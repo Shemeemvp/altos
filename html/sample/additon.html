@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Me..😋</title>
+    <link rel="stylesheet" href="/sample/addition.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="addition-box">
+        <h2 id="head"><b>Addition Box..</b>🧐</h2>
+        <label for="num1">Enter first number:</label>
+        <input id="num1" type="number" />
+        <br>
+        <label for="num2">Enter second number:</label>
+        <input id="num2" type="number" />
+        <br>
+        <button id="sum-button" type="button" onclick="add()">Add Me</button>
+        <br>
+        <h4 id="res-text">It's..😋</h4>
+        <input id="res" type="text" disabled/>
+      </div>
+    </div>
+
+    <script>
+      function add() {
+        var first, second, result;
+        first = Number(document.getElementById("num1").value);
+        second = Number(document.getElementById("num2").value);
+        result = first + second;
+
+        document.getElementById("res").value = result;
+      }
+    </script>
+  </body>
+</html>

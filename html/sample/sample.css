@@ -1,0 +1,32 @@
+body {
+  /* background-color: azure; */
+  background-image: url(img1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* table,th,td {
+            border: 3px solid gray;
+            
+        } */
+h3 {
+  /* border-style: double;
+            border-width: 5px;
+            border-radius: 4px;
+            border-color: aqua beige blue; */
+  /* border: 5px dashed grey; */
+  text-decoration-line: underline;
+}
+div {
+  background-color: antiquewhite;
+  width: 300px;
+  /* margin-left: 300px;
+            margin-top: 73px; */
+  margin: auto;
+  /* padding-top: 50px;
+            padding-left: 25px; */
+  padding: 20px 300px 50px 10px;
+}
+img {
+  width: 500px;
+  opacity: 0.3;
+}

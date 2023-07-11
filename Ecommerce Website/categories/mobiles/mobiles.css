@@ -1,0 +1,171 @@
+body {
+  margin: 0;
+}
+#navbarLogo {
+  width: 12vw;
+}
+.nav-item a {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  margin: 3px;
+  font-family: "Open Sans", sans-serif;
+}
+.dropdown-menu a {
+  font-size: 0.8rem;
+  width: 90%;
+  border: 1px solid lightgray;
+  color: black;
+  margin: 0.2rem 0.5rem;
+  font-family: monospace;
+}
+.body-main-section {
+  margin-top: 17vh;
+  background-color: #a9a9a938;
+}
+.main-head h1 {
+  padding-left: 2rem;
+  color: #000;
+  font-size: 2.3rem;
+  font-weight: 500;
+  text-align: start;
+  font-family: monospace;
+  text-transform: uppercase;
+  position: relative;
+  margin: 1rem auto;
+}
+.head h2 {
+  color: #000;
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  margin: 2rem auto;
+}
+.head h2::after {
+  content: "";
+  width: 5.5rem;
+  position: absolute;
+  margin: 0 auto;
+  height: 0.3rem;
+  border-radius: 0.5rem;
+  background: #7ac400;
+  left: 0;
+  right: 0;
+  bottom: -1rem;
+}
+/* ============Latest Models=========== */
+.ltst-img {
+  float: left;
+  display: contents;
+}
+.ltst-img img {
+  width: 30vw;
+  margin: 0.8rem 0.8rem;
+}
+.ltst-img img:hover {
+  transform: scale(1.05);
+}
+.ltst-models .row {
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+/* ====================================== */
+/* ===========cards=============== */
+
+.rc-card {
+  padding-left: 3rem;
+  padding-right: 3rem;
+  margin-right: -0.5rem;
+  margin-left: -0.5rem;
+}
+.card {
+  position: relative;
+  padding-top: 0.3rem;
+  width: 19vw;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.3rem;
+}
+.card:hover{
+  transform: scale(1.03);
+}
+/* .card-section .row .col {
+  margin-left: 1px;
+  margin-right: 1px;
+} */
+.instock-sec{
+  background-color: #a9a9a938;
+}
+.imgcard-body img {
+  height: 25vh;
+  position: relative;
+  left: 22%;
+  width: 10vw;
+}
+.star-rating i {
+  color: #ffc000;
+}
+.bg-cart {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid;
+  border-radius: 6px;
+  width: 9em;
+  height: 2.5em;
+  color: #7ac400;
+}
+.bg-cart:hover {
+  background-color: #7ac400;
+  color: #fff;
+}
+a {
+  text-decoration: none !important;
+}
+
+/* =============================== */
+@media screen and (max-width: 728px) {
+  #navbarLogo {
+    width: 30vw;
+  }
+  .body-main-section {
+    margin-top: 11vh;
+  }
+  .ltst-img {
+    display: block;
+  }
+  .ltst-img img {
+    width: 80vw;
+    margin: 0.4rem 0.4rem;
+  }
+  .card{
+    width: 73vw;
+  }
+  .imgcard-body img {
+    height: 15vh;
+    width: 35vw;
+  }
+  
+}
+@media screen and (min-width: 729px) and (max-width: 920px) {
+  .body-main-section {
+    margin-top: 10vh;
+  }
+  .ltst-img img {
+    width: 30vw;
+    margin: 0.4rem 0.5rem;
+  }
+  .card{
+    width: 22vw;
+  }
+  .imgcard-body img {
+    height: 9vh;
+    width: 11vw;
+  }
+}

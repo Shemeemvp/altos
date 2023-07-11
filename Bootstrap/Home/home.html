@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/home/home.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-sm justify-content-end navbar-dark bg-dark fixed-top"
+    >
+      <div class="container-fluid">
+        <a href="/Home/home.html" class="navbar-brand">
+          <img
+            src="/Public/staticlogo.png"
+            alt=""
+            class="d-inline-block align-middle mr-2"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav justify-content-end">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                style="color: #4097bf"
+                href="/Home/home.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/About/about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Gallery/gallery.html">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Contact/contact.html">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                type="button"
+                class="btn"
+                data-toggle="modal"
+                data-target="#signupStaticBackdrop1"
+                >Sign Up</a
+              >
+              <!-- ==================signup modal================ -->
+              <div
+                class="signupmodal modal fade"
+                id="signupStaticBackdrop1"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel1"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog d-flex justify-content-center">
+                  <div class="modal-content w-75">
+                    <div
+                      class="modal-header"
+                      style="background-color: #166063e8"
+                    >
+                      <h5
+                        class="modal-title font-weight-bold text-white"
+                        id="exampleModalLabel1"
+                      >
+                        Sign Up
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body p-4">
+                      <form>
+                        <div class="form-group">
+                          <label class="form-label" for="fname"
+                            >First Name</label
+                          >
+                          <input
+                            class="form-control"
+                            type="text"
+                            name=""
+                            id="fname"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label" for="sname"
+                            >Second Name</label
+                          >
+                          <input
+                            class="form-control"
+                            type="text"
+                            name=""
+                            id="sname"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label" for="age">Age</label>
+                          <input
+                            class="form-control"
+                            type="number"
+                            name=""
+                            id="age"
+                          />
+                        </div>
+                        <h5 class="text-center">Gender</h5>
+                        <div class="form-check text-center">
+                          <label class="form-check-label mr-4" for="male"
+                            >Male</label
+                          >
+                          <input
+                            class="radio-inp form-check-input"
+                            type="radio"
+                            name="gender"
+                            id="male"
+                          />
+                          <label class="form-check-label mr-4" for="female"
+                            >Female</label
+                          >
+                          <input
+                            class="radio-inp form-check-input"
+                            type="radio"
+                            name="gender"
+                            id="female"
+                          />
+                          <label class="form-check-label mr-4" for="other"
+                            >Other</label
+                          >
+                          <input
+                            class="radio-inp form-check-input"
+                            type="radio"
+                            name="gender"
+                            id="other"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label" for="address"
+                            >Address</label
+                          >
+                          <textarea
+                            class="form-control"
+                            name="currentaddress"
+                            id="address"
+                            cols="30"
+                            rows="2"
+                            placeholder="Enter Your Address.."
+                          ></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label" for="gmail">Gmail Id</label>
+                          <input
+                            class="form-control"
+                            type="email"
+                            name="mailid"
+                            id="gmail"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label" for="password"
+                            >Password</label
+                          >
+                          <input
+                            class="form-control"
+                            type="password"
+                            id="password"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label" for="retpass"
+                            >Confirm Password</label
+                          >
+                          <input
+                            class="form-control"
+                            type="password"
+                            id="retpass"
+                          />
+                        </div>
+                        <button
+                          type="submit"
+                          class="btn btn-outline-primary btn-block"
+                        >
+                          Sign Up
+                        </button>
+                      </form>
+                    </div>
+                    <div class="foot-text text-center mb-4">
+                      <p>
+                        Don't have an account ?<a
+                          href="#"
+                          class="font-weight-bold text-primary"
+                          data-toggle="modal"
+                          data-target="#signinStaticBackdrop1"
+                          data-dismiss="modal"
+                        >
+                          Sign In</a
+                        >
+                      </p>
+                      <a
+                        class="text-primary font-weight-bold"
+                        href="/home/home.html"
+                        >Home</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                type="button"
+                class="btn"
+                data-toggle="modal"
+                data-target="#signinStaticBackdrop1"
+                >Sign In</a
+              >
+              <!-- ===================signin modal================= -->
+              <div
+                class="modal fade"
+                id="signinStaticBackdrop1"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel1"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog d-flex justify-content-center">
+                  <div class="modal-content w-75">
+                    <div
+                      class="modal-header"
+                      style="background-color: #166063e8"
+                    >
+                      <h5
+                        class="modal-title font-weight-bold text-white"
+                        id="exampleModalLabel1"
+                      >
+                        Sign In
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body p-4">
+                      <form>
+                        <div class="form-outline mb-4">
+                          <input
+                            type="text"
+                            id="userid1"
+                            class="form-control"
+                          />
+                          <label class="form-label" for="userid1"
+                            >User Id</label
+                          >
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input
+                            type="password"
+                            id="password1"
+                            class="form-control"
+                          />
+                          <label class="form-label" for="password1"
+                            >Password</label
+                          >
+                        </div>
+                        <button
+                          type="submit"
+                          class="btn btn-outline-primary btn-block"
+                        >
+                          Sign In
+                        </button>
+                      </form>
+                    </div>
+                    <div class="foot-text text-center mb-4">
+                      <p>
+                        Don't have an account ?<a
+                          href="#"
+                          class="font-weight-bold text-primary"
+                          data-toggle="modal"
+                          data-target="#signupStaticBackdrop1"
+                          data-dismiss="modal"
+                        >
+                          Sign Up</a
+                        >
+                      </p>
+                      <a
+                        class="text-primary font-weight-bold"
+                        href="/home/home.html"
+                        >Home</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="body-section" style="padding-top: 10vh">
+      <div class="namehead">
+        <marquee behavior="alternate" direction="">
+          <h2 id="main">
+            ALTOS <span style="color: #215972">Technologies</span>
+          </h2>
+        </marquee>
+      </div>
+
+      <div class="container-fluid mb-5">
+        <div id="carousel-homepage" class="carousel slide" data-ride="carousel">
+          <ul class="carousel-indicators">
+            <li
+              data-target="#carousel-homepage"
+              data-slide-to="0"
+              class="active"
+            ></li>
+            <li data-target="#carousel-homepage" data-slide-to="1"></li>
+            <li data-target="#carousel-homepage" data-slide-to="3"></li>
+          </ul>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                class="img-fluid"
+                src="https://infopark.in/assets/images/slider/homeBanner2.jpg"
+                alt=""
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="img-fluid"
+                src="https://infopark.in/assets/images/slider/homeBanner1.jpg"
+                alt=""
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="img-fluid"
+                src="https://infopark.in/assets/images/slider/homeBanner4.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+          <a
+            class="carousel-control-prev"
+            href="#carousel-homepage"
+            data-slide="prev"
+          >
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a
+            class="carousel-control-next"
+            href="#carousel-homepage"
+            data-slide="next"
+          >
+            <span class="carousel-control-next-icon"></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="container-fluid mb-5">
+        <div class="homecont">
+          <h3 style="font-family: math" id="cont-head">
+            We Deal With The Aspects Of Professional IT Solutions
+          </h3>
+          <p>
+            Elevate your business with Altos Technologies. As a software
+            development company in India, we craft custom websites and software
+            solutions to fit your unique business needs. Our team of experts
+            delivers solutions that streamline operations, boost<br />
+            efficiency, and create a lasting impact. Partner with us to take
+            your success to new heights with quality and excellence at the
+            forefront.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

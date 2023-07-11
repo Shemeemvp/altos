@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - Kerala Tourism</title>
+    <link rel="stylesheet" href="/Signup/signup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <img src="/Public/kerala-tourism-title.png" alt="KeralaTourism.org" />
+        </div>
+        <div class="nav-bar">
+          <div class="nav-items">
+            <ul class="items-list">
+              <li class="items">
+                <a href="/Home/home.html">Home</a>
+              </li>
+              <li class="items">
+                <a style="color: #9ee1ff" href="/Signup/signup.html">Sign Up</a>
+              </li>
+              <li class="items">
+                <a href="/Signin/signin.html">Sign In</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="content-body">
+        <h2 id="reg">Register</h2>
+        <hr style="opacity: 0" />
+        <div class="formdiv">
+          <form action="">
+            <label for="fname">First Name</label><br />
+            <input type="text" name="" id="fname" /><br />
+            <label for="sname">Second Name</label><br />
+            <input type="text" name="" id="sname" /><br />
+            <label for="age">Age</label><br />
+            <input type="number" name="" id="age" />
+            <h6>Gender</h6>
+            <label for="male">Male</label>
+            <input type="radio" name="gender" id="male" />
+            <label for="female">Female</label>
+            <input type="radio" name="gender" id="female" />
+            <label for="other">Other</label>
+            <input type="radio" name="gender" id="other" />
+            <br />
+            <label for="address">Address</label><br />
+            <textarea
+              name="currentaddress"
+              id="address"
+              cols="30"
+              rows="4"
+              placeholder="Enter Your Address.."
+            ></textarea
+            ><br />
+            <label for="gmail">Gmail Id</label><br />
+            <input type="email" name="mailid" id="gmail" /><br />
+            <label for="password">Password</label><br />
+            <input type="password" id="password" /><br />
+            <label for="retpass">Confirm Password</label><br />
+            <input type="password" id="retpass" /><br />
+            <input
+              style="color: black"
+              type="submit"
+              name=""
+              id="signup-button"
+              value="Sign Up"
+            />
+          </form>
+        </div>
+        <div class="link-si">
+          <p id="txt-1">
+            Already have an account ?<a href="/signin/signin.html"> Sign In</a
+            ><br />
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

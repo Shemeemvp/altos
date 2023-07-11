@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  background-color: darkgrey;
+  background-image: url(/sample/contctbg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.container {
+  padding-top: 100px;
+}
+.calc-body {
+  border: 1px solid slategrey;
+  padding: 20px;
+  border-radius: 10px;
+  width: 254px;
+  background-color: #002853b5;
+  height: 341px;
+  margin: auto;
+}
+.numbers {
+  margin: 15px;
+}
+input {
+  margin-right: 5px;
+  margin-left: 15px;
+  float: left;
+  background-color: #008b8ba8;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  font-size: x-large;
+  font-weight: bold;
+  width: 160px;
+  height: 36px;
+}
+button {
+  width: 40px;
+  font-weight: bold;
+  border: 1px solid;
+  color: cyan;
+  font-size: x-large;
+  border-radius: 7px;
+  font-family: monospace;
+  background-color: #6b6b6b;
+  height: 40px;
+  margin-right: 13px;
+}
+button:hover {
+  transform: scale(1.2);
+  background-color: cyan;
+  color: #6b6b6b;
+}
+#head {
+  font-family: monospace;
+  margin-left: 14px;
+  font-size: 25px;
+  color: white;
+}

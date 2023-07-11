@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | Your Digital Partner</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./signup.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-expand-lg justify-content-end navbar-dark bg-dark fixed-top"
+      >
+        <div class="container-fluid">
+          <a href="/Home/home.html" class="navbar-brand">
+            <img
+              id="navbarLogo"
+              src="/public/logo/logo5.png"
+              alt=""
+              class="d-inline-block align-middle mr-2"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTabsContent"
+            aria-controls="navbarTabsContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarTabsContent"
+          >
+            <ul class="navbar-nav justify-content-end">
+              <li class="nav-item">
+                <a href="/home/home.html" class="nav-link">Products</a>
+              </li>
+              <li class="nav-item">
+                <a href="/cart/cart.html" class="nav-link">Cart</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  id="navbarDropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  >Categories</a
+                >
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">All</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/categories/mobiles/mobiles.html">Mobiles</a>
+                  <a class="dropdown-item" href="/categories/laptops/laptops.html">Laptops</a>
+                  <a class="dropdown-item" href="/categories/gadgets/gadgets.html">Gadgets</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a href="/signin/signin.html" class="nav-link">Sign In</a>
+              </li>
+              <li class="nav-item">
+                <a href="/signup/signup.html" class="nav-link active">Sign Up</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section class="container body-main-section">
+      <div class="signup-content mb-3">
+        <div class="namehead">
+          <h4 class="text-center mb-3">Sign Up</h4>
+        </div>
+        <div class="formdiv">
+          <form class="text-center m-auto" action="">
+            <div class="form-group">
+              <label class="form-label" for="fname">First Name</label>
+              <input class="form-control" type="text" name="" id="fname" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="sname">Second Name</label>
+              <input class="form-control" type="text" name="" id="sname" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="age">Age</label>
+              <input class="form-control" type="number" name="" id="age" />
+            </div>
+            <h5>Gender</h5>
+            <div class="form-check">
+              <label class="form-check-label mr-4" for="male">Male</label>
+              <input
+                class="radio-inp form-check-input"
+                type="radio"
+                name="gender"
+                id="male"
+              />
+              <label class="form-check-label mr-4" for="female">Female</label>
+              <input
+                class="radio-inp form-check-input"
+                type="radio"
+                name="gender"
+                id="female"
+              />
+              <label class="form-check-label mr-4" for="other">Other</label>
+              <input
+                class="radio-inp form-check-input"
+                type="radio"
+                name="gender"
+                id="other"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="address">Address</label>
+              <textarea
+                class="form-control"
+                name="currentaddress"
+                id="address"
+                cols="30"
+                rows="2"
+                placeholder="Enter Your Address.."
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="gmail">Gmail Id</label>
+              <input class="form-control" type="email" name="mailid" id="gmail" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="password">Password</label>
+              <input class="form-control" type="password" id="password" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="retpass">Confirm Password</label>
+              <input class="form-control" type="password" id="retpass" required />
+            </div>
+            <input
+              class="btn btn-outline-dark font-weight-bold mt-3 mb-3"
+              type="submit"
+              name=""
+              id="signup-button"
+              value="Sign Up"
+            />
+          </form>
+        </div>
+        <div class="text-center font-weight-bold foot-section mt-3">
+          <p>
+            Already have an account ?<a href="/signin/signin.html"> Sign In</a
+            ><br />
+          </p>
+          <a href="/home/home.html">Home</a>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container pt-3">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="/home/home.html">1</a></li>
+            <li class="page-item"><a class="page-link" href="/cart/cart.html">2</a></li>
+            <li class="page-item"><a class="page-link" href="/signin/signin.html">3</a></li>
+            <li class="page-item active"><a class="page-link" href="/signup/signup.html">4</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+    <footer
+      class="text-center text-lg-start text-white"
+      style="background-color: #2f384a"
+    >
+      <div class="container p-4 pb-0">
+        <section class="">
+          <div class="row">
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+              <h6 class="mb-4 font-weight-bold">iCart Pvt Ltd.</h6>
+              <p>The complete digital platform.</p>
+              <br />
+              <h6 class="text-uppercase mb-4 font-weight-bold">
+                Policy
+              </h6>
+              <p>
+                <a class="text-white">Terms & Conditions</a>
+              </p>
+              <p>
+                <a class="text-white">Privacy Policy</a>
+              </p>
+            </div>
+
+            <hr class="w-100 clearfix d-md-none" />
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+              <p>
+                <a class="text-white">Mobiles</a>
+              </p>
+              <p>
+                <a class="text-white">Computers and Laptops</a>
+              </p>
+              <p>
+                <a class="text-white">Gadgets</a>
+              </p>
+              <p>
+                <a class="text-white">Home Appliance</a>
+              </p>
+            </div>
+
+            <hr class="w-100 clearfix d-md-none" />
+
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
+              <p>
+                <a href="./home.html" class="text-white">Home</a>
+              </p>
+              <p>
+                <a class="text-white">Your Account</a>
+              </p>
+              <p>
+                <a class="text-white">Shipping Partner</a>
+              </p>
+              <p>
+                <a class="text-white">Help</a>
+              </p>
+            </div>
+
+            <hr class="w-100 clearfix d-md-none" />
+
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+              <p><i class="fa fa-home mr-3"></i> New York, NY 10012, US</p>
+              <p><i class="fa fa-envelope mr-3"></i> info@icart.com</p>
+              <p><i class="fa fa-phone mr-3"></i> + 01 234 567 88</p>
+              <p><i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
+            </div>
+          </div>
+        </section>
+        <hr class="my-1" />
+        <!-- Section: Copyright -->
+        <section class="pt-1 pt-0">
+          <div class="row d-flex align-items-center">
+            <div class="col-md-7 col-lg-8 text-center text-md-start">
+              <div class="pt-1 pb-1">
+                © 2023 Copyright:
+                <a class="text-white" href="home.html">icart.com</a>
+              </div>
+            </div>
+            <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fa fa-facebook-f"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fa fa-twitter"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fa fa-google"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fa fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>

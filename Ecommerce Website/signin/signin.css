@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+}
+.page-item.active .page-link {
+  background-color: #3e485bd4;
+  border-color: #3e485bd4;
+}
+.page-link {
+  color: #3e485bd4;
+}
+#navbarLogo {
+  width: 12vw;
+}
+.nav-item a {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  margin: 3px;
+  font-family: "Open Sans", sans-serif;
+}
+.dropdown-menu a {
+  font-size: 0.8rem;
+  width: 90%;
+  border: 1px solid lightgray;
+  color: black;
+  margin: 0.2rem 0.5rem;
+  font-family: monospace;
+}
+.body-main-section {
+  margin-top: 22vh;
+}
+.signin-content {
+  margin: 4vh auto;
+  background-color: #535353d1;
+  color: white;
+  width: 35vw;
+  border-radius: 0.3rem;
+}
+.foot-text a{
+  color: #00ffe7;
+}
+
+@media screen and (max-width: 728px) {
+  #navbarLogo {
+    width: 30vw;
+  }
+  .body-main-section {
+    margin-top: 15vh;
+  }
+  .signin-content {
+    width: 80vw;
+  }
+}
+@media screen and (min-width: 729px) and (max-width: 920px) {
+  .body-main-section {
+    margin-top: 15vh;
+  }
+  .signin-content {
+    width: 70vw;
+  }
+}

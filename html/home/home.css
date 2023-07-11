@@ -1,0 +1,100 @@
+body{
+    background-image: url(/home/homebg1.avif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+}
+#main{
+    width: 100%;
+    float: left;
+    color: #fff;
+    margin-left: 55px;
+    font-family: cursive;
+    font-size: xx-large;
+}
+.namehead{
+    width: 40%;
+    height: 100px;
+    padding-left: 40px;
+}
+.logo{
+    margin-left: 100px;
+}
+.headbar{
+    width: 100vw;
+    height: 110px;
+    background-color: #23232300;
+
+}
+img{
+    width: 420px;
+    height: 115px;
+}
+a{
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin: 5px;
+    font-family: "Open Sans", sans-serif;
+}
+a:hover{
+    color: #4097bf;
+}
+.nav-tabs{
+    margin-top: -55px;
+    float: right;
+    margin-right: 48px;
+}
+#hometab{
+    color: #4097bf;
+}
+h4{
+    font-size: 20px;
+}
+p{
+    font-size: 17px;
+    font-family: monospace;
+}
+.homecont{
+    float: left;
+    margin-left: 60px;
+    padding-top: 7px;
+    padding-left: 33px;
+    width: 613px;
+    height: 300px;
+    border-radius: 10px;
+    color: #fff;
+    background-color: rgb(21 32 53 / 90%);
+}
+#cont-head{
+    font-size: 26px;
+
+}
+.pagination{
+    margin-top: 50px;
+    width: 100%;
+    float: left;
+}
+.pagination-content{
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    padding-bottom: 5px;
+    
+}
+.pagination-tabs{
+    border: 1px solid white;
+    padding: 4px 9px;
+    border-radius: 4px;
+    margin: 1px;
+    font-weight: 500;
+
+
+}
+.pagination-tabs:hover{
+    background-color: #92acc5b5;
+    color: #fff;
+}
