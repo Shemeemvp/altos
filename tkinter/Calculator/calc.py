@@ -12,14 +12,14 @@ root.configure(bg='#0b569c')
 
 menuBar = Menu(root)
 root.config(menu=menuBar)
-fileMenu = Menu(menuBar)
+fileMenu = Menu(menuBar,tearoff=0)
 menuBar.add_cascade(label="File", menu=fileMenu)
 fileMenu.add_command(label="New")
 fileMenu.add_command(label="Clear", command=lambda:clearLabel())
 fileMenu.add_separator()
 fileMenu.add_command(label="Exit", command=root.quit)
 
-helpMenu = Menu(menuBar)
+helpMenu = Menu(menuBar,tearoff=0)
 menuBar.add_cascade(label="Help", menu=helpMenu)
 helpMenu.add_command(label="Help")
 helpMenu.add_command(label="About")
@@ -48,7 +48,7 @@ def calculate():
             res_label = ""
     result_label.config(text = result)
 
-result_label = Label(root,font=("arial",30),bd=5,relief=RAISED)
+result_label = Label(root,font=("arial",25),bd=5,relief=RAISED)
 result_label.place(x=10,y=10,width=350,height=80)
 
 Button(root, text="C", width=3, height=1 ,bd=3, relief=RIDGE, font=('arial',30,'bold'),fg='cyan',bg='#858b94',command=lambda:clearLabel()).place(x=10,y=100)
