@@ -1,0 +1,40 @@
+body {
+    background-color: #407171;
+    padding: 100px;
+  }
+  #submit {
+    width: 100px;
+    height: 37px;
+    background-color: #ffffff;
+    border-radius: 9px;
+    border: 2px solid #049191;
+    font-weight: 600;
+    font-family: monospace;
+    color: #049191;
+    font-size: 16px;
+  }
+  #submit:hover{
+    transform: scale(1.03);
+    background-color: #049191;
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+  #head {
+    color: #fff;
+    font-family: cursive;
+    font-style: italic;
+  }
+  label{
+    color: #fff;
+    font-size: 17px;
+    font-family: monospace;
+    font-weight: 600;
+  }
+  input{
+    width: 185px;
+    height: 23px;
+    font-size: 15px;
+    font-family: serif;
+    border: 3px solid gray;
+    border-radius: 5px;
+  }

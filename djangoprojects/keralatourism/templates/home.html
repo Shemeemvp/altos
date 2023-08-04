@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Kerala | God's Own Country</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-custom navbar-expand-lg justify-content-end navbar-dark bg-secondary fixed-top"
+      >
+        <div class="container-fluid">
+          <a href="/" class="navbar-brand">
+            <img
+              id="navbarLogo"
+              src="{% static 'images/kerala-tourism-title.png' %}"
+              alt=""
+              class="d-inline-block align-middle mr-2"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTabsContent"
+            aria-controls="navbarTabsContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarTabsContent"
+          >
+            <ul class="navbar-nav justify-content-end">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  id="navbarDropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  >Destinations</a
+                >
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <!-- <a class="dropdown-item" href="#">All</a>
+                  <div class="dropdown-divider"></div> -->
+                  <a href="{% url 'pageEkm' %}" class="dropdown-item"
+                    >Ernakulam</a
+                  >
+                  <a href="{% url 'pageAlp' %}" class="dropdown-item"
+                    >Alappuzha</a
+                  >
+                  <a href="{% url 'pageIdukki' %}" class="dropdown-item"
+                    >Idukki</a
+                  >
+                  <a href="{% url 'pageTvm' %}" class="dropdown-item"
+                    >Trivandrum</a
+                  >
+                  <a href="{% url 'pageWayanad' %}" class="dropdown-item"
+                    >Wayanad</a
+                  >
+                </div>
+              </li>
+              <li class="nav-item">
+                <a href="/" class="nav-link active">Home</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a href="{% url 'pageEkm' %}" class="nav-link">Ernakulam</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'pageAlp' %}" class="nav-link">Alappuzha</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'pageIdukki' %}" class="nav-link">Idukki</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'pageTvm' %}" class="nav-link">Trivandrum</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'pageWayanad' %}" class="nav-link"></a>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section class="container-fluid body-main-section">
+      <div class="home-bg">
+        <img
+          src="{% static 'images/homebg.jpg' %}"
+          alt=""
+          class="home-main-img"
+        />
+      </div>
+    </section>
+    <section class="container-fluid body-sec-section" style="float: left">
+      <div class="expinker-sec">
+        <h2 id="expinker-head">Experience in Kerala</h2>
+        <div class="row home-page-cards">
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 card-tiles">
+            <a href="https://www.keralatourism.org/destination/wildlife/"
+              ><img src="{% static 'images/homeImages/wildlife.jpg' %}" alt=""
+            /></a>
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 card-tiles">
+            <img src="{% static 'images/homeImages/beach.jpg' %}" alt="" />
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 card-tiles">
+            <img
+              src="{% static 'images/homeImages/hill-station.jpg' %}"
+              alt=""
+            />
+          </div>
+          <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12 card-tiles">
+            <img src="{% static 'images/homeImages/ayurveda.jpg' %}" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container-fluid pt-3 pagination-section">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="/">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="{% url 'pageEkm' %}">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="{% url 'pageAlp' %}">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="{% url 'pageIdukki' %}">4</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="{% url 'pageTvm' %}">5</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="{% url 'pageWayanad' %}">6</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+    <footer
+      id="footer-section"
+      class="text-center text-lg-start text-white pt-3"
+      style="background-color: #2f384a"
+    >
+      <div class="container p-4 pb-0">
+        <section class="">
+          <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-6">
+              <h5 class="text-uppercase">Explore</h5>
+              <ul class="list-unstyled footer-min">
+                <li>
+                  <a href="https://www.keralatourism.org/business/"
+                    >Classification Schemes</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.keralatourism.org/governmental-affairs/"
+                    >Governmental Affairs</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.keralatourism.org/media/">Media Room</a>
+                </li>
+                <li>
+                  <a href="https://www.keralatourism.org/event/tourism-events"
+                    >Tourism Events</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6">
+              <h5 class="text-uppercase">Nature</h5>
+              <ul class="list-unstyled footer-min">
+                <li>
+                  <a href="https://www.keralatourism.org/destination/hills/"
+                    >Hills</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.keralatourism.org/destination/backwater/"
+                    >Backwaters</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.keralatourism.org/destination/beaches/"
+                    >Beaches</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.keralatourism.org/destination/wildlife/"
+                    >Wildlife</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.keralatourism.org/destination/waterfalls/"
+                    >Waterfalls</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6">
+              <h5 class="text-uppercase">Places</h5>
+              <ul class="list-unstyled footer-min">
+                <li>
+                  <a href="https://www.keralatourism.org/destination/munnar/202"
+                    >Munnar</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.keralatourism.org/destination/wayanad-district/373"
+                    >Wayanad</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.keralatourism.org/destination/kovalam-beach/236"
+                    >Kovalam</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.keralatourism.org/destination/periyar-tiger-reserve-idukki/192"
+                    >Periyar</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.keralatourism.org/destination/varkala-beach/328"
+                    >Varkala</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 footer-min">
+              <h5 class="text-uppercase">Specialities</h5>
+              <ul class="list-unstyled">
+                <li>
+                  <a href="https://www.keralatourism.org/ayurveda/">Ayurveda</a>
+                </li>
+                <li>
+                  <a href="https://www.keralatourism.org/monsoon/">Monsoon</a>
+                </li>
+                <li>
+                  <a href="https://www.keralatourism.org/houseboat/"
+                    >Houseboat</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.keralatourism.org/kerala-food/"
+                    >Kerala Food</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.keralatourism.org/event/">Festivals</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-xs-12">
+              <hr class="hr-f" />
+            </div>
+          </div>
+        </section>
+        <hr class="my-1" />
+        <!-- Section: Copyright -->
+        <section class="pt-1 pt-0">
+          <div class="row d-flex align-items-center">
+            <div class="col-md-6 col-lg-5 col-sm-4 col-xs-12 text-center">
+              <div class="subscribe-box">
+                <h5 class="text-uppercase">
+                  Subscribe Our Newsletter<br /><small
+                    >Get notified to Kerala Tourism events and
+                    activities</small
+                  >
+                </h5>
+                <!-- <form action="" autocomplete="off" class="form-horizontal" method="post"> -->
+                <div class="input-group">
+                  <input
+                    name="email"
+                    value=""
+                    class="form-control email-field"
+                    type="text"
+                    placeholder="Your Email"
+                  />
+                  <span class="input-group-btn">
+                    <button
+                      class="btn btn-default subscribe-btn"
+                      type="submit"
+                      style="background-color: #E91E63; color:#ffffff ;"
+                    >
+                      SUBSCRIBE
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-lg-4 text-center text-md-start">
+              <div class="pt-1 pb-1">
+                © 2023 Copyright:
+                <a class="text-white" href="home.html">keralatourism.org</a>
+              </div>
+            </div>
+            <div class="col-md-3 col-lg-3 ml-lg-0 text-center text-md-end">
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fa fa-facebook-f"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fa fa-twitter"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fa fa-google"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fa fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

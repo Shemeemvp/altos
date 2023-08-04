@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+}
+.nav-item a {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  margin: 3px;
+  font-family: "Open Sans", sans-serif;
+}
+.dropdown-menu a {
+  font-size: 0.8rem;
+  width: 90%;
+  border: 1px solid lightgray;
+  color: black;
+  margin: 0.2rem 0.5rem;
+  font-family: monospace;
+}
+#navbarLogo {
+  width: 22vw;
+}
+.container-fluid.body-main-section {
+  margin-top: 14vh;
+  padding-left: 0;
+  padding-right: 0;
+}
+.container-fluid.body-sec-section {
+  padding-left: 0;
+  padding-right: 0;
+}
+.pagination-section {
+  width: 100%;
+  float: left;
+  height: fit-content;
+  /* background-color: #9ba7b38c; */
+}
+.page-item.active .page-link {
+  background-color: #3e485bd4;
+  border-color: #3e485bd4;
+}
+.page-link a {
+  color: #3e485bd4;
+}
+.home-bg {
+  height: fit-content;
+  background-color: #cdd1d5;
+  padding-left: 5vw;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+}
+.home-main-img {
+  width: 90vw;
+}
+.expinker-sec {
+  width: 100%;
+  float: left;
+  padding-top: 5px;
+  height: 555px;
+  background-color: #e3e7f1;
+}
+#expinker-head {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  text-align: center;
+  color: #999999;
+  font-family: cursive;
+}
+.home-page-cards {
+  padding-left: 3rem;
+  padding-top: 1rem;
+}
+.card-tiles {
+  width: fit-content;
+  height: fit-content;
+  float: left;
+  /* margin-right: 1.3rem;
+  margin-left: 1.3rem; */
+}
+.card-tiles img {
+  width: 20vw;
+  border-radius: 1rem;
+}
+.card-tiles:hover {
+  transform: scale(1.05);
+}

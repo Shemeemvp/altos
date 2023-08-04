@@ -1,0 +1,81 @@
+body {
+  background-color: #1c2269;
+  padding-top: 3rem;
+}
+.container {
+  width: 100%;
+  /* margin: auto; */
+  height: fit-content;
+}
+#submitbutton {
+  width: 100px;
+  height: 37px;
+  background-color: #ffffff;
+  border-radius: 9px;
+  border: 2px solid #049191;
+  font-weight: 600;
+  font-family: monospace;
+  color: #049191;
+  font-size: 16px;
+}
+#submitbutton:hover {
+  transform: scale(1.03);
+  background-color: #049191;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+#head {
+  color: #fff;
+  font-family: cursive;
+  font-style: italic;
+  font-size: 36px;
+  width: fit-content;
+  margin: auto;
+  height: fit-content;
+}
+label {
+  color: #fff;
+  font-size: 17px;
+  font-family: monospace;
+  font-weight: 600;
+}
+input {
+  width: 255px;
+  height: 23px;
+  font-size: 15px;
+  font-family: serif;
+  border: 3px solid gray;
+  border-radius: 5px;
+}
+select {
+  width: 265px;
+  height: 32px;
+  font-size: 15px;
+  font-family: monospace;
+  border: 3px solid gray;
+  border-radius: 5px;
+}
+#res-head {
+  color: white;
+  font-size: 28px;
+  margin-top: 2rem;
+}
+#resSpan {
+  color: #05e8f3f0;
+  font-size: xxx-large;
+}
+.result-tag {
+  width: fit-content;
+  margin: auto;
+  height: fit-content;
+}
+.calc-body {
+  padding-top: 1rem;
+  width: fit-content;
+  margin: auto;
+  height: fit-content;
+}
+i{
+    color: #ffffff;
+    font-size: 35px;
+}

@@ -1,0 +1,35 @@
+============================DJANGO INSTALLATION=========================
+Step1: pip install django
+[For system]
+
+Step 2: pip install virtualenvwrapper-win
+[Instalation of venv]
+
+Step 3: mkvirtualenv test
+[test like a venv name]
+
+Step 4:workon test
+
+Step5: pip install django
+[For venv]
+
+Step6:create a folder for django projects
+And open cmd in the path of the folder
+
+Step 7: django-admin startproject {project name}
+
+Step8: cd {projectname}
+[Change directory]
+
+Step9: python manage.py startapp {appname}
+
+Step10: code .
+[Open vscode]
+
+Step 11:{project}->settings.py-> ISTALLED APPS
+add the app name
+
+Step12: open terminal and convert in to cmd
+
+Step 13: python manage.py runserver
+[For run our project]

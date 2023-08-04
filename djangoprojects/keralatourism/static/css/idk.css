@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+}
+.nav-item a {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  margin: 3px;
+  font-family: "Open Sans", sans-serif;
+}
+#navbarLogo {
+  width: 22vw;
+}
+.container-fluid.body-main-section {
+  margin-top: 14vh;
+  padding-left: 0;
+  padding-right: 0;
+}
+.page-item.active .page-link {
+  background-color: #3e485bd4;
+  border-color: #3e485bd4;
+}
+.page-link a {
+  color: #3e485bd4;
+}
+#head {
+  background: darkcyan;
+  padding-left: 2rem;
+  color: azure;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  font-family: cursive;
+  height: 45px;
+}
+.image img {
+  width: 545px;
+  margin-right: 50px;
+  border-radius: 15px;
+}
+.image {
+  float: right;
+  margin-top: 35px;
+}
+#para1 {
+  width: 47%;
+  padding: 20px;
+  font-size: 17px;
+  color: white;
+  border-radius: 7px;
+  margin-top: 20px;
+  background: #008080d9;
+  margin-left: 43px;
+  font-family: monospace;
+}
+#gallery {
+  background: darkcyan;
+  padding-left: 2rem;
+  color: azure;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  font-family: cursive;
+  height: 45px;
+}
+.gallery-tiles{
+  padding-left: 2rem;
+}
+.gallery-tiles img {
+  width: 20vw;
+  height: fit-content;
+  margin: 1rem;
+}
+.gallery-tiles img:hover{
+  transform: scale(1.03);
+}

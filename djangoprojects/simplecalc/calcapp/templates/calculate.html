@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/calculate.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <h2 id="head">Calculator</h2>
+        </div>
+        <div class="calc-body">
+            <form action="{% url 'calculate' %}" method="post">
+                {% csrf_token %}
+                <label for="inp1">Enter First Value</label><br>
+                <input type="number" id="inp1" name="num1" required><br><br>
+                <label for="inp2">Enter Second Value</label><br>
+                <input type="number" id="inp2" name="num2" required><br><br>
+                <select name="operand" id="operand" required>
+                    <option value="">Select an operation</option>
+                    <option value="+">Add</option>
+                    <option value="-">Subtract</option>
+                    <option value="*">Multiply</option>
+                    <option value="/">Divide</option>
+                </select>
+                <br>
+                <br>
+                <button type="submit" id="submitbutton">Calculate</button>
+            </form>
+        </div>
+        <div class="result-tag">
+            <!-- <h1 id="res-head">It's <span id="resSpan">{{result}}</span>..😃</h1> -->
+            {% if result %}
+            <h1 id="res-head">It's <span id="resSpan">{{result}}</span>..😃</h1>
+            {% else %}
+            <h1 id="res-head">Give me some inputs😊</h1>
+            {% endif %}
+        </div>
+        <center>
+            <div>
+                <a href="{% url 'home' %}"><span><i class="fa fa-refresh" aria-hidden="true"></i></span></a>
+            </div>
+        </center>
+    </div>
+    
+</body>
+</html>
