@@ -1,0 +1,133 @@
+body {
+  margin: 0;
+}
+.home-button i {
+  color: black;
+  font-size: 1rem;
+  margin-top: 2rem;
+  margin-left: 1rem;
+}
+#enroll-std-head {
+  font-size: 2rem;
+  font-family: math;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+#student-info-head-label {
+  font-size: 2rem;
+  font-family: math;
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+#edit-std-head {
+  font-size: 2rem;
+  font-family: math;
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+.form-section {
+  margin-top: 2rem;
+  margin-left: 1rem;
+  height: fit-content;
+}
+.col-md-4.edit-image-section {
+  width: 30%;
+  height: fit-content;
+}
+.edit-form-section {
+  margin-top: 1rem;
+  height: fit-content;
+}
+#remove-photo {
+  text-decoration: none;
+  /* color: rgba(255, 56, 56, 0.911); */
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+label {
+  font-family: monospace;
+}
+.form-group input {
+  width: 40vw;
+}
+.form-group textarea {
+  width: 40vw;
+}
+.form-group select {
+  width: 40vw;
+}
+.table-section table {
+  width: 80vw;
+  margin: auto;
+}
+.profile-link {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+}
+.profile-main-body .card {
+  background-color: gainsboro;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 0 solid transparent;
+  border-radius: 0.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%),
+    0 2px 6px 0 rgb(206 206 238 / 54%);
+}
+.card span a{
+  float: right;
+  font-size: 1.6rem;
+  color: cadetblue;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid cadetblue;
+}
+.card .card-body .left-section {
+  width: 18vw;
+  float: left;
+}
+.card .card-body .right-section {
+  width: 50vw;
+  float: left;
+}
+.profile-main-body {
+  width: fit-content;
+  margin-top: 1rem;
+  float: left;
+}
+.add-button {
+  width: 85vw;
+  height: fit-content;
+  float: left;
+}
+.add-button a {
+  float: right;
+  /* margin-right: 7rem; */
+}
+.close-button {
+  width: 100%;
+  margin-top: 2.6rem;
+  height: fit-content;
+  float: left;
+}
+/* .close-button i {
+  float: right;
+  font-size: 1.6rem;
+  color: #fff;
+  border: 1px solid lightgrey;
+  padding: 0.3rem;
+} */
+.profile-action-section {
+  width: 100%;
+  height: fit-content;
+}
+.profile-action-section a {
+  float: right;
+}
