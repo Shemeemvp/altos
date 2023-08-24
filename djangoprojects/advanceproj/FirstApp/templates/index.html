@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body style="background-image: url('/static/images/home1.jpg');">
+    <h1 id="index-head">Welcome to Django..😊</h1>
+    <a href="{% url 'homePage' %}"><button id="index-button">Home Page</button></a>
+</body>
+</html>
