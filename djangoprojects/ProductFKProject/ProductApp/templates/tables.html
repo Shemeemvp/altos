@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    /> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-custom navbar-expand-md justify-content-end navbar-dark bg-info fixed-top"
+      >
+        <div class="container-fluid mt-2 mb-2">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="/" class="nav-link"
+                ><span><i class="fa-solid fa-house"></i></span> Home</a
+              >
+            </li>
+          </ul>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTabsContent"
+            aria-controls="navbarTabsContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarTabsContent"
+          >
+            <ul class="navbar-nav justify-content-end">
+              <!-- <li class="nav-item">
+                <a href="/" class="nav-link active">Home</a>
+              </li> -->
+              <li class="nav-item">
+                <a href="{% url 'addCategoriesPage' %}" class="nav-link">Add Categories</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'addProductPage' %}" class="nav-link"
+                  >Add Product</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'productsPage' %}" class="nav-link">Products</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'tablesPage' %}" class="nav-link active">Tables</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section>
+        <div class="container-fluid table-section">
+            <h3 id="prod-page-head" class="alert alert-info text-center mb-1">
+              Products
+            </h3>
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table table-info table-striped table-hover text-center">
+                  <thead>
+                    <tr>
+                      <th>Product ID</th>
+                      <th>Product</th>
+                      <th>Category</th>
+                      <th>Price</th>
+                      <th>MFG Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for p in productData %}
+                    <tr>
+                      <td>
+                        <strong>{{ p.id}}</strong>
+                      </td>
+                      <td>{{p.product_name}}</td>
+                      <td>{{p.product_category.category_name}}</td>
+                      <td>
+                        Rs. {{ p.product_price}}
+                      </td>
+                      <td>{{ p.product_manufacture_date}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+    </section>
+    <section>
+        <div class="container-fluid table-section">
+            <h3 id="prod-page-head" class="alert alert-dark text-center mb-1">
+              Categories
+            </h3>
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table table-secondary table-striped table-hover text-center">
+                  <thead>
+                    <tr>
+                      <th>Category ID</th>
+                      <th>Category Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for p in categories %}
+                    <tr>
+                      <td>
+                        <strong>{{ p.id}}</strong>
+                      </td>
+                      <td>{{p.category_name}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+    </section>
+
+
+    {% for message in messages %}
+    <script>
+     alert("{{message}}");
+    </script>
+    {% endfor %}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

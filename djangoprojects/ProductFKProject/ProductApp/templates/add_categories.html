@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Categories</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    /> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-custom navbar-expand-md justify-content-end navbar-dark bg-info fixed-top"
+      >
+        <div class="container-fluid mt-2 mb-2">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="/" class="nav-link"
+                ><span><i class="fa-solid fa-house"></i></span> Home</a
+              >
+            </li>
+          </ul>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTabsContent"
+            aria-controls="navbarTabsContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarTabsContent"
+          >
+            <ul class="navbar-nav justify-content-end">
+              <!-- <li class="nav-item">
+                <a href="/" class="nav-link active">Home</a>
+              </li> -->
+              <li class="nav-item">
+                <a href="{% url 'addCategoriesPage' %}" class="nav-link active"
+                  >Add Categories</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'addProductPage' %}" class="nav-link"
+                  >Add Product</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'productsPage' %}" class="nav-link">Products</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'tablesPage' %}" class="nav-link">Tables</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section>
+      <div class="head">
+        <div class="row">
+          <div class="col-md-5"></div>
+          <div class="col-md-7 mt-4">
+            <h2
+              id="cat-head-label"
+              class="d-flex justify-content-center font-weight-bold"
+            >
+              Add New Category
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="row">
+          <div class="col-md-5">
+            <img
+              class="ml-5 w-75"
+              src="{% static 'images/bg2.webp' %}"
+              alt="SignUp"
+            />
+          </div>
+          <div class="col-md-7">
+            <form
+              class="form form-inline mt-5"
+              action="{% url 'addCategory' %}"
+              method="post"
+            >
+              {% csrf_token %}
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Category Name"
+                  name="category-name"
+                  required
+                />
+              </div>
+
+              <!-- <div class="d-flex justify-content-start"> -->
+              <input
+                role="button"
+                class="btn btn-outline-success text-uppercase"
+                id="add-cat-button"
+                type="submit"
+                value="Add Category"
+              />
+              <!-- </div> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
