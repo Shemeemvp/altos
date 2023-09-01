@@ -1,0 +1,181 @@
+body {
+  margin: 0;
+  /* background-image: url(/UserLoginApp/static/images/home.png); */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100vw 100vh;
+}
+header {
+  margin-bottom: 12vh;
+}
+.nav-item a {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 3px;
+  font-family: "Open Sans", sans-serif;
+}
+.navbar .navbar-nav .nav-item a {
+  color: rgb(255 255 255 / 84%);
+}
+.navbar .navbar-nav .nav-item a:hover {
+  color: #fff;
+}
+#home-head-label {
+  padding-top: 0.5rem;
+  padding-left: 2rem;
+  font-size: 2.3rem;
+}
+#home-reg-para {
+  padding-top: 1rem;
+  padding-left: 2rem;
+  font-size: 1.2rem;
+  font-family: monospace;
+}
+.home-banner-seg{
+  padding: 0;
+}
+.home-banner-seg .home-banner img{
+  width: 100vw;
+  height: 50vh;
+}
+
+
+/* Sign up Page */
+#reg-head-label {
+  font-family: sans-serif;
+  width: 70%;
+  font-size: 2.1rem;
+  margin-bottom: 4vh;
+  color: #b5b1b1;
+}
+.user-reg-form {
+  width: 70%;
+}
+.form-control {
+  width: 100%;
+  margin: auto;
+}
+.user-reg-form .form-inline .form-control {
+  width: 49%;
+  /* margin-right: 0.2rem; */
+}
+#reg-button {
+  font-size: 1rem;
+  font-family: monospace;
+  margin-top: 0.5rem;
+  width: 15vw;
+  /* margin-left: 35%; */
+}
+#warning-text {
+  margin-left: 13%;
+  font-size: 0.9rem;
+}
+.warning-text {
+  color: red;
+  margin-left: 1%;
+  font-size: 0.9rem;
+}
+
+/* Login Page */
+.login-form {
+  width: 80%;
+  margin: auto;
+}
+#login-head-label {
+  font-family: sans-serif;
+  font-size: 2.1rem;
+  color: #b5b1b1;
+}
+.login-icons {
+  color: lightslategrey;
+}
+.login-form .form-control {
+  width: 75%;
+  margin: auto;
+}
+.login-icons:hover {
+  transform: scale(1.2);
+}
+.loginerror {
+  color: red;
+  margin-left: 13%;
+  font-size: 0.9rem;
+  margin-top: -0.7rem;
+}
+
+/* About Page */
+
+#about-head-label {
+  margin-top: 21vh;
+  margin-left: 5vw;
+  font-size: 2.3rem;
+  font-family: monospace;
+  font-weight: 600;
+}
+#about-subhead {
+  margin-left: 6vw;
+}
+#brand {
+  font-size: 2.2rem;
+  color: blueviolet;
+}
+#subhead1 {
+  margin-left: 7vw;
+  margin-top: 6vh;
+  font-size: 1.5rem;
+  font-family: math;
+}
+#subhead2 {
+  margin-left: 7vw;
+  font-family: math;
+}
+#tech-list {
+  margin-top: 5vh;
+  margin-left: 7vw;
+  display: inline-flex;
+  list-style-type: none;
+}
+.list-items {
+  font-size: 1.05rem;
+  background: white;
+  font-family: cursive;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+  border: 2px solid cadetblue;
+  margin-right: 2rem;
+  color: cadetblue;
+}
+.list-items:hover {
+  background-color: cadetblue;
+  color: white;
+}
+
+/* Edit Page */
+#clear-button {
+  font-size: 1rem;
+  font-family: monospace;
+  margin-top: 0.5rem;
+  margin-right: 1rem;
+  /* margin-left: 35%; */
+}
+#save-button {
+  font-size: 1rem;
+  font-family: monospace;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  width: 10vw;
+  /* margin-left: 35%; */
+}
+#cancel-button {
+  font-size: 1rem;
+  font-family: monospace;
+  margin-top: 0.5rem;
+}
+#remove-photo {
+  text-decoration: none;
+  /* color: rgba(255, 56, 56, 0.911); */
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}

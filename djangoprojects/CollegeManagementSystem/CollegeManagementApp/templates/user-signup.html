@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    /> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-custom navbar-expand-md justify-content-end navbar-dark bg-info fixed-top"
+      >
+        <div class="container-fluid mt-2 mb-2">
+          <a class="navbar-brand font-weight-bold" href="/">COLLEGE MANAGEMENT SYSTEM</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTabsContent"
+            aria-controls="navbarTabsContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarTabsContent"
+          >
+            <ul class="navbar-nav justify-content-end">
+              <li class="nav-item">
+                <a href="/" class="nav-link"
+                  ><span><i class="fa-solid fa-house"></i></span> Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'userSignupPage' %}" class="nav-link active">Sign Up</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'userSigninPage' %}" class="nav-link"
+                  >Login <span><i class="fa fa-light fa-user"></i></span
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section>
+      <div class="head">
+        <div class="row">
+          <div class="col-md-5"></div>
+          <div class="col-md-7 mt-4">
+            <h2 id="reg-head-label" class="d-flex justify-content-center font-weight-bold text-info">
+              REGISTER
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="row">
+          <div class="col-md-5">
+            <img class="ml-5 w-75" src="{% static 'images/bg2.webp' %}" alt="SignUp" />
+          </div>
+          <div class="col-md-7">
+            <form class="form user-reg-form" action="{% url 'createUser' %}" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group form-inline">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="First Name"
+                  name="first-name"
+                  required
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Last Name"
+                  name="last-name"
+                />
+              </div>
+              <div class="form-group form-inline">
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Age"
+                  name="age"
+                  required
+                />
+                <select name="gender" id="genderInput" class="form-control">
+                    <option value="">--Gender--</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group form-inline">
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Contact No."
+                  name="mobile"
+                />
+                <select name="course" id="courseInput" class="form-control">
+                    <option value="">--Course--</option>
+                    {%if courses%}{% for i in courses%}
+                    <option value="{{i.id}}">{{i.course_name}}</option>
+                    {% endfor %}{%endif%}
+                </select>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="address" id="addressInput" cols="" rows="3" placeholder="Permanent Address"></textarea>
+              </div>
+              <div class="form-group form-inline">
+                <label for="inputImage" class="form-label w-25">Profile Picture</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  name="image"
+                  accept="image/*"
+                  style="width: 75%;"
+                />
+              </div>
+              <hr>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="User Name"
+                  name="user-name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Email"
+                  name="email"
+                />
+              </div>
+              <div class="form-group form-inline">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Password"
+                  id="password1"
+                  name="password1"
+                  required
+                />
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Re-enter password"
+                  id="password2"
+                  name="password2"
+                  onblur="checkPass()"
+                  required
+                />
+                <div id="warning-password" class="warning-text"></div>
+                {% if messages %} 
+                {% for message in messages %} 
+                {% if message.tags%}
+                <p id="warning-text" class="text-danger">{{ message }}</p>
+                <!-- <script>alert('{{message}}')</script> -->
+                {% endif %} 
+                {% endfor %} 
+                {% endif %}
+              </div>
+              <!-- <div class="form-group">
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Re-enter password"
+                  id="password2"
+                  name="password2"
+                  onblur="checkPass()"
+                  required
+                />
+                <div id="warning-password" class="warning-text"></div>
+              </div> -->
+              <div class="w-100 d-flex justify-content-center">
+                <input
+                  role="button"
+                  class="btn btn-outline-success"
+                  id="reg-button"
+                  type="submit"
+                  value="REGISTER"
+                />
+              </div>
+            </form>
+            <div class="row mt-3"  style="width: 70%;">
+              <div class="col d-flex justify-content-center">
+                <p>Already a member? <a class="font-weight-bold" href="{% url 'userSigninPage' %}">Login</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function checkPass() {
+        var pass1 = document.getElementById("password1").value;
+        var pass2 = document.getElementById("password2").value;
+        var div = document.getElementById("warning-password");
+        if (pass1 != "") {
+          if (pass1 != pass2) {
+            div.innerHTML =
+              "Passwords doesn't match..Please try again.";
+          }
+          else{
+            div.innerHTML = "";
+          }
+        }
+      }
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

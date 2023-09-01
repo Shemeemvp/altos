@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    /> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body style="background-color: #a9a9a991;">
+    <header>
+      <nav
+        class="navbar navbar-custom navbar-expand-md justify-content-end navbar-dark bg-info fixed-top"
+      >
+        <div class="container-fluid mt-2 mb-2">
+          <a class="navbar-brand font-weight-bold" href="/">COLLEGE MANAGEMENT SYSTEM</a>
+          <!-- <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="/" class="nav-link active"><span><i class="fa-solid fa-house"></i></span> Home</a>
+            </li>
+          </ul> -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTabsContent"
+            aria-controls="navbarTabsContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarTabsContent"
+          >
+            <ul class="navbar-nav justify-content-end">
+              <li class="nav-item">
+                <a href="/" class="nav-link active"><span><i class="fa-solid fa-house"></i></span> Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'userSignupPage' %}" class="nav-link">Sign Up</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'userSigninPage' %}" class="nav-link">Login <span><i class="fa fa-light fa-user"></i></span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section>
+      <div class="container-fluid home-banner-seg">
+        <div class="home-banner">
+          <img src="{% static 'images/banner2.avif' %}" alt="">
+        </div>
+      </div>
+    </section>
+    <section>
+        <h2 id="home-head-label" class="text-info">Welcome to the Home page</h2>
+        <p id="home-reg-para">Please <a href="{% url 'userSignupPage' %}"><strong>REGISTER</strong></a> if this is your first time here..</p>
+    </section>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    /> -->
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+  </head>
+  <body>
+    <header>
+      <nav
+        class="container-fluid navbar navbar-custom navbar-expand-md justify-content-end navbar-dark fixed-top"
+      >
+        <div class="container-fluid mt-2 mb-2">
+            <a class="navbar-brand font-weight-bold" href="#">Admin Panel</a>
+          <!-- <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="/" class="nav-link"
+                ><span><i class="fa-solid fa-house"></i></span> Home</a
+              >
+            </li>
+          </ul> -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTabsContent"
+            aria-controls="navbarTabsContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarTabsContent"
+          >
+            <ul class="navbar-nav justify-content-end">
+              <!-- <li class="nav-item">
+                <a href="{% url 'userSigninPage' %}" class="nav-link active"
+                  >Login <span><i class="fa fa-light fa-user"></i></span
+                ></a>
+              </li> -->
+              <li class="nav-item">
+                <a href="{% url 'adminHomePage' %}" class="nav-link active"
+                  ><span><i class="fa fa-tachometer" aria-hidden="true"></i></span> Dashboard</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'addCoursePage' %}" class="nav-link"><span><i class="fa fa-plus" aria-hidden="true"></i></span> Add Course</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'addStudentPage' %}" class="nav-link"><span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Add Student</a>
+              </li>
+              <li>
+                <div class="dropdown show container-fluid">
+                  <a
+                    class="dropdown-toggle nav-link font-weight-bold"
+                    href="#"
+                    role="button"
+                    id="profileDropdownMenu"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="text-decoration: none;color: rgb(255 255 255 / 84%);"
+                  >
+                    <span><i class="fa fa-solid fa-users"></i> &nbsp;</span
+                    >Show Users
+                  </a>
+
+                  <div
+                    class="dropdown-menu usersdd p-2"
+                    aria-labelledby="profileDropdownMenu"
+                  >
+                    <a class="dropdown-item" href="{% url 'showStudentsPage' %}">Show Students</a>
+                    <a class="dropdown-item" href="{% url 'showTeachersPage' %}">Show Teachers</a>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="dropdown show container-fluid">
+                  <a
+                    class="dropdown-toggle nav-link text-secondary font-weight-bold"
+                    href="#"
+                    role="button"
+                    id="profileDropdownMenu"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="text-decoration: none"
+                  >
+                    <span><i class="fa fa-solid fa-user"></i> &nbsp;</span
+                    >Admin
+                  </a>
+
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="profileDropdownMenu"
+                  >
+                    <!-- <a class="dropdown-item" href="">My Profile</a>
+                    <a class="dropdown-item" href="{% url 'userProfileEdit' user.id %}">Edit Profile</a>
+                    <div class="dropdown-divider"></div> -->
+                    <a class="dropdown-item" href="{% url 'userLogout' %}"
+                      ><button class="btn btn-outline-danger w-100">
+                        <span
+                          ><i
+                            class="fa fa-solid fa-arrow-right-from-bracket"
+                          ></i
+                        ></span>
+                        Logout
+                      </button></a
+                    >
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="dashboard-seg p-3">
+              <div class="dash-content">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <span><i class="fa fa-tachometer text-info" aria-hidden="true"></i></span>  &nbsp;DASHBOARD
+                  </li>
+                  <li class="list-group-item">
+                    <span><i class="fa fa-angle-right" aria-hidden="true"></i> &nbsp;</span> Default
+                  </li>
+                  <li class="list-group-item">
+                    <span><i class="fa fa-angle-right" aria-hidden="true"></i> &nbsp;</span> Analytics
+                  </li>
+                  <li class="list-group-item">
+                    <span><i class="fa-solid fa-chart-simple text-success"></i> &nbsp;</span> Performance
+                  </li>
+                  <li class="list-group-item">
+                    <span><i class="fa-solid fa-money-check-dollar"></i> &nbsp;</span> Payroll
+                  </li>
+                  <li class="list-group-item">
+                    <span><i class="fa-solid fa-calendar-days"></i> &nbsp;</span> Calendar
+                  </li>
+                  <li class="list-group-item">
+                    <span><i class="fa-solid fa-comment text-success"></i> &nbsp;</span> Feedback
+                  </li>
+                  <li class="list-group-item">
+                    <span><i class="fa-solid fa-bug text-danger"></i> &nbsp;</span> Report Issue
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="dash-right-seg p-3">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="dash-right-content">
+                    <a href="{% url 'showStudentsPage' %}" style="text-decoration: none;">
+                      <div class="row">
+                        <div class="col-7 tile-text">
+                          STUDENTS
+                        </div>
+                        <div class="col-5">
+                          <span><i class="fa-solid fa-graduation-cap text-info"></i></span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="dash-right-content">
+                    <a href="{% url 'showTeachersPage' %}" style="text-decoration: none;">
+                      <div class="row">
+                        <div class="col-7 tile-text">
+                          FACULTY
+                        </div>
+                        <div class="col-5">
+                          <span><i class="fa-solid fa-chalkboard-user text-secondary"></i></span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="dash-right-content">
+                    <div class="row">
+                      <div class="col-7 tile-text">
+                        PERFORMANCE
+                      </div>
+                      <div class="col-5">
+                        <span><i class="fa-solid fa-chart-simple text-success"></i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="dash-right-content">
+                    <div class="row">
+                      <div class="col-7 tile-text">
+                        PLACEMENTS
+                      </div>
+                      <div class="col-5">
+                        <span><i class="fa-solid fa-award text-success"></i></i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    /> -->
+    <link rel="stylesheet" href="{% static 'css/user-profile.css' %}" />
+  </head>
+  <body>
+    <header>
+      <nav
+        class="container-fluid navbar navbar-custom navbar-expand-md justify-content-end navbar-dark fixed-top"
+      >
+        <div class="container-fluid mt-2 mb-2">
+          <a class="navbar-brand font-weight-bold" href="/">COLLEGE MANAGEMENT SYSTEM</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTabsContent"
+            aria-controls="navbarTabsContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarTabsContent"
+          >
+            <ul class="navbar-nav justify-content-end">
+              <li class="nav-item">
+                <a href="/" class="nav-link"
+                  ><span><i class="fa-solid fa-house"></i></span> Home</a
+                >
+              </li>
+              <li>
+                <div class="dropdown show">
+                  <a
+                    class="dropdown-toggle nav-link text-white font-weight-bold"
+                    href="#"
+                    role="button"
+                    id="profileDropdownMenu"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="text-decoration: none"
+                  >
+                    <span><i class="fa fa-solid fa-user"></i> &nbsp;</span
+                    >{{user.first_name}} {{user.last_name}}
+                  </a>
+
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="profileDropdownMenu"
+                  >
+                    <a class="dropdown-item" href="{% url 'userProfilePage' user.id %}">My Profile</a>
+                    <a class="dropdown-item" href="{% url 'userProfileEdit' user.id %}">Edit Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'userLogout' %}"
+                      ><button class="btn btn-outline-danger w-100">
+                        <span
+                          ><i
+                            class="fa fa-solid fa-arrow-right-from-bracket"
+                          ></i
+                        ></span>
+                        Logout
+                      </button></a
+                    >
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section>
+      <div class="container-fluid">
+        <div class="profile-head">
+          <div class="row">
+            <div class="col-md-3">
+              <h4
+                id="prof-head-label"
+                class="text-secondary font-weight-bold mt-4 ml-5"
+              >
+                MY PROFILE
+              </h4>
+            </div>
+            <div class="col-md-9"></div>
+          </div>
+        </div>
+        <div class="profile">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="profile-left-seg p-3">
+                <div class="pl-content p-3">
+                  <div class="image-seg pt-3 d-flex justify-content-center">
+                    {%if userDetails.image %}
+                    <img
+                      src="{{userDetails.image.url}}"
+                      alt=""
+                      class="rounded-circle"
+                      width="130"
+                      height="145"
+                    />
+                    {% else %}
+                    <img
+                      src="{% static 'images/prof.jpg' %}"
+                      alt=""
+                      class="rounded-circle"
+                      width="130"
+                      height="145"
+                    />
+                    {%endif%}
+                  </div>
+                  <div class="name-seg mt-4 mb-2">
+                    <h3
+                      id="prof-name-seg-main"
+                      class="d-flex justify-content-center"
+                    >
+                      {{user.first_name}} {{user.last_name}}
+                    </h3>
+                  </div>
+                  <div class="crs-seg pl-5 pr-5 mt-4 mb-5">
+                    <div class="font-weight-bold" style="float: left">
+                      <h4>Course</h4>
+                    </div>
+                    <div style="float: right">
+                      <h6>{{userDetails.course.course_name}}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="profile-right-seg pr-3 pt-3 pb-3">
+                <div class="pr-content p-3">
+                  <div style="width: 100%">
+                    <h6 class="mb-3 pt-3 pl-4">Personal Info</h6>
+                  </div>
+                  <div class="mb-5" style="width: 100%">
+                    <div style="width: 40%; float: left">
+                      <h5 class="mt-2 ml-5">NAME</h5>
+                    </div>
+                    <div style="width: 40%; float: right">
+                      <h6 class="mt-2 mr-2">
+                        {{user.first_name}} {{user.last_name}}
+                      </h6>
+                    </div>
+                  </div>
+                  <hr class="hr-break" style="margin-top: 12vh" />
+                  <div class="mb-5" style="width: 100%">
+                    <div style="width: 40%; float: left">
+                      <h5 class="mt-2 ml-5">EMAIL</h5>
+                    </div>
+                    <div style="width: 40%; float: right">
+                      <h6 class="mt-2 mr-2">{{user.email}}</h6>
+                    </div>
+                  </div>
+                  <hr class="hr-break" style="margin-top: 12vh" />
+                  <div class="mb-5" style="width: 100%">
+                    <div style="width: 40%; float: left">
+                      <h5 class="mt-2 ml-5">CONTACT NUMBER</h5>
+                    </div>
+                    <div style="width: 40%; float: right">
+                      <h6 class="mt-2 mr-2">{{userDetails.phone}}</h6>
+                    </div>
+                  </div>
+                  <hr class="hr-break" style="margin-top: 12vh" />
+                  <div class="pb-3 mb-5" style="width: 100%">
+                    <div style="width: 40%; float: left">
+                      <h5 class="mt-2 ml-5">ADDRESS</h5>
+                    </div>
+                    <div style="width: 40%; float: right">
+                      <h6 class="mt-2 mr-2">{{userDetails.address}}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container-fluid">
+        <div class="other-det-seg p-3">
+          <div class="other-content">
+            <div class="row">
+              <div class="col">
+                <div style="width: 100%">
+                  <h6 class="pl-5 pt-4">Other Info</h6>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="pb-3 mb-5" style="width: 100%">
+                  <div style="width: 40%; float: left">
+                    <h5 class="mt-2 ml-5">User Name</h5>
+                  </div>
+                  <div style="width: 40%; float: right">
+                    <h6 class="mt-2 mr-2">{{user.username}}</h6>
+                  </div>
+                </div>
+                <hr class="hr-break m-3" />
+                <div class="pb-3 mb-5" style="width: 100%">
+                  <div style="width: 40%; float: left">
+                    <h5 class="mt-2 ml-5">Joining Date</h5>
+                  </div>
+                  <div style="width: 40%; float: right">
+                    <h6 class="mt-2 mr-2">{{user.date_joined}}</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="pb-3 mb-5" style="width: 100%">
+                  <div style="width: 40%; float: left">
+                    <h5 class="mt-2 ml-5">Gender</h5>
+                  </div>
+                  <div style="width: 40%; float: right">
+                    <h6 class="mt-2 mr-2">{{userDetails.gender}}</h6>
+                  </div>
+                </div>
+                <hr class="hr-break m-3" />
+                <div class="pb-3 mb-5" style="width: 100%">
+                    <div style="width: 40%; float: left">
+                      <h5 class="mt-2 ml-5">Profile Status</h5>
+                    </div>
+                    <div style="width: 40%; float: right">
+                      <h6 class="mt-2 mr-2">ACTIVE <span><i class="fa fa-check text-success" aria-hidden="true"></i></span></h6>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
