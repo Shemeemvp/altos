@@ -40,12 +40,12 @@ def addStudentPage(request):
     courses = CourseModel.objects.all()
     return render(request, "admin-addstudent.html", {"courses": courses})
 
-
+@login_required(login_url="userSigninPage")
 def showStudentsPage(request):
     students = StudentModel.objects.all()
     return render(request, "admin-showstudent.html", {"students": students})
 
-
+@login_required(login_url="userSigninPage")
 def showTeachersPage(request):
     teachers = TeacherModel.objects.all()
     return render(request, "admin-showteacher.html", {"teachers": teachers})
@@ -139,7 +139,7 @@ def userLogout(request):
     auth.logout(request)
     return redirect("userSigninPage")
 
-
+@login_required(login_url="userSigninPage")
 def userProfileEdit(request, pk):
     user = User.objects.get(id=pk)
     details = TeacherModel.objects.get(teacher_info=pk)
@@ -147,7 +147,7 @@ def userProfileEdit(request, pk):
     context = {"user": user, "userDetails": details, "courses": courses}
     return render(request, "user-edit.html", context)
 
-
+@login_required(login_url="userSigninPage")
 def removeProfileImage(request, pk):
     userDetails = TeacherModel.objects.get(teacher_info=pk)
     userDetails.image = None
@@ -159,10 +159,12 @@ def removeProfileImage(request, pk):
     context = {"user": user, "userDetails": details, "courses": courses}
     return render(request, "user-edit.html", context)
 
-
+@login_required(login_url="userSigninPage")
 def updateUserData(request, pk):
     if request.method == "POST":
         user = User.objects.get(id=pk)
+        userDetails = TeacherModel.objects.get(teacher_info=pk)
+
         fName = request.POST["first-name"]
         lName = request.POST["last-name"]
         age = request.POST["age"]
@@ -181,18 +183,26 @@ def updateUserData(request, pk):
             if User.objects.filter(username=uName).exists():
                 messages.info(request, "Username already exists!! Please try another..")
                 return redirect("userProfileEdit", pk)
+            else:
+                user.username = uName
+                user.save()
+                return redirect("userProfilePage", pk)
         elif user.email != email:
             if User.objects.filter(email=email).exists():
                 messages.info(request, "Email ID already exists!! Please try another..")
                 return redirect("userProfileEdit", pk)
+            else:
+                user.email = email
+                user.save()
+                return redirect("userProfilePage", pk)
         else:
             user.first_name = fName
             user.last_name = lName
-            user.username = uName
-            user.email = email
+            # user.username = uName
+            # user.email = email
             user.save()
 
-            userDetails = TeacherModel.objects.get(teacher_info=user.id)
+            
 
             newImage = request.FILES.get("image")
             currentImage = userDetails.image
@@ -205,13 +215,14 @@ def updateUserData(request, pk):
             userDetails.gender = gender
             userDetails.course = course
             userDetails.phone = phone
+            userDetails.save()
             # messages.info(request, 'Registration Successful..')
             print("=============User updation successful============")
             return redirect("userProfilePage", pk)
     else:
         return redirect("userProfileEdit", pk)
 
-
+@login_required(login_url="userSigninPage")
 def addCourse(request):
     if request.method == "POST":
         cName = request.POST["course-name"]
@@ -224,7 +235,7 @@ def addCourse(request):
         courseData.save()
         return redirect("addCoursePage")
 
-
+@login_required(login_url="userSigninPage")
 def addStudentData(request):
     if request.method == "POST":
         fName = request.POST["first-name"]
@@ -252,7 +263,7 @@ def addStudentData(request):
         student.save()
         return redirect("addStudentPage")
 
-
+@login_required(login_url="userSigninPage")
 def removeTeacher(request, pk):
     teacher = TeacherModel.objects.get(id=pk)
     userAuthDetails = teacher.teacher_info.id
@@ -262,7 +273,7 @@ def removeTeacher(request, pk):
 
     return redirect("showTeachersPage")
 
-
+@login_required(login_url="userSigninPage")
 def removeStudent(request, pk):
     student = StudentModel.objects.get(id=pk)
     student.delete()

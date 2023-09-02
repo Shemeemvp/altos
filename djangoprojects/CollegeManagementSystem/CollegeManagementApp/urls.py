@@ -10,7 +10,7 @@ urlpatterns = [
     path("user-profile/<int:pk>", views.userProfilePage, name="userProfilePage"),
     path("admin-home/", views.adminHomePage, name="adminHomePage"),
     path("add-course/", views.addCoursePage, name="addCoursePage"),
-    path("add-student-page", views.addStudentPage, name="addStudentPage"),
+    path("add-student-page/", views.addStudentPage, name="addStudentPage"),
     path("show-student/", views.showStudentsPage, name="showStudentsPage"),
     path("show-teachers/", views.showTeachersPage, name="showTeachersPage"),
     
