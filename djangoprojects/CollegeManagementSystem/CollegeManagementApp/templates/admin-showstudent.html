@@ -101,6 +101,7 @@
                   >
                     <a class="dropdown-item" href="{% url 'showStudentsPage' %}">Show Students</a>
                     <a class="dropdown-item" href="{% url 'showTeachersPage' %}">Show Teachers</a>
+                    <a class="dropdown-item" href="{% url 'showCourse' %}">Show Courses</a>
                   </div>
                 </div>
               </li>
@@ -188,6 +189,9 @@
                     {%endif%}
                   </td>
                   <td>
+                    <a href="{% url 'editStudent' i.id %}">
+                      <button type="button" class="btn btn-outline-info" >Edit</button>
+                    </a>
                     <a href="{% url 'removeStudent' i.id %}">
                       <button type="button" onclick="return confirm(`Are you sure you want to remove '{{i.first_name}} {{i.last_name}}'?`)" class="btn btn-outline-danger" >Delete</button>
                     </a>

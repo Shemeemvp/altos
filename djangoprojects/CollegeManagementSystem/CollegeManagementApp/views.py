@@ -40,6 +40,11 @@ def addStudentPage(request):
     courses = CourseModel.objects.all()
     return render(request, "admin-addstudent.html", {"courses": courses})
 
+def editStudent(request, pk):
+    courses = CourseModel.objects.all()
+    student = StudentModel.objects.get(id = pk)
+    return render(request, 'admin-editstudent.html',{"courses": courses, 'student':student})
+
 @login_required(login_url="userSigninPage")
 def showStudentsPage(request):
     students = StudentModel.objects.all()
@@ -49,6 +54,19 @@ def showStudentsPage(request):
 def showTeachersPage(request):
     teachers = TeacherModel.objects.all()
     return render(request, "admin-showteacher.html", {"teachers": teachers})
+
+def showCourses(request):
+    courses = CourseModel.objects.all()
+    return render(request, 'admin-showcourse.html',{'courses':courses})
+
+def editCoursePage(request, pk):
+    crs = CourseModel.objects.get(id = pk)
+    return render(request, 'admin-editcourse.html', {'course':crs})
+
+def removeCourse(request, pk):
+    course = CourseModel.objects.get(id = pk)
+    course.delete()
+    return redirect('showCourse')
 
 
 def createUser(request):
@@ -160,6 +178,16 @@ def removeProfileImage(request, pk):
     return render(request, "user-edit.html", context)
 
 @login_required(login_url="userSigninPage")
+def removeStudentImage(request, pk):
+    student = StudentModel.objects.get(id=pk)
+    student.image = None
+    student.save()
+
+    courses = CourseModel.objects.all()
+    context = {"student": student, "courses": courses}
+    return render(request, "admin-editstudent.html", context)
+
+@login_required(login_url="userSigninPage")
 def updateUserData(request, pk):
     if request.method == "POST":
         user = User.objects.get(id=pk)
@@ -233,7 +261,21 @@ def addCourse(request):
             course_name=cName, course_duration=cDuration, course_fee=cFee
         )
         courseData.save()
-        return redirect("addCoursePage")
+        return redirect("showCourse")
+    
+@login_required(login_url="userSigninPage")
+def editCourse(request, pk):
+    if request.method == "POST":
+        cName = request.POST["course-name"]
+        cDuration = request.POST["course-duration"]
+        cFee = request.POST["course-fee"]
+
+        courseData = CourseModel.objects.get(id = pk)
+        courseData.course_name = cName
+        courseData.course_duration = cDuration
+        courseData.course_fee = cFee
+        courseData.save()
+        return redirect("showCourse")
 
 @login_required(login_url="userSigninPage")
 def addStudentData(request):
@@ -262,6 +304,39 @@ def addStudentData(request):
         )
         student.save()
         return redirect("addStudentPage")
+    
+
+@login_required(login_url="userSigninPage")
+def editStudentData(request,pk):
+    if request.method == "POST":
+        fName = request.POST["first-name"]
+        lName = request.POST["last-name"]
+        age = request.POST["age"]
+        gender = request.POST["gender"]
+        email = request.POST["email"]
+        phone = request.POST["mobile"]
+        crsSelect = request.POST["course"]
+        course = CourseModel.objects.get(id=crsSelect)
+        address = request.POST["address"]
+
+        student = StudentModel.objects.get(id = pk)
+        newImage = request.FILES.get("image")
+        currentImage = student.image
+        if newImage is not None:
+            student.image = newImage
+        else:
+            student.image = currentImage
+        student.first_name = fName
+        student.last_name = lName
+        student.age = age
+        student.gender = gender
+        student.email = email
+        student.phone = phone
+        student.course = course
+        student.address = address
+
+        student.save()
+        return redirect("showStudentsPage")
 
 @login_required(login_url="userSigninPage")
 def removeTeacher(request, pk):

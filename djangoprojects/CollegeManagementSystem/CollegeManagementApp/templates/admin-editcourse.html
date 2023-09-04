@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>Edit Course</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -66,13 +66,13 @@
                 >
               </li>
               <li class="nav-item">
-                <a href="{% url 'addCoursePage' %}" class="nav-link"
+                <a href="{% url 'addCoursePage' %}" class="nav-link active"
                   ><span><i class="fa fa-plus" aria-hidden="true"></i></span>
                   Add Course</a
                 >
               </li>
               <li class="nav-item">
-                <a href="{% url 'addStudentPage' %}" class="nav-link active"
+                <a href="{% url 'addStudentPage' %}" class="nav-link"
                   ><span
                     ><i class="fa fa-user-plus" aria-hidden="true"></i
                   ></span>
@@ -153,78 +153,44 @@
               <h3
                 class="font-weight-bold text-secondary d-flex justify-content-center"
               >
-                ENTER STUDENT DETAILS
+                Edit Course Details
               </h3>
             </div>
           </div>
         </div>
         <div class="row pt-4">
           <div class="col-md-12">
-            <form class="form student-reg-form" action="{% url 'addStudentData' %}" method="post" enctype="multipart/form-data">
+            <form class="form course-form" action="{% url 'editCourse' course.id %}" method="post">
               {%csrf_token%}
-              <div class="form-group form-inline">
+              <div class="form-group">
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="First Name"
-                  name="first-name"
+                  name="course-name"
+                  placeholder="Course Name"
+                  value="{{course.course_name}}"
+                  id="courseName"
                   required
                 />
+              </div>
+              <div class="form-group">
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Last Name"
-                  name="last-name"
+                  name="course-duration"
+                  placeholder="Course Duration (In Months)"
+                  value="{{course.course_duration}}"
+                  id="courseDuration"
                 />
-              </div>
-              <div class="form-group form-inline">
-                <input
-                  type="number"
-                  class="form-control"
-                  placeholder="Age"
-                  name="age"
-                  required
-                />
-                <select name="gender" id="genderInput" class="form-control">
-                    <option value="">--Gender--</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
               </div>
               <div class="form-group">
                 <input
-                  type="email"
+                  type="text"
                   class="form-control"
-                  placeholder="Email"
-                  name="email"
-                />
-              </div>
-              <div class="form-group form-inline">
-                <input
-                  type="number"
-                  class="form-control"
-                  placeholder="Contact No."
-                  name="mobile"
-                />
-                <select name="course" id="courseInput" class="form-control">
-                    <option value="">--Course--</option>
-                    {%if courses%}{% for i in courses%}
-                    <option value="{{i.id}}">{{i.course_name}}</option>
-                    {% endfor %}{%endif%}
-                </select>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" name="address" id="addressInput" cols="" rows="3" placeholder="Permanent Address"></textarea>
-              </div>
-              <div class="form-group form-inline">
-                <label for="inputImage" class="form-label text-secondary w-25">Profile Picture</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  name="image"
-                  accept="image/*"
-                  style="width: 75%;"
+                  name="course-fee"
+                  value="{{course.course_fee}}"
+                  placeholder="Course Fee"
+                  id="courseFee"
                 />
               </div>
               <div class="w-100 d-flex justify-content-center">
@@ -233,7 +199,7 @@
                     name=""
                     class="btn btn-outline-success actionbuttons mr-2"
                     id=""
-                    value="ADD STUDENT"
+                    value="SAVE"
                   />
                   <input
                     type="reset"
@@ -242,6 +208,7 @@
                     id=""
                     value="CLEAR"
                   />
+                  <a href="{% url 'showCourse' %}"><button class="btn btn-info ml-2" >CANCEL</button></a>
               </div>
             </form>
           </div>

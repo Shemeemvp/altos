@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>Edit Student Details</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -153,14 +153,40 @@
               <h3
                 class="font-weight-bold text-secondary d-flex justify-content-center"
               >
-                ENTER STUDENT DETAILS
+                EDIT STUDENT DETAILS
               </h3>
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-12 d-flex flex-column align-items-center text-center">
+            {%if student.image %}
+            <img
+              id="userImage"
+              src="{{student.image.url}}"
+              alt="{{student.first_name}}"
+              class="img-thumbnail bg-light"
+              width="130"
+              height=""
+            />
+            <a type="button" href="{% url 'removeStudentImage' student.id %}"
+              ><button class="btn btn-outline-danger mt-2" id="remove-photo" onclick="return confirm('Are you sure you want to remove Profile Image?')">Remove Photo <span><i class="fa fa-trash" aria-hidden="true"></i></span></button></a
+            >
+            {% else %}
+            <img
+              id="userImage"
+              src="{% static 'images/prof.jpg' %}"
+              alt="Admin"
+              class="img-thumbnail"
+              width="130"
+              height=""
+            />
+            {%endif%}
+          </div>
+        </div>
         <div class="row pt-4">
           <div class="col-md-12">
-            <form class="form student-reg-form" action="{% url 'addStudentData' %}" method="post" enctype="multipart/form-data">
+            <form class="form student-reg-form" action="{% url 'editStudentData' student.id %}" method="post" enctype="multipart/form-data">
               {%csrf_token%}
               <div class="form-group form-inline">
                 <input
@@ -168,12 +194,14 @@
                   class="form-control"
                   placeholder="First Name"
                   name="first-name"
+                  value="{{student.first_name}}"
                   required
                 />
                 <input
                   type="text"
                   class="form-control"
                   placeholder="Last Name"
+                  value="{{student.last_name}}"
                   name="last-name"
                 />
               </div>
@@ -182,6 +210,7 @@
                   type="number"
                   class="form-control"
                   placeholder="Age"
+                  value="{{student.age}}"
                   name="age"
                   required
                 />
@@ -197,6 +226,7 @@
                   type="email"
                   class="form-control"
                   placeholder="Email"
+                  value="{{student.email}}"
                   name="email"
                 />
               </div>
@@ -205,6 +235,7 @@
                   type="number"
                   class="form-control"
                   placeholder="Contact No."
+                  value="{{student.phone}}"
                   name="mobile"
                 />
                 <select name="course" id="courseInput" class="form-control">
@@ -215,7 +246,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="address" id="addressInput" cols="" rows="3" placeholder="Permanent Address"></textarea>
+                <textarea class="form-control" name="address" id="addressInput" cols="" rows="3" placeholder="Permanent Address">{{student.address}}</textarea>
               </div>
               <div class="form-group form-inline">
                 <label for="inputImage" class="form-label text-secondary w-25">Profile Picture</label>
@@ -223,6 +254,7 @@
                   type="file"
                   class="form-control"
                   name="image"
+                  id="inputImage"
                   accept="image/*"
                   style="width: 75%;"
                 />
@@ -233,7 +265,7 @@
                     name=""
                     class="btn btn-outline-success actionbuttons mr-2"
                     id=""
-                    value="ADD STUDENT"
+                    value="SAVE"
                   />
                   <input
                     type="reset"
@@ -242,6 +274,7 @@
                     id=""
                     value="CLEAR"
                   />
+                  <div><a role="button" href="{% url 'showStudentsPage' %}"><button class="btn btn-info ml-2" >CANCEL</button></a></div>
               </div>
             </form>
           </div>
@@ -249,6 +282,21 @@
       </div>
     </section>
 
+    <script>
+      window.onload = function () {
+        const $genderSelect = document.querySelector("#genderInput");
+        const $courseSelect = document.querySelector("#courseInput")
+        $genderSelect.value = `{{student.gender}}`;
+        $courseSelect.value = `{{student.course.id}}`;
+      };
+
+      inputImage.onchange = (evt) => {
+        const [file] = inputImage.files;
+        if (file) {
+          userImage.src = URL.createObjectURL(file);
+        }
+      };
+    </script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
       integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="

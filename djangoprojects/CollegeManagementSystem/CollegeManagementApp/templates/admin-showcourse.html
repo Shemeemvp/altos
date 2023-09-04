@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>Course</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -72,7 +72,7 @@
                 >
               </li>
               <li class="nav-item">
-                <a href="{% url 'addStudentPage' %}" class="nav-link active"
+                <a href="{% url 'addStudentPage' %}" class="nav-link"
                   ><span
                     ><i class="fa fa-user-plus" aria-hidden="true"></i
                   ></span>
@@ -82,17 +82,17 @@
               <li>
                 <div class="dropdown show container-fluid">
                   <a
-                    class="dropdown-toggle nav-link font-weight-bold"
+                    class="dropdown-toggle nav-link active font-weight-bold"
                     href="#"
                     role="button"
                     id="profileDropdownMenu"
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
-                    style="text-decoration: none;color: rgb(255 255 255 / 84%);"
+                    style="text-decoration: none; color: rgb(255 255 255 / 84%)"
                   >
-                    <span><i class="fa fa-solid fa-users"></i> &nbsp;</span
-                    >Show Users
+                    <span><i class="fa fa-solid fa-users"></i> &nbsp;</span>Show
+                    Users
                   </a>
 
                   <div
@@ -105,7 +105,7 @@
                   </div>
                 </div>
               </li>
-              <li class="">
+              <li>
                 <div class="dropdown show container-fluid">
                   <a
                     class="dropdown-toggle nav-link text-secondary font-weight-bold"
@@ -124,9 +124,6 @@
                     class="dropdown-menu"
                     aria-labelledby="profileDropdownMenu"
                   >
-                    <!-- <a class="dropdown-item" href="">My Profile</a>
-                    <a class="dropdown-item" href="{% url 'userProfileEdit' user.id %}">Edit Profile</a>
-                    <div class="dropdown-divider"></div> -->
                     <a class="dropdown-item" href="{% url 'userLogout' %}"
                       ><button class="btn btn-outline-danger w-100">
                         <span
@@ -153,97 +150,46 @@
               <h3
                 class="font-weight-bold text-secondary d-flex justify-content-center"
               >
-                ENTER STUDENT DETAILS
+                COURSES AVAILABLE
               </h3>
             </div>
           </div>
         </div>
-        <div class="row pt-4">
-          <div class="col-md-12">
-            <form class="form student-reg-form" action="{% url 'addStudentData' %}" method="post" enctype="multipart/form-data">
-              {%csrf_token%}
-              <div class="form-group form-inline">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="First Name"
-                  name="first-name"
-                  required
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Last Name"
-                  name="last-name"
-                />
-              </div>
-              <div class="form-group form-inline">
-                <input
-                  type="number"
-                  class="form-control"
-                  placeholder="Age"
-                  name="age"
-                  required
-                />
-                <select name="gender" id="genderInput" class="form-control">
-                    <option value="">--Gender--</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="Email"
-                  name="email"
-                />
-              </div>
-              <div class="form-group form-inline">
-                <input
-                  type="number"
-                  class="form-control"
-                  placeholder="Contact No."
-                  name="mobile"
-                />
-                <select name="course" id="courseInput" class="form-control">
-                    <option value="">--Course--</option>
-                    {%if courses%}{% for i in courses%}
-                    <option value="{{i.id}}">{{i.course_name}}</option>
-                    {% endfor %}{%endif%}
-                </select>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" name="address" id="addressInput" cols="" rows="3" placeholder="Permanent Address"></textarea>
-              </div>
-              <div class="form-group form-inline">
-                <label for="inputImage" class="form-label text-secondary w-25">Profile Picture</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  name="image"
-                  accept="image/*"
-                  style="width: 75%;"
-                />
-              </div>
-              <div class="w-100 d-flex justify-content-center">
-                  <input
-                    type="submit"
-                    name=""
-                    class="btn btn-outline-success actionbuttons mr-2"
-                    id=""
-                    value="ADD STUDENT"
-                  />
-                  <input
-                    type="reset"
-                    name=""
-                    class="btn btn-outline-secondary actionbuttons"
-                    id=""
-                    value="CLEAR"
-                  />
-              </div>
-            </form>
+      </div>
+    </section>
+    <section>
+      <div class="container-fluid">
+        <div class="table-seg">
+          <div class="table">
+            <table class="table table-striped bg-dark text-white">
+              <thead class="bg-secondary text-white">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Course Name</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Course Fee</th>
+                  <th scope="col">ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for i in courses%}
+                <tr>
+                  <th scope="row">{{i.id}}</th>
+                  <td>{{i.course_name}}</td>
+                  <td>{{i.course_duration}}</td>
+                  <td>{{i.course_fee}}</td>
+                  <td>
+                    <a href="{% url 'editCoursePage' i.id %}">
+                      <button type="button" class="btn btn-outline-info" >Edit</button>
+                    </a>
+                    <a href="{% url 'removeCourse' i.id %}">
+                      <button type="button" onclick="return confirm(`Are you sure you want to remove course '{{i.course_name}}'?`)" class="btn btn-outline-danger" >Delete</button>
+                    </a>
+                  </td>
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

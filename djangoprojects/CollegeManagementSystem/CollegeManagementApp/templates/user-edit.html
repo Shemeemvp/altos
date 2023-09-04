@@ -324,17 +324,11 @@
     </section>
 
     <script>
-      // var course = std.course
       window.onload = function () {
         const $genderSelect = document.querySelector("#genderInput");
         const $courseSelect = document.querySelector("#courseInput")
-        // $select.value = course;
         $genderSelect.value = `{{userDetails.gender}}`;
         $courseSelect.value = `{{userDetails.course.id}}`;
-        // setTimeout(() => {
-    //       const $courseSelect = document.querySelector("#courseInput");
-        //   $courseSelect.value = `{{userDetails.course.course_name}}`;
-        // }, 3000);
       };
 
       function checkPass() {
