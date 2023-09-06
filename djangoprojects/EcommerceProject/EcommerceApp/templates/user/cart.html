@@ -10,6 +10,7 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="{% static 'css/products-home.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}" />
 
     <link
       rel="stylesheet"
@@ -36,6 +37,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
@@ -83,7 +85,13 @@
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link active mr-2"
-                  ><span><i class="fa fa-cart-shopping"></i></span> Cart <span style="margin-top: -0.2rem;position: absolute;" class="badge badge-pill badge-info">0</span></a>
+                  ><span><i class="fa fa-cart-shopping"></i></span> Cart
+                  <span
+                    style="margin-top: -0.2rem; position: absolute"
+                    class="badge badge-pill badge-info"
+                    >0</span
+                  ></a
+                >
               </li>
               <li class="nav-item dropdown">
                 <a
@@ -130,11 +138,10 @@
         </div>
       </nav>
     </header>
-    <section id="empty-cart-seg" style="margin-top: 18vh;">
-      <div
-        id="cartModal"
-        class="d-flex justify-content-center"
-      >
+
+    {%if not products%}
+    <section id="empty-cart-seg" style="margin-top: 18vh">
+      <div id="cartModal" class="d-flex justify-content-center">
         <div class="w-100">
           <div class="p-4">
             <div class="container-fluid mb-2 cart-modal">
@@ -172,6 +179,169 @@
         </div>
       </div>
     </section>
+    {%else%}
+    <section class="cart-products-seg">
+      <div class="container-fluid">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-md-12">
+            <div class="card cart-card mb-5 mt-2">
+              <div class="card-body p-0">
+                <div class="row g-0">
+                  <div class="col-md-8">
+                    <div class="p-5">
+                      <div
+                        class="d-flex justify-content-between align-items-center mb-5"
+                      >
+                        <h1 class="fw-bold mb-0 text-black">Your Items</h1>
+                        <h6 class="mb-0 text-muted">{{count}} items</h6>
+                      </div>
+                      <hr class="my-4" />
+
+                      {% for p in products %}
+
+                      <div
+                        class="row mb-4 d-flex justify-content-between align-items-center product-data"
+                      >
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                          <img
+                            src="{{p.product.image.url}}"
+                            class="img-fluid rounded-3"
+                            alt=".."
+                          />
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-4">
+                          <h5 class="text-secondary">
+                            {{p.product.product_name}}
+                          </h5>
+                          <h6 class="text-muted mb-1">
+                            {{p.product.description}}
+                          </h6>
+                          <p>Seller : {{p.product.vendor}}</p>
+                        </div>
+                        <div
+                          class="col-md-2 col-lg-2 col-xl-2 d-flex justify-content-center"
+                        >
+                          <input
+                            type="hidden"
+                            name="prod-id"
+                            value="{{p.product.id}}"
+                          />
+                          {%csrf_token%}
+                          {%if p.quantity == 1 %}
+                          <button class="btn px-2 changeQuantity" disabled onclick="changeQuantity('{{p.id}}','{{p.product.id}}',-1)">
+                            <i class="fas fa-minus"></i>
+                          </button>
+                          {%else%}
+                          <button class="btn px-2 changeQuantity" onclick="changeQuantity('{{p.id}}','{{p.product.id}}',-1)">
+                            <i class="fas fa-minus"></i>
+                          </button>
+                          {%endif%}
+
+                          <!-- <input id="prodQuantity" min="0" readonly="readonly"  value="{{this.quantity}}" class="form-control form-control-sm" /> -->
+                          <span
+                            id="qnt{{p.id}}"
+                            class="d-flex align-items-center m-2 border rounded p-2"
+                            >{{p.quantity}}</span
+                          >
+
+                          <button
+                            class="btn px-2 changeQuantity"
+                            onclick="changeQuantity('{{p.id}}','{{p.product.id}}',1)"
+                          >
+                            <i class="fas fa-plus"></i>
+                          </button>
+                        </div>
+                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                          <h6 class="mb-0">₹ <span id="price{{p.id}}">{{p.total_price}}</span></h6>
+                        </div>
+                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                          <a
+                            href="#"
+                            onclick="removeCartProduct(`{{p.product.id}}`)"
+                            class="text-muted h4"
+                            ><i class="fas fa-times"></i
+                          ></a>
+                          <!-- <a type="button" class="text-muted"
+                              ><i class="fa fa-times"></i
+                            ></a> -->
+                        </div>
+                      </div>
+
+                      <hr class="my-4" />
+
+                      {%endfor%}
+
+                      <div class="pt-5 d-felx justify-content-center">
+                        <h6 class="mb-0">
+                          <a href="/" class="text-body"
+                            ><i class="fa fa-long-arrow-alt-left mr-2"></i>Back
+                            to shopping</a
+                          >
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 bg-grey">
+                    <div class="p-5">
+                      <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                      <hr class="my-4" />
+
+                      <div class="d-flex justify-content-between mb-4">
+                        <h5 class="text-uppercase">items {{count}}</h5>
+                        <h5>₹ <span id="cart-total">{{sum}}</span></h5>
+                      </div>
+
+                      <h5 class="text-uppercase mb-3">Shipping</h5>
+
+                      <div class="mb-4 pb-2">
+                        <select class="select">
+                          <option value="1">
+                            Standard Delivery- ₹20.00
+                          </option>
+                          <option value="2">Fast Delivery- ₹50.00</option>
+                        </select>
+                      </div>
+
+                      <h5 class="text-uppercase mb-3">Give code</h5>
+
+                      <div class="mb-5">
+                        <div class="form-outline">
+                          <input
+                            type="text"
+                            id="form3Examplea2"
+                            class="form-control form-control-lg"
+                          />
+                          <label class="form-label" for="form3Examplea2"
+                            >Enter your code</label
+                          >
+                        </div>
+                      </div>
+
+                      <hr class="my-4" />
+
+                      <div class="d-flex justify-content-between mb-5">
+                        <h5 class="text-uppercase">Total price</h5>
+                        <h5>₹ <span id="sum-total">{{sum}}</span></h5>
+                      </div>
+
+                      <button
+                        type="button"
+                        onclick="window.location.href=`{% url 'checkoutPage' %}`"
+                        class="btn btn-outline-dark btn-block"
+                        data-mdb-ripple-color="dark"
+                      >
+                        Proceed To Pay
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {%endif%}
 
     <footer
       id="footer-section"
@@ -296,6 +466,12 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="{% static 'js/products.js' %}" type="text/javascript"></script>
   </body>
 </html>

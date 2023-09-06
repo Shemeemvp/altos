@@ -10,7 +10,7 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="{% static 'css/products-home.css' %}" />
-    
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -67,6 +67,9 @@
             class="collapse navbar-collapse justify-content-end"
             id="navbarTabsContent"
           >
+          <div class="location mr-4 my-2 text-white font-weight-bold">
+            <span><i class="fa-solid fa-location-dot"></i></span> Current Location
+          </div>
             <form class="form-inline">
               <div class="search-bar bg-light">
                 <input
@@ -78,16 +81,60 @@
               </div>
             </form>
             <ul class="navbar-nav justify-content-end">
+              {% if request.user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  data-mdb-toggle="dropdown"
+                  id="navbarDropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  ><span><i class="fa-solid fa-user"></i></span>
+                  {{request.user.first_name}}</a
+                >
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#"><span><i class="fa fa-user text-secondary"></i></span> My Profile</a>
+                  <a class="dropdown-item" href="{% url 'myOrders' %}"><span><i class="fa-solid fa-cart-shopping"></i></span> Orders</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-heart text-danger"></i></span> Wishlist</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-tag text-info"></i></span> Coupons</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa fa-solid fa-gift"></i></span> Gift Cards</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-bell"></i></span> Notifications</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'userLogout' %}"><span><i class="fa-solid fa-power-off"></i></span> Logout</a>
+                </div>
+              </li>
+              {% else %}
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  data-mdb-toggle="dropdown"
+                  id="navbarDropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  ><span><i class="fa-solid fa-right-to-bracket"></i></span>
+                  Login</a
+                >
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'userSigninPage' %}"><span><i class="fa-solid fa-right-to-bracket text-info"></i></span> Login</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'userSignupPage' %}"><span><i class="fa fa-user text-secondary"></i></span> New Customer? <span class="btn btn-outline-primary" onclick="window.location.href = `{% url 'userSignupPage' %}`" >Sign Un</span></a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-heart text-danger"></i></span> Wishlist</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-tag text-info"></i></span> Coupons</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa fa-solid fa-gift"></i></span> Gift Cards</a>
+                </div>
+              </li>
+              {% endif %}
               <li class="nav-item">
                 <a href="/" class="nav-link active">Products</a>
-              </li>
-              <li class="nav-item mr-1">
-                <a href="{% url 'userCartPage' %}" class="nav-link"><span><i class="fa fa-cart-shopping"></i></span> Cart <span style="margin-top: -0.2rem;position: absolute;" class="badge badge-pill badge-info">0</span></a>
               </li>
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
-                  data-toggle="dropdown"
+                  data-mdb-toggle="dropdown"
                   id="navbarDropdown"
                   href="#"
                   role="button"
@@ -98,31 +145,41 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">All</a>
                   <div class="dropdown-divider"></div>
+                  {% for i in categories%}
                   <a
                     class="dropdown-item"
-                    href="/categories/mobiles/mobiles.html"
-                    >Mobiles</a
+                    href="{% url 'showCategoryItems' i.id %}"
+                    >{{i.category_name}}</a
                   >
-                  <a
-                    class="dropdown-item"
-                    href="/categories/laptops/laptops.html"
-                    >Laptops</a
-                  >
-                  <a
-                    class="dropdown-item"
-                    href="/categories/gadgets/gadgets.html"
-                    >Gadgets</a
-                  >
+                  {%endfor%}
                 </div>
               </li>
-              <li class="nav-item">
-                <a href="{% url 'userSigninPage' %}" class="nav-link"
-                  ><span><i class="fa-solid fa-right-to-bracket"></i></span> Login</a
+              <li class="nav-item mr-1">
+                <a href="{% url 'userCartPage' %}" class="nav-link"
+                  ><span><i class="fa fa-cart-shopping"></i></span> Cart
+                  {%if request.user%}
+                  <span
+                    style="margin-top: -0.2rem; position: absolute"
+                    id="cart-count"
+                    class="badge badge-pill badge-info"
+                    >{{count}}</span>
+                  {%else%}
+                  {%endif%}
+                  </a
                 >
               </li>
-              <li class="nav-item">
-                <a href="{% url 'userSignupPage' %}" class="nav-link">Sign Up</a>
-              </li>
+              
+              <!-- <li class="nav-item">
+                <a href="{% url 'userSigninPage' %}" class="nav-link"
+                  ><span><i class="fa-solid fa-right-to-bracket"></i></span>
+                  Login</a
+                >
+              </li> -->
+              <!-- <li class="nav-item">
+                <a href="{% url 'userSignupPage' %}" class="nav-link"
+                  >Sign Up</a
+                >
+              </li> -->
             </ul>
           </div>
         </div>
@@ -196,7 +253,10 @@
           <div class="owl-carousel owl-theme">
             <div class="item owl-items">
               <div class="marquee-img">
-                <img src="{% static 'images/marq-img/mrq01.png' %}" alt="mrq01" />
+                <img
+                  src="{% static 'images/marq-img/mrq01.png' %}"
+                  alt="mrq01"
+                />
               </div>
             </div>
             <div class="item">
@@ -246,45 +306,11 @@
             </div>
           </div>
         </div>
-        <!-- <div class="marquee-slider">
-          <marquee behavior="scroll" direction="">
-            <div class="marquee-img">
-              <img src="/public/marq-img/mrq01.png" alt="" />
-            </div>
-            <div class="marquee-img">
-              <img src="/public/marq-img/mrq02.png" alt="" />
-            </div>
-            <div class="marquee-img">
-              <img src="/public/marq-img/mrq03.png" alt="" />
-            </div>
-            <div class="marquee-img">
-              <img src="/public/marq-img/mrq04.png" alt="" />
-            </div>
-            <div class="marquee-img">
-              <img src="/public/marq-img/mrq05.png" alt="" />
-            </div>
-            <div class="marquee-img">
-              <img src="/public/marq-img/mrq06.png" alt="" />
-            </div>
-            <div class="marquee-img">
-              <img src="/public/marq-img/mrq07.png" alt="" />
-            </div>
-            <div class="marquee-img">
-              <img src="/public/marq-img/mrq08.png" alt="" />
-            </div>
-            <div class="marquee-img">
-              <img src="/public/marq-img/mrq09.png" alt="" />
-            </div>
-            <div class="marquee-img">
-              <img src="/public/marq-img/mrq10.png" alt="">
-            </div>
-          </marquee>
-        </div> -->
       </div>
     </section>
     <section>
       <div class="container-fluid featured-products-section">
-        <div class="ft-products">
+        <div class="ft-products my-2">
           <h2>Featured <b>Products</b></h2>
         </div>
         <div class="rc-prd-carousel-section">
@@ -307,20 +333,22 @@
             <div class="carousel-inner">
               <div class="item carousel-item active">
                 <div class="row">
+                  {% for i in crsl2 %}
                   <div class="col-sm-3">
-                    <div class="thumb-wrapper">
+                    <div class="thumb-wrapper mx-1 my-2">
                       <span class="wish-icon"
                         ><i class="fa fa-heart-o"></i
                       ></span>
                       <div class="img-box">
                         <img
-                          src="https://img1.gadgetsnow.com/gd/images/products/additional/large/G234508_View_1/mobiles/tablets/apple-ipad-pro-11-inch-2021-space-gray-128gb-8gb-ram-.jpg"
+                          src="{{i.image.url}}"
                           class="img-fluid"
                           alt=""
                         />
                       </div>
                       <div class="thumb-content">
-                        <h4>Apple iPad</h4>
+                        <h4>{{i.product_name}}</h4>
+                        <small class="text-secondary">{{i.description}}</small>
                         <div class="star-rating">
                           <ul class="list-inline">
                             <li class="list-inline-item">
@@ -341,153 +369,34 @@
                           </ul>
                         </div>
                         <p class="item-price">
-                          <strike>₹18,999</strike> <b>₹15,999</b>
+                          <strike>₹{{i.original_price}}</strike> <b>₹{{i.price}}</b>
                         </p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+                        <button onclick="addToCart(`{{i.id}}`)" type="button" class="btn" id="add-to-cart{{i.id}}">Add to cart</button>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-3">
-                    <div class="thumb-wrapper">
-                      <span class="wish-icon"
-                        ><i class="fa fa-heart-o"></i
-                      ></span>
-                      <div class="img-box">
-                        <img
-                          src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISERUQEBMVFREXFhUXEBcSEBUSFREWFxIWFhUVFRUYHSggGBolGxYXITEhJSkuLi4uFx8zODMsNygtLisBCgoKDQ0NDg0NDysZFRkrKysrNysrLS0rLSsrKysrKysrLS0rKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOEA4QMBIgACEQEDEQH/xAAcAAEAAQUBAQAAAAAAAAAAAAAAAwIEBQYHCAH/xABDEAACAQICBgcDCgQEBwAAAAAAAQIDEQQhBRIxQVFhBgcTInGBkTJCoRQjUmJygpKxwdGissLwM1PS4RUkNENzo/H/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AO4gAAAAAAAAAAAAAAAAAACDGYunSg6lWShBbW38FxfI0rSXWPBO1CndfSqS1b+EVu814Ab4Dnuj+spayjiKKinsnTndeDT2epuGA07h63sVEnwl3X+z8gMkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWWmNKU8NSlWqu0VsW+T3RjzLupNRTlJpRSbbeSSWbbOBdY3TF4ms1B2pRuqS5b5tcXa/pwzCnpj00qYipeTtFX7OEXlBfvxe18sjUf8Aijb9mPnBS+MrssM5vMvsNhd7AyejsZGSa2L3o7rfSjfZbetluFs8jS0rOjLVbeWzPatxbaH0c69WNGhBzrP2NXdbfLco8b5ZkXTfB1MN2HaLVnJVoTi1nCVGpGLje/eTjKMk96kBvWhOnFSFlrZcHmvRnSejunYYqDccpxtrxvx2NcjzFhMXJ5XXrY3ToPp6phMZRlVvGlUapzb9lxm7XvsyerJ8kwPQAAAAAAAAAAAAAAAAAAAAAAAAAAAAFrpTHww9GpXqu1OnFym+SWxc9wGgdb/SpUaXyOm+/NXrWeyHux87XfJczhsU6krsm0tpyeOrTxE/anJyavfVvsS5JWS5JF7o/D2zAqw+ESVyqhQqV6sMNh469ao9WEdme1tvdFK7b3JMp0ji1FWR2bqo6F/I6XyrEx/5yss09uHpuzVPlJ5OXOy927DPdCuidLR9DUjadeVnXq2s6kuC+jBbl57W2c/686Eozo1IuSvllJpXaabtxtTh6I7Ecz676N6FGXCT+Fl/UBxmnJ74wfG8I3fjJJS+Jm9F6ThFOnVj83LKcZ/OU2v5o/HxRjKVIknRA9LdH8cq+GpVou6lBZ31rtZN335p5mQNA6lMTraPlS/yq9SK8JqNX85yN/AAAAAAAAAAAAAAAAAAAAAAAAAHGuv/AKStRhouk85pVcS+Eb2pw82pN/ZjxOvY3FQo051qj1adOMpzb2RjFNyfojyZpnSk8Ziq2Lqe1Vm5Wfux2Qh92CjHyAwtKnOM1tT/AD/dG20K2rR16j1fBXuuO1WPuh6as9ZJremk0/FPJn3Gp1ZxoUoJznKMKcVda0pNRittlm1syQG39TnRuOMxEsfVjrYehJKipKyqV8pJtcIKz8ZRfundjFdFtCQwWEpYWnshHvP6c3nOfnJtmVAHO+uf/pqS+tL84HRDmvXPU7lCPGU/6f2A5ZRpksqRNRgTSgEb/wBScrRxUNylSl+KM1/SjppzDqZVp4vwofnWOnhQAAAAAAAAAAAAAAAAAAAAAAAHM+vjT3Y4GOEg7VMTK0uVKnaU/VuEeakzheFpm09bWmflWlatnenQtQp55Xg26j8e0cl91GDwFIDIUnqxNy6mtCfKMbPGTV6eGVqd9jrVItL8MHLL68WaNjqqjF/E9CdXOg/kej6NKStVku1r8e0qd5xf2VaP3QNmAAA5N1w4i+Jo0uFPW9ZTX6HWTiHWTiNfSdRboRpwX4FJ/GTAwdGJLOJ8pFcwjfOp6GeKl/4V6dq/1OkGhdUNP5ivPjWUfw0oP+s30KAAAAAAAAAAAAAAAAAAAAABjOk2llhMHXxT/wC1TnJL6Uku5HzlZeZkzl3X9pXs8FSwqedeqnJcadFa7/jdIDhtG8nrSd5Ntyb2yk3dt+LM3g4WVzF4OBmJu0QMh0P0X8s0lh6DV4KfaVuHZ0u+0+Umow++elDkXUPou7xONkt8aFN24JVKluTvT/CddAAAAeeekGK7XGV6m1SqSa+zfu/A7xpvFdlh6tTfGEnH7VrR+Njzo6l5yfN29cgMjSZ9qSIKcimtUyCOxdVtG2j4z+nUqy9Jun/QbcYfohhXSwOGg1aSowc1wlKKlL+JszAUAAAAAAAAAAAAAAAAAAAAADz115aS7XSiop92hShG3CdT5yX8Lp+h6FPJvSTH/KcfisRtU69RxsnLuKTjDZ9WMQGj6Zc4+dkR4KaSzuvGEkvVouY6OeIu7pUvelfat6hxfwA731Z6N+T6Lw0WrSlDtql8mnVbqWfgpJfdLnSnTLB0MnU15cKS1/4vZ+JyLpF0yrV+65Wo2tCEO7CNtitv87mqYrSk521dq222J7Nu6+QHW9J9bKjfsaGV7XqVNnjGKy9TXa/W1jG46qowTbTtSk8+Gc2c8rRm7uTtfatt/HYWdSLbSWs5PZZ2u/CwHQ8Z1jYzFUKlKpGm6eqnN04OM9ZTWqleVrXV7Wvkapg68ZbHnvWxrxTzRV2Ko0lT9+T1qn6IijRjK2sk7bHvXg9q8gMpGZXhMO69anQV/nKkKeW5Tmot+Sd/IxypSXszfJTWul62k/U2zqowMq2koynZxo051W0mlrZU4Jp/bb+4Ed2Stktm4+gBQAAAAAAAAAAAAAAAAAAC20hjoUYOpUdor1b4Jb2T1JqKcpOySbbe5Lazk3TnpA6snnaKuoLgv3YFv0t6wK9RuFGTpU9ncdpvxnt9LHN62Ib3leNxF2fNE4TtZty/w45zfHhBc3+XkBc4DCJrtareotivZy/2/MoxulXey2bIaq28rIk0tjrtKPglHwslYtcHhrybvsupSXHfGm+O5y8lxA+0MHKo3rZK/eV8ovm1tf1V5tbC9qdnTWrFd7dZZ+i2I+Otlqw7sVldL4RX6/mWtSSWS897fi94EGIqN8F8X/t8RhaupnFd7jvKWrk9GgBSlKTuy6pwK6dMmVMIhki66J9Jamj8X28VrU2oxrwv7VNtttfWVrr03kbiWE6erO72NWYHqOhWjOMZwd4ySlFrY01dNeRWaF1O6WdXBPDzleeHlqxvt7KSvT8l3orlBG+hQAAAAAAAAAAAAAAAAAixVeNOEqk3aMYuUnwUVd/kBqvTjTOrbDRebWtV8Pdj5tX8EuJxzT+M1pM2DF6TlXnVry9qcm9vsrZGK5JJGm6UqZsIx0lKclCKvKTSiubM1jZRo01Rpu6j7W6UpP2pf3utwLXQMFedeTtqrVpv68ln6R/mIMXWc5XaUrNKC+nN31U+WTk+S5hVNGm5Ss21K15vY6cXsj9uXwXiXU6i9mOUVlly91fr/wDSlx1I2veTu5S3yk9smW1WpbJATTrFvOstreW+5aVsRb9LbW+CPtKlfOeb3Lcv3fP8gLilWb9iN+cu6v3foXUNffO32IJW/FcgiySMgJ4xf+bU9Kf+gmjKotkoy5SWq/xL/SWsZkkagRcwxSb1ZJxk9ilsl9mSyey9tvI+YmN0RtprVkrp7UyLXcXqSd0/8Nva7ZuMuLW2+9eDA2zqj0k6WkY02+7VjKm/TWj560UvvM70eY+jFfUx1CfCrTfpNHpwKAAAAAAAAAAAAAAAAGrdZGO7LAySdnUnGC52vUkvONOS8zaTQ+uC/wAlo8O2l6vC17fqBy7CztDbnb9NvmYDSks2X2FxWVr5fzPe/Ux+k87sIvZT7PC04q3eTnK/va2e3wsvItcFBJ6zVtVNJfXkk5vyWrHyZLpyycItO1op6ryaSV/gi0r1dWCW+15eLzfxbCpMRVuY3EVn/f7bSmdctZPWkkBdYeN3rP7vJfu/72F2mW8WSJgTqRWmQKRUpATqRWpECZWpATqR8rLWi4rbti+Elmn6kdypSCJ+jnzmLw9veqU7LhrSjl8T1Iea+rHCdrpTDxtdRq1JvkqUpyT9YxXmelAoAAAAAAAAAAAAAAAAat1mYN1NHVZJZ0nGr92D+c/9bmbSU1IKScZJOLTUk9jTVmmB5QpS1e69se7422y89vmS146yLzphoeWAxlXDyu0rdi9uvSk/mp+icG+MGY+jV4gUaabc9Zx2pu8X3X3XnbcWWkq/esXmko3tJX4PK69VyMFjp3a42z8QKnVPuEd2WakTYOfeAyiZUmRJlSYEqkVpkKZUmBcQzdvzdl5l/VwSXszTWWbT95tRVld52fLm7oxaZJTqNZptPk7AXc8LUW2L37M9ktV7OeXmuJFrW27tvIRxU7Wu2rxducVZc9n5LgiuNGti68MPRWtWrS1YR2Rindu/CCV2+SkwOkdQehm5V8fNWSXY0rr3pNVKz8u4r/aOymM6NaGp4LC0sLSzjTjZu1nOTznN85SbfmZMAAAAAAAAAAAAAAAAAAANO6yuhq0jh06dliqWs6DeSmmu9Rm90ZWWe5pPZdPznNSpTlTqRlCcZNTU7qUJJ2cJJ7GmevTResXq6paRTrUtWnjErKT9iuksoVbZ8lNZrmsgOEQtUg423ZX4mAx9F7d62mwaS0XicHVdHEU5QlHbGSza+lFrKceauRVqca0dZO0r2z2T9d4Gsoqje9y5r4SUHmmuT3BUrgT0Z3s95MWUrRlbPxtkXEavECVzS2kiZBk8yRMCVMqTIddcTY+iXQ3GaRd8PBRo5a1aqnGmvsZXqPlHLi0BhaUJzlGnThKdST1acIJylOT3JI751YdA1gIPEYi0sbUVp2zVCGT7KD3vJaz3tJbFd5DoT0BwujlrwvVxLVp1qi71t8acdlOPJZvK7dkbYAAAAAAAAAAAAAAAAAAAAAAAABY6Y0Ph8VT7LE0o1IblJZxfGMlnF800zmWn+phNueCxGrvVPEJtLwqxzS8YyfM62APPWI6udKQvGdDtYv3qdSlUS8FKUJfAtodWWOm8qEoeKSV/OVviejgB5zxPVNpSMdaNKE+EY14Kduak1FeUmYx9Xuk088FVv405fGMmj0+APNWF6sdKVHb5K4L6VSrSSXlrN/A2jQ3UhVdnjMTCC3xoQ15fjmkl+FnbQBqWhOrfRmGs44aNSas9fEfPyutjSl3Yv7KRtiVsls3H0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/2Q=="
-                          class="img-fluid"
-                          alt="Headphone"
-                        />
-                      </div>
-                      <div class="thumb-content">
-                        <h4>Sony Headphone</h4>
-                        <div class="star-rating">
-                          <ul class="list-inline">
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star-o"></i>
-                            </li>
-                          </ul>
-                        </div>
-                        <p class="item-price">
-                          <strike>₹4,999</strike> <b>₹2,999</b>
-                        </p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="thumb-wrapper">
-                      <span class="wish-icon"
-                        ><i class="fa fa-heart-o"></i
-                      ></span>
-                      <div class="img-box">
-                        <img
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_swD7FTP6CaIXlDA0vpr-h7ADwtAYELYioPfgQe1BvQ&usqp=CAU&ec=48665701"
-                          class="img-fluid"
-                          alt="Macbook"
-                        />
-                      </div>
-                      <div class="thumb-content">
-                        <h4>Macbook Air</h4>
-                        <div class="star-rating">
-                          <ul class="list-inline">
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star-half-o"></i>
-                            </li>
-                          </ul>
-                        </div>
-                        <p class="item-price">
-                          <strike>₹154,999</strike> <b>₹124,999</b>
-                        </p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="thumb-wrapper">
-                      <span class="wish-icon"
-                        ><i class="fa fa-heart-o"></i
-                      ></span>
-                      <div class="img-box">
-                        <img
-                          src="data:image/jpeg;base64,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"
-                          class="img-fluid"
-                          alt="Nikon"
-                        />
-                      </div>
-                      <div class="thumb-content">
-                        <h4>Nikon DSLR</h4>
-                        <div class="star-rating">
-                          <ul class="list-inline">
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star-o"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star-o"></i>
-                            </li>
-                          </ul>
-                        </div>
-                        <p class="item-price">
-                          <strike>₹254,999</strike> <b>₹184,999</b>
-                        </p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                      </div>
-                    </div>
-                  </div>
+                  {% endfor %}
                 </div>
               </div>
               <div class="item carousel-item">
                 <div class="row">
+                  {% for i in crsl1 %}
                   <div class="col-sm-3">
-                    <div class="thumb-wrapper">
+                    <div class="thumb-wrapper mx-1 my-2">
                       <span class="wish-icon"
                         ><i class="fa fa-heart-o"></i
                       ></span>
                       <div class="img-box">
                         <img
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzamQ9urvKxjmEoMoU8kg07XIBfMpcoVrdAMII8XIBlg&usqp=CAU&ec=48665701"
+                          src="{{i.image.url}}"
                           class="img-fluid"
-                          alt="Play Station"
+                          alt=""
                         />
                       </div>
                       <div class="thumb-content">
-                        <h4>Sony Play Station</h4>
-                        <p class="item-price">
-                          <strike>₹349,999</strike> <b>₹294,999</b>
-                        </p>
+                        <h4>{{i.product_name}}</h4>
+                        <small class="text-secondary">{{i.description}}</small>
                         <div class="star-rating">
                           <ul class="list-inline">
                             <li class="list-inline-item">
@@ -507,130 +416,15 @@
                             </li>
                           </ul>
                         </div>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="thumb-wrapper">
-                      <span class="wish-icon"
-                        ><i class="fa fa-heart-o"></i
-                      ></span>
-                      <div class="img-box">
-                        <img
-                          src="data:image/jpeg;base64,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"
-                          class="img-fluid"
-                          alt="Macbook"
-                        />
-                      </div>
-                      <div class="thumb-content">
-                        <h4>Macbook Pro</h4>
                         <p class="item-price">
-                          <strike>₹111,999</strike> <b>₹102,999</b>
+                          <strike>₹{{i.original_price}}</strike> <b>₹{{i.price}}</b>
                         </p>
-                        <div class="star-rating">
-                          <ul class="list-inline">
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star-half-o"></i>
-                            </li>
-                          </ul>
-                        </div>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+                        <button onclick="addToCart(`{{i.id}}`)" type="button" class="btn" id="add-to-cart{{i.id}}">Add to cart</button>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-3">
-                    <div class="thumb-wrapper">
-                      <span class="wish-icon"
-                        ><i class="fa fa-heart-o"></i
-                      ></span>
-                      <div class="img-box">
-                        <img
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQClqgFd1vBAtVkPWXBpcI1fHY5AruIf_QIYnvFZn-coQ&usqp=CAU&ec=48665701"
-                          class="img-fluid"
-                          alt="Speaker"
-                        />
-                      </div>
-                      <div class="thumb-content">
-                        <h4>Bose Speaker</h4>
-                        <p class="item-price">
-                          <strike>₹5,999</strike> <b>₹3,999</b>
-                        </p>
-                        <div class="star-rating">
-                          <ul class="list-inline">
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star-o"></i>
-                            </li>
-                          </ul>
-                        </div>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="thumb-wrapper">
-                      <span class="wish-icon"
-                        ><i class="fa fa-heart-o"></i
-                      ></span>
-                      <div class="img-box">
-                        <img
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2CwPNaHq0YKHxLbWXb1g0u0i25Xs1kd_wnpZxaLmkwX7nkyBy7QuBOvhw7_L1mdSwaRfPJLdw3pA&usqp=CAU&ec=48665701"
-                          class="img-fluid"
-                          alt="Galaxy"
-                        />
-                      </div>
-                      <div class="thumb-content">
-                        <h4>Samsung Galaxy S8</h4>
-                        <p class="item-price">
-                          <strike>₹14,999</strike> <b>₹11,999</b>
-                        </p>
-                        <div class="star-rating">
-                          <ul class="list-inline">
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star"></i>
-                            </li>
-                            <li class="list-inline-item">
-                              <i class="fa fa-star-o"></i>
-                            </li>
-                          </ul>
-                        </div>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                      </div>
-                    </div>
-                  </div>
+                  {% endfor %}
                 </div>
               </div>
             </div>
@@ -652,103 +446,7 @@
               <i class="fa fa-angle-right"></i>
             </a>
           </div>
-          <!-- <div
-            id="rc-prod-carousel"
-            class="carousel slide"
-            data-ride="carousel"
-          >
-            <ul class="carousel-indicators">
-              <li data-target="#rc-prod-carousel" data-slide-to="0" class="active"></li>
-              <li data-target="#rc-prod-carousel" data-slide-to="1"></li>
-              <li data-target="#rc-prod-carousel" data-slide-to="3"></li>
-              <li data-target="#rc-prod-carousel" data-slide-to="4"></li>
-            </ul>
-  
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img
-                  class="img-fluid"
-                  src="/public/carousel Images/Web banner-01.webp"
-                  alt=""
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  class="img-fluid"
-                  src="/public/carousel Images/Web banner-02.webp"
-                  alt=""
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  class="img-fluid"
-                  src="/public/carousel Images/Web banner-03.webp"
-                  alt=""
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  class="img-fluid"
-                  src="/public/carousel Images/Web banner-04.webp"
-                  alt=""
-                />
-              </div>
-            </div>
-  
-            <a class="carousel-control-prev" href="#rc-prod-carousel" data-slide="prev">
-              <span
-                class="carousel-control-prev-icon carousel-slide-icons"
-              ></span>
-            </a>
-            <a class="carousel-control-next" href="#rc-prod-carousel" data-slide="next">
-              <span
-                class="carousel-control-next-icon carousel-slide-icons"
-              ></span>
-            </a>
-          </div> -->
         </div>
-        <!-- <div class="owl-slider ft-prd-owlslider">
-          <div class="owl-carousel1 ft-products-owl-carousel owl-theme">
-            <div class="item owl-items">
-              <div class="thumb-wrapper">
-                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                <div class="img-box">
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_swD7FTP6CaIXlDA0vpr-h7ADwtAYELYioPfgQe1BvQ&usqp=CAU&ec=48665701"
-                    class="img-fluid"
-                    alt="Macbook"
-                  />
-                </div>
-                <div class="thumb-content">
-                  <h4>Macbook Air</h4>
-                  <div class="star-rating">
-                    <ul class="list-inline">
-                      <li class="list-inline-item">
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li class="list-inline-item">
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li class="list-inline-item">
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li class="list-inline-item">
-                        <i class="fa fa-star"></i>
-                      </li>
-                      <li class="list-inline-item">
-                        <i class="fa fa-star-half-o"></i>
-                      </li>
-                    </ul>
-                  </div>
-                  <p class="item-price">
-                    <strike>$899.00</strike> <b>$649.00</b>
-                  </p>
-                  <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </section>
     <section>
@@ -758,296 +456,47 @@
         </div>
         <div class="rc-products-cards">
           <div class="row mb-2">
+            {%for p in products%}
             <div class="col-md-3 rc-card mt-2">
-              <div class="card ofrcard">
-                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                <div class="imgcard-body">
-                  <img
-                    src="/public/Mobiles/mob-01.webp"
-                    class="card-img img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div class="card-body bg-light text-center">
-                  <div class="mb-2">
-                    <h6 class="font-weight-semibold mb-2">
-                      <a href="#" class="text-default mb-2" data-abc="true"
-                        >Samsung Galaxy S23 Ultra 5G</a
+                <div class="card ofrcard">
+                  <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                  <div class="imgcard-body">
+                    <img
+                      src="{{p.image.url}}"
+                      class="card-img img-fluid"
+                      alt=""
+                    />
+                  </div>
+                  <div class="card-body bg-light text-center">
+                    <div class="mb-2">
+                      <h6 class="font-weight-semibold mb-2">
+                        <a href="#" class="text-default mb-2" data-abc="true"
+                          >{{p.product_name}}</a
+                        >
+                      </h6>
+                      <a href="#" class="text-muted" data-abc="true"
+                        >{{p.description}}</a
                       >
-                    </h6>
-                    <a href="#" class="text-muted" data-abc="true"
-                      >Cream, 12GB, 1TB GB Storage</a
-                    >
+                    </div>
+                    <h3 class="mb-0 font-weight-semibold">₹{{p.price}}</h3>
+                    <div class="star-rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                    </div>
+                    <div class="text-muted mb-3">34 reviews</div>
+                    {%csrf_token%}
+                    <!-- <a href="#"> -->
+                        <button onclick="addToCart(`{{p.id}}`)" type="button" class="bg-cart" id="add-to-cart{{p.id}}">
+                          <i class="fa fa-cart-plus mr-2"></i> Add to cart
+                        </button>
+                    <!-- </a> -->
                   </div>
-                  <h3 class="mb-0 font-weight-semibold">₹154,999</h3>
-                  <div class="star-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                  </div>
-                  <div class="text-muted mb-3">34 reviews</div>
-                  <button onclick="" type="button" class="bg-cart">
-                    <i class="fa fa-cart-plus mr-2"></i> Add to cart
-                  </button>
                 </div>
               </div>
-            </div>
-            <div class="col-md-3 rc-card mt-2">
-              <div class="card ofrcard">
-                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                <div class="imgcard-body">
-                  <img
-                    src="/public/Mobiles/mob-04.webp"
-                    class="card-img img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div class="card-body bg-light text-center">
-                  <div class="mb-2">
-                    <h6 class="font-weight-semibold mb-2">
-                      <a href="#" class="text-default mb-2" data-abc="true"
-                        >Oppo Find N2 Flip</a
-                      >
-                    </h6>
-                    <a href="#" class="text-muted" data-abc="true"
-                      >Astral Black, 256 GB 8 GB RAM</a
-                    >
-                  </div>
-                  <h3 class="mb-0 font-weight-semibold">₹89,999</h3>
-                  <div class="star-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                  </div>
-                  <div class="text-muted mb-3">34 reviews</div>
-                  <button onclick="" type="button" class="bg-cart">
-                    <i class="fa fa-cart-plus mr-2"></i> Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 rc-card mt-2">
-              <div class="card ofrcard">
-                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                <div class="imgcard-body">
-                  <img
-                    src="/public/gadgets/gad-01.webp"
-                    class="card-img img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div class="card-body bg-light text-center">
-                  <div class="mb-2">
-                    <h6 class="font-weight-semibold mb-2">
-                      <a href="#" class="text-default mb-2" data-abc="true"
-                        >Gizmore Gizfit 910 Pro</a
-                      >
-                    </h6>
-                    <a href="#" class="text-muted" data-abc="true"
-                      >Hyper-smooth 4.0 stabilization</a
-                    >
-                  </div>
-                  <h3 class="mb-0 font-weight-semibold">₹2,499</h3>
-                  <div class="star-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                  </div>
-                  <div class="text-muted mb-3">34 reviews</div>
-                  <button onclick="" type="button" class="bg-cart">
-                    <i class="fa fa-cart-plus mr-2"></i> Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 rc-card mt-2">
-              <div class="card ofrcard">
-                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                <div class="imgcard-body">
-                  <img
-                    src="/public/Mobiles/mob-08.webp"
-                    class="card-img img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div class="card-body bg-light text-center">
-                  <div class="mb-2">
-                    <h6 class="font-weight-semibold mb-2">
-                      <a href="#" class="text-default mb-2" data-abc="true"
-                        >OnePlus 10 Pro 5G</a
-                      >
-                    </h6>
-                    <a href="#" class="text-muted" data-abc="true"
-                      >Volcanic Black, 128GB 8GB</a
-                    >
-                  </div>
-                  <h3 class="mb-0 font-weight-semibold">₹59,999</h3>
-                  <div class="star-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                  </div>
-                  <div class="text-muted mb-3">34 reviews</div>
-                  <button onclick="" type="button" class="bg-cart">
-                    <i class="fa fa-cart-plus mr-2"></i> Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3 rc-card mt-2">
-              <div class="card ofrcard">
-                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                <div class="imgcard-body">
-                  <img
-                    src="/public/laptops/lap-02.webp"
-                    class="card-img img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div class="card-body bg-light text-center">
-                  <div class="mb-2">
-                    <h6 class="font-weight-semibold mb-2">
-                      <a href="#" class="text-default mb-2" data-abc="true"
-                        >HP Pavilion x360</a
-                      >
-                    </h6>
-                    <a href="#" class="text-muted" data-abc="true"
-                      >12th Gen Intel Core i5-1235U 14-inch FHD</a
-                    >
-                  </div>
-                  <h3 class="mb-0 font-weight-semibold">₹76,146</h3>
-                  <div class="star-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                  </div>
-                  <div class="text-muted mb-3">34 reviews</div>
-                  <button onclick="" type="button" class="bg-cart">
-                    <i class="fa fa-cart-plus mr-2"></i> Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 rc-card mt-2">
-              <div class="card ofrcard">
-                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                <div class="imgcard-body">
-                  <img
-                    src="/public/gadgets/gad-07.webp"
-                    class="card-img img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div class="card-body bg-light text-center">
-                  <div class="mb-2">
-                    <h6 class="font-weight-semibold mb-2">
-                      <a href="#" class="text-default mb-2" data-abc="true"
-                        >Gizmore GIZBUD 851</a
-                      >
-                    </h6>
-                    <a href="#" class="text-muted" data-abc="true"
-                      >True Wireless Bluetooth Earbuds White</a
-                    >
-                  </div>
-                  <h3 class="mb-0 font-weight-semibold">₹2,999</h3>
-                  <div class="star-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                  </div>
-                  <div class="text-muted mb-3">34 reviews</div>
-                  <button onclick="" type="button" class="bg-cart">
-                    <i class="fa fa-cart-plus mr-2"></i> Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 rc-card mt-2">
-              <div class="card ofrcard">
-                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                <div class="imgcard-body">
-                  <img
-                    src="/public/gadgets/gad-08.webp"
-                    class="card-img img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div class="card-body bg-light text-center">
-                  <div class="mb-2">
-                    <h6 class="font-weight-semibold mb-2">
-                      <a href="#" class="text-default mb-2" data-abc="true"
-                        >Xiaomi Bluetooth Speaker</a
-                      >
-                    </h6>
-                    <a href="#" class="text-muted" data-abc="true"
-                      >Black, Powerful 63.5mm Sound Driver</a
-                    >
-                  </div>
-                  <h3 class="mb-0 font-weight-semibold">₹4,500</h3>
-                  <div class="star-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                  </div>
-                  <div class="text-muted mb-3">34 reviews</div>
-                  <button onclick="" type="button" class="bg-cart">
-                    <i class="fa fa-cart-plus mr-2"></i> Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 rc-card mt-2">
-              <div class="card ofrcard">
-                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                <div class="imgcard-body">
-                  <img
-                    src="/public/laptops/lap-05.webp"
-                    class="card-img img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div class="card-body bg-light text-center">
-                  <div class="mb-2">
-                    <h6 class="font-weight-semibold mb-2">
-                      <a href="#" class="text-default mb-2" data-abc="true"
-                        >Acer Aspire 3</a
-                      >
-                    </h6>
-                    <a href="#" class="text-muted" data-abc="true"
-                      >Intel Core i5 11th Gen/8GB RAM/128GB SSD</a
-                    >
-                  </div>
-                  <h3 class="mb-0 font-weight-semibold">₹56,159</h3>
-                  <div class="star-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
-                  </div>
-                  <div class="text-muted mb-3">34 reviews</div>
-                  <button onclick="" type="button" class="bg-cart">
-                    <i class="fa fa-cart-plus mr-2"></i> Add to cart
-                  </button>
-                </div>
-              </div>
-            </div>
+            {%endfor%}
           </div>
         </div>
       </div>
@@ -1205,6 +654,12 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="{% static 'js/products.js' %}" type="text/javascript"></script>
   </body>
 </html>

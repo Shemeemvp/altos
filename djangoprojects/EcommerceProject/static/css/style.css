@@ -186,3 +186,17 @@ header {
   font-size: 0.8rem;
   margin-bottom: 1rem;
 }
+
+/* Placed Order page */
+.placed-order-seg {
+  margin-top: 20vh;
+}
+
+/* My Orders */
+.my-orders-seg {
+  margin-top: 19vh;
+}
+.card.my-order-card {
+  height: fit-content;
+  width: 100%;
+}

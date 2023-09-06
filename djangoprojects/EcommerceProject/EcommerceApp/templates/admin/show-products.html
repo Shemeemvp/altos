@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    /> -->
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+  </head>
+  <body>
+    <header>
+      <nav
+        class="container-fluid navbar navbar-custom navbar-expand-md justify-content-end navbar-dark fixed-top"
+      >
+        <div class="container-fluid mt-2 mb-2">
+          <a href="" class="navbar-brand">
+            <img
+              id="navbarLogo"
+              src="{% static 'images/logo/logo5.png' %}"
+              alt=""
+              class="d-inline-block align-middle"
+            />
+          </a>
+          <a class="navbar-brand font-weight-bold ml-3" href="#">Admin Panel</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTabsContent"
+            aria-controls="navbarTabsContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarTabsContent"
+          >
+            <ul class="navbar-nav justify-content-end">
+              <li class="nav-item">
+                <a href="{% url 'adminHomePage' %}" class="nav-link active"
+                  ><span
+                    ><i class="fa fa-tachometer" aria-hidden="true"></i
+                  ></span>
+                  Dashboard</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'addCategoryPage' %}" class="nav-link"
+                  ><span><i class="fa fa-plus" aria-hidden="true"></i></span>
+                  Add Category</a
+                >
+              </li>
+              <li>
+                <div class="dropdown show container-fluid">
+                  <a
+                    class="dropdown-toggle nav-link font-weight-bold"
+                    href="#"
+                    role="button"
+                    id="profileDropdownMenu"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="text-decoration: none; color: rgb(255 255 255 / 84%)"
+                  >
+                    <span><i class="fa-brands fa-shopify"></i> &nbsp;</span
+                    >Products
+                  </a>
+
+                  <div
+                    class="dropdown-menu usersdd p-2"
+                    aria-labelledby="profileDropdownMenu"
+                  >
+                    <a class="dropdown-item" href="{% url 'showProducts' %}"
+                      >Products</a
+                    >
+                    <a class="dropdown-item" href="{% url 'addProductPage' %}"
+                      >Add Product</a
+                    >
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="dropdown show container-fluid">
+                  <a
+                    class="dropdown-toggle nav-link font-weight-bold"
+                    href="#"
+                    role="button"
+                    id="profileDropdownMenu"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="text-decoration: none; color: rgb(255 255 255 / 84%)"
+                  >
+                    <span><i class="fa fa-cart-shopping"></i> &nbsp;</span
+                    >Orders
+                  </a>
+
+                  <div
+                    class="dropdown-menu usersdd p-2"
+                    aria-labelledby="profileDropdownMenu"
+                  >
+                    <a class="dropdown-item" href="">Orders Placed</a>
+                    <a class="dropdown-item" href="">Shipment</a>
+                    <a class="dropdown-item" href="">Order Tracking</a>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="dropdown show container-fluid">
+                  <a
+                    class="dropdown-toggle nav-link font-weight-bold"
+                    href="#"
+                    role="button"
+                    id="profileDropdownMenu"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="text-decoration: none"
+                  >
+                    <span><i class="fa fa-solid fa-user"></i>&nbsp;</span>Admin
+                  </a>
+
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="profileDropdownMenu"
+                  >
+                    <!-- <a class="dropdown-item" href="">My Profile</a>
+                    <a class="dropdown-item" href="">Edit Profile</a>
+                    <div class="dropdown-divider"></div> -->
+                    <a class="dropdown-item" href="{% url 'userLogout' %}"
+                      ><button class="btn btn-outline-danger w-100">
+                        <span
+                          ><i
+                            class="fa fa-solid fa-arrow-right-from-bracket"
+                          ></i
+                        ></span>
+                        Logout
+                      </button></a
+                    >
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <div class="add-course-head pt-4">
+              <h3
+                class="font-weight-bold text-secondary d-flex justify-content-center"
+              >
+                PRODUCTS IN STOCK
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container-fluid">
+        <div class="table-seg">
+          <div class="table">
+            <table class="table table-striped bg-dark text-white">
+              <thead class="bg-secondary text-white">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">NAME</th>
+                  <th scope="col">CATEGORY</th>
+                  <th scope="col">QUANTITY</th>
+                  <th scope="col">UNIT PRICE</th>
+                  <th scope="col">SELLER</th>
+                  <th scope="col">MFG DATE</th>
+                  <th scope="col">PHOTO</th>
+                  <th scope="col">ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for i in products%}
+                <tr>
+                  <th scope="row">{{i.id}}</th>
+                  <td>{{i.product_name}}</td>
+                  <td>{{i.category.category_name}}</td>
+                  <td>{{i.quantity}}</td>
+                  <td>{{i.price}}</td>
+                  <td>{{i.vendor}}</td>
+                  <td>{{i.mfg_date}}</td>
+                  <td>
+                    {%if i.image%}
+                    <img
+                      src="{{i.image.url}}"
+                      class="img-thumbnail bg-secondary"
+                      style="width: 5vw"
+                      alt=""
+                    />
+                    {%else%}
+                    <img
+                      src="{% static 'images/products/empty.png' %}"
+                      class="img-thumbnail bg-secondary"
+                      style="width: 5vw"
+                      alt=""
+                    />
+                    {%endif%}
+                  </td>
+                  <td>
+                    <a href="">
+                      <button type="button" class="btn btn-outline-info">
+                        Edit
+                      </button>
+                    </a>
+                    <!-- <a href="#"> -->
+                      <!-- <button type="button" onclick="return confirm(`Are you sure you want to remove '{{i.product_name}}'?`)" class="btn btn-outline-danger" >Delete</button> -->
+                      <button
+                        type="button"
+                        onclick="confirmDelete(`{{ i.id }}`)"
+                        class="btn btn-outline-danger"
+                      >
+                        Delete
+                      </button>
+                    <!-- </a> -->
+                  </td>
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
+</html>

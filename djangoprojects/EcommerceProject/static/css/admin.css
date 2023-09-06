@@ -1,127 +1,142 @@
 body {
-    margin: 0;
-    background-color: #141414;
-  }
-  header {
-    margin-bottom: 12vh;
-  }
-  .navbar {
-    background-color: #232832;
-  }
-  .nav-item a {
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 600;
-    margin: 3px;
-    font-family: "Open Sans", sans-serif;
-  }
-  .navbar .navbar-nav .nav-item a {
-    color: rgb(255 255 255 / 84%);
-  }
-  .dropdown.show .dropdown-toggle {
-    color: rgb(255 255 255 / 84%);
-  }
-  .navbar .navbar-nav .nav-item a:hover {
-    color: #fff;
-  }
-  .profile .pl-content {
-    background-color: #232832;
-    color: white;
-    height: 60vh;
-    border-radius: 0.4rem;
-  }
-  .profile .pr-content {
-    background-color: #232832;
-    color: white;
-    height: 60vh;
-    border-radius: 0.4rem;
-  }
-  .other-content {
-    background-color: #232832;
-    color: white;
-    height: 30vh;
-    border-radius: 0.4rem;
-  }
-  #prof-name-seg-main {
-    margin-top: 2.2rem;
-    margin-bottom: 2.1rem;
-  }
-  hr {
-    border-top: 1px solid rgb(165 165 165 / 50%);
-  }
-  .admin-home-banner-seg {
-    padding: 0;
-  }
-  .admin-home-banner img {
-    width: 100vw;
-  }
-  .course-form {
-    width: 70%;
-    margin: auto;
-  }
-  .course-form .form-control {
-    width: 50%;
-    margin: auto;
-  }
-  /* .actionbuttons{
+  margin: 0;
+  background-color: #141414;
+}
+header {
+  margin-bottom: 17vh;
+}
+.navbar {
+  background-color: #232832;
+}
+#navbarLogo {
+  width: 10vw;
+}
+.nav-item a {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 3px;
+  font-family: "Open Sans", sans-serif;
+}
+.navbar .navbar-nav .nav-item a {
+  color: rgb(255 255 255 / 84%);
+}
+.dropdown.show .dropdown-toggle {
+  color: rgb(255 255 255 / 84%);
+}
+#profileDropdownMenu{
+    color: rgb(255 255 255 / 67%);
+}
+#profileDropdownMenu:hover {
+    color: #ffffff;
+}
+
+.navbar .navbar-nav .nav-item a:hover {
+  color: #fff;
+}
+.profile .pl-content {
+  background-color: #232832;
+  color: white;
+  height: 60vh;
+  border-radius: 0.4rem;
+}
+.profile .pr-content {
+  background-color: #232832;
+  color: white;
+  height: 60vh;
+  border-radius: 0.4rem;
+}
+.other-content {
+  background-color: #232832;
+  color: white;
+  height: 30vh;
+  border-radius: 0.4rem;
+}
+#prof-name-seg-main {
+  margin-top: 2.2rem;
+  margin-bottom: 2.1rem;
+}
+hr {
+  border-top: 1px solid rgb(165 165 165 / 50%);
+}
+.admin-home-banner-seg {
+  padding: 0;
+}
+.admin-home-banner img {
+  width: 100vw;
+}
+.course-form {
+  width: 70%;
+  margin: auto;
+}
+.course-form .form-control {
+  width: 50%;
+  margin: auto;
+}
+/* .actionbuttons{
       margin: auto;
   } */
-  
-  .student-reg-form {
-    width: 50%;
-    margin: auto;
-  }
-  .form-control {
-    width: 100%;
-    margin: auto;
-  }
-  .student-reg-form .form-inline .form-control {
-    width: 49%;
-    /* margin-right: 0.2rem; */
-  }
-  /* .dropdown.show .nav-link:hover {
+
+.student-reg-form {
+  width: 50%;
+  margin: auto;
+}
+.form-control {
+  width: 100%;
+  margin: auto;
+}
+.student-reg-form .form-inline .form-control {
+  width: 49%;
+  /* margin-right: 0.2rem; */
+}
+/* .dropdown.show .nav-link:hover {
     color: #fff;
   } */
-  .usersdd .dropdown-item {
-    border: 1px solid lightslategray;
-    border-radius: 0.25rem;
-    margin: 0.15rem;
+.usersdd .dropdown-item {
+  border: 1px solid lightslategray;
+  border-radius: 0.25rem;
+  margin: 0.15rem;
+}
+.usersdd .dropdown-item:hover {
+  background-color: #232832;
+  color: #fff;
+}
+.dash-content {
+  background-color: #232832;
+  /* color: white; */
+  width: 80%;
+  height: 80vh;
+  border-radius: 0.4rem;
+}
+.dash-right-content {
+  background-color: #232832;
+  /* color: white; */
+  width: 93%;
+  margin-top: 2rem;
+  height: 27vh;
+  border-radius: 0.4rem;
+}
+.dash-right-content i {
+  padding-top: 30%;
+  font-size: 5rem;
+}
+.dash-right-content .tile-text {
+  color: white;
+  padding-top: 15%;
+  padding-left: 3rem;
+  font-weight: 700;
+  font-size: 1.65rem;
+}
+
+.list-group .list-group-item {
+  background-color: #232832;
+  color: #fff;
+  font-family: system-ui;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 728px) {
+  #navbarLogo {
+    width: 30vw;
   }
-  .usersdd .dropdown-item:hover {
-    background-color: #232832;
-    color: #fff;
-  }
-  .dash-content {
-    background-color: #232832;
-    /* color: white; */
-    width: 80%;
-    height: 80vh;
-    border-radius: 0.4rem;
-  }
-  .dash-right-content {
-    background-color: #232832;
-    /* color: white; */
-    width: 93%;
-    margin-top: 2rem;
-    height: 27vh;
-    border-radius: 0.4rem;
-  }
-  .dash-right-content i {
-    padding-top: 30%;
-    font-size: 5rem;
-  }
-  .dash-right-content .tile-text{
-    color: white;
-    padding-top: 15%;
-    padding-left: 3rem;
-    font-weight: 700;
-    font-size: 1.65rem;
-  }
-  
-  .list-group .list-group-item {
-    background-color: #232832;
-    color: #fff;
-    font-family: system-ui;
-    font-weight: 500;
-  }
-  
+}

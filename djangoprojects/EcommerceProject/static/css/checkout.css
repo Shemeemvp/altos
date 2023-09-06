@@ -1,0 +1,26 @@
+body {
+  background-color: #d4d4d4d7;
+}
+.checkout-seg {
+  background-color: #ffffff69;
+  margin-top: 18vh;
+}
+.checkout-page-form {
+  width: 95vw;
+  margin: auto;
+}
+.card.summary-card {
+  height: fit-content;
+}
+.address-form-seg {
+  display: none;
+  margin: auto;
+}
+.customer-address .address-seg1{
+    width: 1vw;
+    float: left;
+}
+.customer-address .address-seg2{
+    float: left;
+    width: max-content;
+}

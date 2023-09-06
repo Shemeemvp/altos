@@ -1,18 +1,200 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
-from EcommerceApp.models import CategoryModel, CartModel, CustomerModel, ProductModel
+from EcommerceApp.models import (
+    CategoryModel,
+    CartModel,
+    CustomerModel,
+    ProductModel,
+    Orders,
+)
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import HttpResponse, JsonResponse
 
 
 # Create your views here.
 def homePage(request):
-    return render(request, "user/products-home.html")
+    ctg = CategoryModel.objects.all()
+    prd = ProductModel.objects.all()
+    crsl1 = ProductModel.objects.all()[0:4]
+    crsl2 = ProductModel.objects.all()[6:10]
+    print(crsl1)
+    print(crsl2)
+    cartItemsCount = len(CartModel.objects.filter(user=request.user.id))
+    context = {
+        "categories": ctg,
+        "products": prd,
+        "count": cartItemsCount,
+        "crsl1": crsl1,
+        "crsl2": crsl2,
+    }
+
+    return render(request, "user/products-home.html", context)
 
 
 # GUI Pages
+# CART
+@login_required(login_url="userSigninPage")
 def userCartPage(request):
-    return render(request, "user/cart.html")
+    products = CartModel.objects.filter(user=request.user.id)
+    netAmount = 0
+    for i in products:
+        netAmount += i.total_price
+    count = len(products)
+    return render(
+        request,
+        "user/cart.html",
+        {"products": products, "count": count, "sum": netAmount},
+    )
+
+
+# @login_required(login_url="userSigninPage")
+# def addToCart(request, pk):
+#     userId = request.user.id
+#     prodId = pk
+#     item = ProductModel.objects.get(id=prodId)
+#     user = User.objects.get(id=userId)
+#     if CartModel.objects.filter(user=userId).exists():
+#         if CartModel.objects.filter(user=userId).filter(product=prodId).exists():
+#             # if product is not None:
+#             product = CartModel.objects.get(user=userId, product=prodId)
+#             product.quantity += 1
+#             product.total_price = product.quantity * product.product.price
+#             product.save()
+
+#             return redirect("homePage")
+#         else:
+#             cartItem = CartModel(
+#                 user=user, product=item, quantity=1, total_price=item.price
+#             )
+#             cartItem.save()
+#             return redirect("homePage")
+#     else:
+#         cartItem = CartModel(
+#             user=user, product=item, quantity=1, total_price=item.price
+#         )
+#         cartItem.save()
+
+#         return redirect("homePage")
+    
+
+@login_required(login_url="userSigninPage")
+def addToCart(request):
+    if request.method == 'POST':
+        productId = request.POST.get('product')
+        item = ProductModel.objects.get(id=productId)
+        user = User.objects.get(id=request.user.id)
+        if CartModel.objects.filter(user=user.id).exists():
+            if CartModel.objects.filter(user=user.id).filter(product=productId).exists():
+            # if product is not None:
+                product = CartModel.objects.get(user=user.id, product=productId)
+                product.quantity += 1
+                product.total_price = product.quantity * product.product.price
+                product.save()
+
+                cartItemsCount = len(CartModel.objects.filter(user=request.user.id))
+                return JsonResponse({"status":'Item Added','cartCount':cartItemsCount})
+            else:
+                cartItem = CartModel(user=user, product=item, quantity=1, total_price=item.price)
+                cartItem.save()
+
+                cartItemsCount = len(CartModel.objects.filter(user=request.user.id))
+                return JsonResponse({"status":'Item Added','cartCount':cartItemsCount})
+        else:
+            cartItem = CartModel(user=user, product=item, quantity=1, total_price=item.price)
+            cartItem.save()
+
+            cartItemsCount = len(CartModel.objects.filter(user=request.user.id))
+            return JsonResponse({"status":'Item Added','cartCount':cartItemsCount})
+    else:
+        return redirect("homePage")
+
+
+def removeCartItem(request, pk):
+    cartItem = CartModel.objects.filter(user=request.user.id).filter(product=pk)
+    cartItem.delete()
+    return redirect("userCartPage")
+
+
+def changeProductQuantity(request):
+    if request.method == "POST":
+        prodId = request.POST.get("product")
+        count = request.POST.get("count")
+
+        if CartModel.objects.filter(user=request.user.id, product=prodId):
+            cart = CartModel.objects.get(user=request.user.id, product=prodId)
+            cart.quantity += int(count)
+            cart.total_price = cart.quantity * cart.product.price
+            cart.save()
+            items = CartModel.objects.filter(user=request.user.id)
+            netAmount = 0
+            for i in items:
+                netAmount += i.total_price
+
+            return JsonResponse(
+                {"qty": cart.quantity, "totPrice": cart.total_price, "sum": netAmount}
+            )
+    return redirect("userCartPage")
+
+
+# CATEGORIES
+def showCategoryItems(request, pk):
+    items = ProductModel.objects.filter(category_id=pk)
+    category = CategoryModel.objects.get(id=pk)
+    context = {"items": items, "category": category}
+    return render(request, "user/categories/category.html", context)
+
+
+# CHECKOUT
+def checkoutPage(request):
+    customer = CustomerModel.objects.get(user=request.user)
+    products = CartModel.objects.filter(user=request.user.id)
+    netAmount = 0
+    for i in products:
+        netAmount += i.total_price
+    count = len(products)
+
+    return render(
+        request,
+        "user/checkout.html",
+        {"count": count, "subtotal": netAmount, "customer": customer},
+    )
+
+
+def placeOrder(request):
+    if request.method == "POST":
+        items = CartModel.objects.filter(user=request.user.id)
+        print(items.values())
+        for item in items:
+            product = ProductModel.objects.get(id=item.product.id)
+            quantity = item.quantity
+            price = item.total_price
+            order = Orders(
+                user=User.objects.get(id=request.user.id),
+                product=product,
+                price=price,
+                quantity=quantity,
+                payment="COD",
+                status="Placed",
+            )
+            order.save()
+
+        cart = CartModel.objects.filter(user=request.user)
+        cart.delete()
+        return render(request, "user/order-placed.html")
+    else:
+        return redirect("checkoutPage")
+
+
+# ORDERS
+def myOrders(request):
+    customer = CustomerModel.objects.get(user=request.user)
+    orders = Orders.objects.filter(user=request.user).order_by("-id")
+    context = {"orders": orders, "customer": customer}
+    return render(request, "user/orders.html", context)
+
+
+# REGISTER, LOGIN AND LOGOUT
 
 
 def userSignupPage(request):
@@ -23,7 +205,6 @@ def signinPage(request):
     return render(request, "login.html")
 
 
-# REGISTER, LOGIN AND LOGOUT
 def registerUser(request):
     if request.method == "POST":
         fName = request.POST["first-name"]
@@ -72,6 +253,10 @@ def registerUser(request):
 
 
 def userLogin(request):
+    try:
+        next = request.GET.get("next")
+    except:
+        pass
     if request.method == "POST":
         uName = request.POST["user-name"]
         password = request.POST["password"]
@@ -84,13 +269,9 @@ def userLogin(request):
                 # return render(request, "admin-home.html", {"user": request.user})
             else:
                 auth.login(request, user)
-                # userDetails = TeacherModel.objects.get(teacher_info=user.id)
-                return redirect("userProfilePage", user.id)
-                # return render(
-                #     request,
-                #     "user-profile.html",
-                #     {"user": request.user, "userDetails": userDetails},
-                # )
+                if next:
+                    return redirect(next)
+                return redirect("homePage")
         else:
             messages.info(request, "Incorrect Username or Password..Please try again")
             return redirect("userSigninPage")
@@ -135,6 +316,19 @@ def addProductPage(request):
 
 
 @login_required(login_url="userSigninPage")
+def showProducts(request):
+    products = ProductModel.objects.all()
+    return render(request, "admin/show-products.html", {"products": products})
+
+
+@login_required(login_url="userSigninPage")
+def removeProduct(request, pk):
+    item = ProductModel.objects.get(id=pk)
+    item.delete()
+    return redirect("showProducts")
+
+
+@login_required(login_url="userSigninPage")
 def addProductDetails(request):
     if request.method == "POST":
         pName = request.POST["prod-name"]
@@ -143,6 +337,7 @@ def addProductDetails(request):
         PCategory = CategoryModel.objects.get(id=request.POST["category"])
         pQuantity = request.POST["quantity"]
         pMFGDate = request.POST["mfg-date"]
+        vendor = request.POST["vendor"]
         pImage = request.FILES.get("image")
 
         product = ProductModel(
@@ -152,6 +347,7 @@ def addProductDetails(request):
             quantity=pQuantity,
             price=pPrice,
             mfg_date=pMFGDate,
+            vendor=vendor,
             image=pImage,
         )
         product.save()

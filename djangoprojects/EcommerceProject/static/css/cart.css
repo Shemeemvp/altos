@@ -1,0 +1,13 @@
+body {
+  background-color: #fff;
+}
+.cart-products-seg {
+  background-color: #ece8ff;
+  margin-top: 18vh;
+}
+.cart-products-seg .card.cart-card {
+  border-radius: 15px;
+  margin: auto;
+  width: 95vw;
+  height: fit-content;
+}

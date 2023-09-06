@@ -11,6 +11,8 @@ class ProductModel(models.Model):
     description = models.TextField()
     category = models.ForeignKey(CategoryModel, on_delete=models.CASCADE)
     quantity = models.IntegerField()
+    vendor = models.CharField(max_length=100,null=True)
+    original_price = models.BigIntegerField(null=True)
     price = models.BigIntegerField()
     mfg_date = models.DateField()
     image = models.ImageField(upload_to='productImages/')
@@ -25,3 +27,15 @@ class CustomerModel(models.Model):
 class CartModel(models.Model):
     product = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete= models.CASCADE)
+    quantity = models.IntegerField(null=True)
+    total_price = models.IntegerField(null=True)
+
+class Orders(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
+    # cart = models.ForeignKey(CartModel, on_delete=models.CASCADE)
+    payment = models.CharField(max_length=50)
+    quantity = models.IntegerField(null=True)
+    price = models.BigIntegerField(null=True)
+    status = models.CharField(max_length=50, null=True)
+    order_date = models.DateField(auto_now_add=True)
