@@ -69,6 +69,9 @@
             class="collapse navbar-collapse justify-content-end"
             id="navbarTabsContent"
           >
+          <div class="location mr-4 my-2 text-white font-weight-bold">
+            <span><i class="fa-solid fa-location-dot"></i></span> Current Location
+          </div>
             <form class="form-inline">
               <div class="search-bar bg-light">
                 <input
@@ -80,23 +83,60 @@
               </div>
             </form>
             <ul class="navbar-nav justify-content-end">
+              {% if request.user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link active dropdown-toggle"
+                  data-mdb-toggle="dropdown"
+                  id="navbarDropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  ><span><i class="fa-solid fa-user"></i></span>
+                  {{request.user.first_name}}</a
+                >
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#"><span><i class="fa fa-user text-secondary"></i></span> My Profile</a>
+                  <a class="dropdown-item" href="{% url 'myOrders' %}"><span><i class="fa-solid fa-cart-shopping"></i></span> Orders</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-heart text-danger"></i></span> Wishlist</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-tag text-info"></i></span> Coupons</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa fa-solid fa-gift"></i></span> Gift Cards</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-bell"></i></span> Notifications</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'userLogout' %}"><span><i class="fa-solid fa-power-off"></i></span> Logout</a>
+                </div>
+              </li>
+              {% else %}
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  data-mdb-toggle="dropdown"
+                  id="navbarDropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  ><span><i class="fa-solid fa-right-to-bracket"></i></span>
+                  Login</a
+                >
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'userSigninPage' %}"><span><i class="fa-solid fa-right-to-bracket text-info"></i></span> Login</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'userSignupPage' %}"><span><i class="fa fa-user text-secondary"></i></span> New Customer? <span class="btn btn-outline-primary" onclick="window.location.href = `{% url 'userSignupPage' %}`" >Sign Un</span></a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-heart text-danger"></i></span> Wishlist</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-tag text-info"></i></span> Coupons</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa fa-solid fa-gift"></i></span> Gift Cards</a>
+                </div>
+              </li>
+              {% endif %}
               <li class="nav-item">
                 <a href="/" class="nav-link">Products</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link active mr-2"
-                  ><span><i class="fa fa-cart-shopping"></i></span> Cart
-                  <span
-                    style="margin-top: -0.2rem; position: absolute"
-                    class="badge badge-pill badge-info"
-                    >0</span
-                  ></a
-                >
               </li>
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
-                  data-toggle="dropdown"
+                  data-mdb-toggle="dropdown"
                   id="navbarDropdown"
                   href="#"
                   role="button"
@@ -105,33 +145,30 @@
                   >Categories</a
                 >
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">All</a>
+                  <a class="dropdown-item" href="{% url 'categoryItems' %}">All</a>
                   <div class="dropdown-divider"></div>
+                  {% for i in categories%}
                   <a
                     class="dropdown-item"
-                    href="/categories/mobiles/mobiles.html"
-                    >Mobiles</a
+                    href="{% url 'showCategoryItems' i.id %}"
+                    >{{i.category_name}}</a
                   >
-                  <a
-                    class="dropdown-item"
-                    href="/categories/laptops/laptops.html"
-                    >Laptops</a
-                  >
-                  <a
-                    class="dropdown-item"
-                    href="/categories/gadgets/gadgets.html"
-                    >Gadgets</a
-                  >
+                  {%endfor%}
                 </div>
               </li>
-              <li class="nav-item">
-                <a href="{% url 'userSigninPage' %}" class="nav-link"
-                  ><span><i class="fa-solid fa-right-to-bracket"></i></span>
-                  Login</a
+              <li class="nav-item mr-1">
+                <a href="{% url 'userCartPage' %}" class="nav-link"
+                  ><span><i class="fa fa-cart-shopping"></i></span> Cart
+                  {%if request.user%}
+                  <span
+                    style="margin-top: -0.2rem; position: absolute"
+                    id="cart-count"
+                    class="badge badge-pill badge-info"
+                    >{{count}}</span>
+                  {%else%}
+                  {%endif%}
+                  </a
                 >
-              </li>
-              <li class="nav-item">
-                <a href="{%  url 'userSignupPage' %}" class="nav-link">Sign Up</a>
               </li>
             </ul>
           </div>
@@ -156,23 +193,24 @@
             </div>
           </div>
       
-          <div class="container">
+          <div class="container-fluid">
             <h2 class="h5 mb-5 text-center">You may also like these products</h2>
             <div class="row">
+              {%for i in items%}
               <div class="col-lg-3">
                 <div class="card text-center mb-3">
                   <div class="py-5 px-4">
                     <img
-                      src="https://www.bootdey.com/image/280x280/6495ED/000000"
+                      src="{{i.image.url}}"
                       alt=""
                       class="img-fluid mb-4"
                     />
                     <h3 class="fs-6 text-truncate"><a
                         href="#"
                         class="stretched-link text-reset"
-                      >Smartphone 5G Black 12GB RAM+512GB NEW</a></h3>
-                    <span class="text-success">$799.00</span>
-                    <del class="text-muted">$650.83</del>
+                      >{{i.product_name}}</a></h3>
+                    <span class="text-success">₹{{i.price}}</span>
+                    <del class="text-muted">₹{{i.original_price}}</del>
                   </div>
                   <div
                     class="bg-danger text-white small position-absolute end-0 top-0 px-2 py-2 lh-1 text-center"
@@ -182,76 +220,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3">
-                <div class="card text-center position-relative mb-3">
-                  <div class="py-5 px-4">
-                    <img
-                      src="https://www.bootdey.com/image/280x280/FFB6C1/000000"
-                      alt=""
-                      class="img-fluid mb-4"
-                    />
-                    <h3 class="fs-6 text-truncate"><a
-                        href="#"
-                        class="stretched-link text-reset"
-                      >Wireless Headphones with Noise Cancellation Tru Bass Bluetooth
-                        HiFi</a></h3>
-                    <span class="text-success">$250.00</span>
-                    <del class="text-muted">$250</del>
-                  </div>
-                  <div
-                    class="bg-danger text-white small position-absolute end-0 top-0 px-2 py-2 lh-1 text-center"
-                  >
-                    <span class="d-block">25%</span>
-                    <span class="d-block">OFF</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3">
-                <div class="card text-center mb-3">
-                  <div class="py-5 px-4">
-                    <img
-                      src="https://www.bootdey.com/image/280x280/008B8B/000000"
-                      alt=""
-                      class="img-fluid mb-4"
-                    />
-                    <h3 class="fs-6 text-truncate"><a
-                        href="#"
-                        class="stretched-link text-reset"
-                      >Smartwatch IP68 Waterproof GPS and Bluetooth Support</a></h3>
-                    <span class="text-success">$29.00</span>
-                    <del class="text-muted">$14.50</del>
-                  </div>
-                  <div
-                    class="bg-danger text-white small position-absolute end-0 top-0 px-2 py-2 lh-1 text-center"
-                  >
-                    <span class="d-block">50%</span>
-                    <span class="d-block">OFF</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3">
-                <div class="card text-center mb-3">
-                  <div class="py-5 px-4">
-                    <img
-                      src="https://www.bootdey.com/image/280x280/00CED1/000000"
-                      alt=""
-                      class="img-fluid mb-4"
-                    />
-                    <h3 class="fs-6 text-truncate"><a
-                        href="#"
-                        class="stretched-link text-reset"
-                      >Men's Running Shoes</a></h3>
-                    <span class="text-success">$110.00</span>
-                    <del class="text-muted">$85.23</del>
-                  </div>
-                  <div
-                    class="bg-danger text-white small position-absolute end-0 top-0 px-2 py-2 lh-1 text-center"
-                  >
-                    <span class="d-block">25%</span>
-                    <span class="d-block">OFF</span>
-                  </div>
-                </div>
-              </div>
+              {%endfor%}
             </div>
           </div>
         </div>

@@ -10,6 +10,7 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="{% static 'css/products-home.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/product.css' %}" />
 
     <link
       rel="stylesheet"
@@ -95,14 +96,14 @@
                   {{request.user.first_name}}</a
                 >
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">My Profile</a>
-                  <a class="dropdown-item" href="{% url 'myOrders' %}">Orders</a>
-                  <a class="dropdown-item" href="#">Wishlist</a>
-                  <a class="dropdown-item" href="#">Coupons</a>
-                  <a class="dropdown-item" href="#">Gift Cards</a>
-                  <a class="dropdown-item" href="#">Notifications</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa fa-user text-secondary"></i></span> My Profile</a>
+                  <a class="dropdown-item" href="{% url 'myOrders' %}"><span><i class="fa-solid fa-cart-shopping"></i></span> Orders</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-heart text-danger"></i></span> Wishlist</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-tag text-info"></i></span> Coupons</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa fa-solid fa-gift"></i></span> Gift Cards</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-bell"></i></span> Notifications</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{% url 'userLogout' %}">Logout</a>
+                  <a class="dropdown-item" href="{% url 'userLogout' %}"><span><i class="fa-solid fa-power-off"></i></span> Logout</a>
                 </div>
               </li>
               {% else %}
@@ -119,21 +120,21 @@
                   Login</a
                 >
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'userSigninPage' %}">Login</a>
+                  <a class="dropdown-item" href="{% url 'userSigninPage' %}"><span><i class="fa-solid fa-right-to-bracket text-info"></i></span> Login</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{% url 'userSignupPage' %}">New Customer? <span class="btn btn-outline-primary" onclick="window.location.href = `{% url 'userSignupPage' %}`" >Sign Un</span></a>
-                  <a class="dropdown-item" href="#">Wishlist</a>
-                  <a class="dropdown-item" href="#">Coupons</a>
-                  <a class="dropdown-item" href="#">Gift Cards</a>
+                  <a class="dropdown-item" href="{% url 'userSignupPage' %}"><span><i class="fa fa-user text-secondary"></i></span> New Customer? <span class="btn btn-outline-primary" onclick="window.location.href = `{% url 'userSignupPage' %}`" >Sign Un</span></a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-heart text-danger"></i></span> Wishlist</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-tag text-info"></i></span> Coupons</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa fa-solid fa-gift"></i></span> Gift Cards</a>
                 </div>
               </li>
               {% endif %}
               <li class="nav-item">
-                <a href="/" class="nav-link">Products</a>
+                <a href="/" class="nav-link active">Products</a>
               </li>
               <li class="nav-item dropdown">
                 <a
-                  class="nav-link active dropdown-toggle"
+                  class="nav-link dropdown-toggle"
                   data-mdb-toggle="dropdown"
                   id="navbarDropdown"
                   href="#"
@@ -143,12 +144,12 @@
                   >Categories</a
                 >
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">All</a>
+                  <a class="dropdown-item" href="{% url 'categoryItems' %}">All</a>
                   <div class="dropdown-divider"></div>
                   {% for i in categories%}
                   <a
                     class="dropdown-item"
-                    href="/categories/mobiles/mobiles.html"
+                    href="{% url 'showCategoryItems' i.id %}"
                     >{{i.category_name}}</a
                   >
                   {%endfor%}
@@ -160,6 +161,7 @@
                   {%if request.user%}
                   <span
                     style="margin-top: -0.2rem; position: absolute"
+                    id="cart-count"
                     class="badge badge-pill badge-info"
                     >{{count}}</span>
                   {%else%}
@@ -172,37 +174,84 @@
         </div>
       </nav>
     </header>
-
-
     <section>
-      <div class="container pt-3">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item active">
-              <a class="page-link" href="./home.html">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="/cart/cart.html">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="/signin/signin.html">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="/signup/signup.html">4</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 px-5 py-5">
+                    <div class="product-image">
+                        <img src="{{product.image.url}}" class="img-thumbnail w-100" alt="">
+                    </div>
+                    <div class="buy-buttons px-4 mt-5">
+                        {%csrf_token%}
+                        <button class="btn btn-warning text-white font-weight-bold mr-3" id="addButton{{product.id}}" onclick="addToCart(`{{product.id}}`)"><span><i class="fa-solid fa-cart-shopping"></i></span> ADD TO CART</button>
+                        <button class="btn btn-warning text-white font-weight-bold"><span><i class="fa-solid fa-bolt"></i></span> Buy Now</button>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="product-body p-5">
+                        <div class="prod-name">
+                            <h3 class="text-uppercase text-primary font-weight-bold mb-4">{{product.product_name}}</h3>
+                        </div>
+                        <div class="rating">
+                            <span class="badge badge-success">4.3 <i class="fa fa-star"></i></span><span class="text-secondary font-weight-bold">1,69,228 Ratings & 9,728 Reviews</span>
+                        </div>
+                        <div class="price mt-3">
+                            <span >Price:</span>
+                            <span class="text-black font-weight-bold ml-2">₹ {{product.price}}</span>
+                            <span class="text-muted ml-2">₹ <strike>{{product.original_price}}</strike></span>
+                        </div>
+                        <div class="offer-seg mt-3">
+                            <h6 class="text-secondary">Coupons for you</h6>
+                            <p><span><i class="fa-solid fa-hand-holding-heart"></i></span>&nbsp; No cost EMI <strong>₹3,167/month</strong>. Standard EMI also available</p>
+                            <hr>
+                            <h6 class="text-secondary">Available Offers</h6>
+                            <p><span><i class="fa-solid fa-tag text-success"></i></span>&nbsp; Bank OfferGet 10% Cashback on Samsung Axis bank Credit Card <span class="text-primary">T&C</span></p>
+                            <p><span><i class="fa-solid fa-tag text-success"></i></span>&nbsp; Bank Offer5% Cashback on Flipkart Axis Bank Card <span class="text-primary">T&C</span></p>
+                            <p><span><i class="fa-solid fa-tag text-success"></i></span>&nbsp; Special PriceGet extra ₹5500 off (price inclusive of cashback/coupon) <span class="text-primary">T&C</span></p>
+
+                        </div>
+                        <div class="description mt-3">
+                            Description: <h5 class="text-secondary">{{product.description}}</h5>
+                        </div>
+                        <div class="seller mt-3">
+                            Seller: <h6 class="text-secondary">{{product.vendor}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container-fluid">
+            <h2 class="h3 mb-5 text-center">Similar Products</h2>
+            <div class="row">
+              {%for i in items%}
+              <div class="col-lg-3">
+                <div class="card text-center mb-3">
+                  <div class="py-5 px-4">
+                    <img
+                      src="{{i.image.url}}"
+                      alt=""
+                      class="img-fluid mb-4"
+                    />
+                    <h3 class="fs-6 text-truncate"><a
+                        href="{% url 'showProduct' i.id %}"
+                        class="stretched-link text-reset"
+                      >{{i.product_name}}</a></h3>
+                    <span class="text-success">₹{{i.price}}</span>
+                    <del class="text-muted">₹{{i.original_price}}</del>
+                  </div>
+                  <div
+                    class="bg-danger text-white small position-absolute end-0 top-0 px-2 py-2 lh-1 text-center"
+                  >
+                    <span class="d-block">10%</span>
+                    <span class="d-block">OFF</span>
+                  </div>
+                </div>
+              </div>
+              {%endfor%}
+            </div>
+          </div>
     </section>
     <footer
       id="footer-section"
@@ -327,6 +376,12 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="{% static 'js/products.js' %}" type="text/javascript"></script>
   </body>
 </html>

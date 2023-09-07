@@ -69,6 +69,9 @@
             class="collapse navbar-collapse justify-content-end"
             id="navbarTabsContent"
           >
+          <div class="location mr-4 my-2 text-white font-weight-bold">
+            <span><i class="fa-solid fa-location-dot"></i></span> Current Location
+          </div>
             <form class="form-inline">
               <div class="search-bar bg-light">
                 <input
@@ -80,23 +83,60 @@
               </div>
             </form>
             <ul class="navbar-nav justify-content-end">
+              {% if request.user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link active dropdown-toggle"
+                  data-mdb-toggle="dropdown"
+                  id="navbarDropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  ><span><i class="fa-solid fa-user"></i></span>
+                  {{request.user.first_name}}</a
+                >
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#"><span><i class="fa fa-user text-secondary"></i></span> My Profile</a>
+                  <a class="dropdown-item" href="{% url 'myOrders' %}"><span><i class="fa-solid fa-cart-shopping"></i></span> Orders</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-heart text-danger"></i></span> Wishlist</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-tag text-info"></i></span> Coupons</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa fa-solid fa-gift"></i></span> Gift Cards</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-bell"></i></span> Notifications</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'userLogout' %}"><span><i class="fa-solid fa-power-off"></i></span> Logout</a>
+                </div>
+              </li>
+              {% else %}
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  data-mdb-toggle="dropdown"
+                  id="navbarDropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  ><span><i class="fa-solid fa-right-to-bracket"></i></span>
+                  Login</a
+                >
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'userSigninPage' %}"><span><i class="fa-solid fa-right-to-bracket text-info"></i></span> Login</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'userSignupPage' %}"><span><i class="fa fa-user text-secondary"></i></span> New Customer? <span class="btn btn-outline-primary" onclick="window.location.href = `{% url 'userSignupPage' %}`" >Sign Un</span></a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-heart text-danger"></i></span> Wishlist</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa-solid fa-tag text-info"></i></span> Coupons</a>
+                  <a class="dropdown-item" href="#"><span><i class="fa fa-solid fa-gift"></i></span> Gift Cards</a>
+                </div>
+              </li>
+              {% endif %}
               <li class="nav-item">
                 <a href="/" class="nav-link">Products</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link active mr-2"
-                  ><span><i class="fa fa-cart-shopping"></i></span> Cart
-                  <span
-                    style="margin-top: -0.2rem; position: absolute"
-                    class="badge badge-pill badge-info"
-                    >0</span
-                  ></a
-                >
               </li>
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
-                  data-toggle="dropdown"
+                  data-mdb-toggle="dropdown"
                   id="navbarDropdown"
                   href="#"
                   role="button"
@@ -105,34 +145,29 @@
                   >Categories</a
                 >
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">All</a>
+                  <a class="dropdown-item" href="{% url 'categoryItems' %}">All</a>
                   <div class="dropdown-divider"></div>
+                  {% for i in categories%}
                   <a
                     class="dropdown-item"
-                    href="/categories/mobiles/mobiles.html"
-                    >Mobiles</a
+                    href="{% url 'showCategoryItems' i.id %}"
+                    >{{i.category_name}}</a
                   >
-                  <a
-                    class="dropdown-item"
-                    href="/categories/laptops/laptops.html"
-                    >Laptops</a
-                  >
-                  <a
-                    class="dropdown-item"
-                    href="/categories/gadgets/gadgets.html"
-                    >Gadgets</a
-                  >
+                  {%endfor%}
                 </div>
               </li>
-              <li class="nav-item">
-                <a href="{% url 'userSigninPage' %}" class="nav-link"
-                  ><span><i class="fa-solid fa-right-to-bracket"></i></span>
-                  Login</a
-                >
-              </li>
-              <li class="nav-item">
-                <a href="{%  url 'userSignupPage' %}" class="nav-link"
-                  >Sign Up</a
+              <li class="nav-item mr-1">
+                <a href="{% url 'userCartPage' %}" class="nav-link"
+                  ><span><i class="fa fa-cart-shopping"></i></span> Cart
+                  {%if request.user%}
+                  <span
+                    style="margin-top: -0.2rem; position: absolute"
+                    id="cart-count"
+                    class="badge badge-pill badge-info"
+                    >{{count}}</span>
+                  {%else%}
+                  {%endif%}
+                  </a
                 >
               </li>
             </ul>
@@ -147,6 +182,9 @@
           class="form form-horizontal checkout-page-form"
           role="form"
         > -->
+        <div class="row px-4 py-3">
+          <span><i style="font-size: 1.45rem;" onclick="javascript:history.go(-1)" class="fa fa-arrow-left"></i></span>
+        </div>
         <div class="row">
           <div class="col-md-9">
             <div class="address-head-label w-100 px-2 py-3 bg-dark">
@@ -374,7 +412,7 @@
                           type="radio"
                           name="PaymentMethod"
                           id="payment1"
-                          value="CREDITCARD"
+                          value="Credit Card"
                         />
                         <label class="form-check-label pt-1" for="payment1">
                           Credit Card
@@ -458,7 +496,7 @@
                           type="radio"
                           name="PaymentMethod"
                           id="payment2"
-                          value="PAYPAL"
+                          value="PayPal"
                         />
                         <label class="form-check-label pt-1" for="payment2">
                           PayPal
@@ -524,7 +562,7 @@
                           type="radio"
                           name="PaymentMethod"
                           id="payment3"
-                          value="RAZORPAY"
+                          value="Razorpay"
                         />
                         <label class="form-check-label pt-1" for="payment3">
                           Razorpay
@@ -572,7 +610,7 @@
                           type="radio"
                           name="PaymentMethod"
                           id="payment4"
-                          value="COD"
+                          value="Cash On Delivery"
                         />
                         <label class="form-check-label pt-1" for="payment4">
                           Pay On Delivery
