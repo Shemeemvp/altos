@@ -6,6 +6,7 @@ urlpatterns = [
 
     # Home Page URLs
     path('',views.homePage, name='homePage'),
+    path('show-product/<int:pk>',views.showProduct, name= 'showProduct'),
 
     # ADMIN Panel Pages
     path('admin/', admin.site.urls),
@@ -15,7 +16,20 @@ urlpatterns = [
     path('show-products/',views.showProducts, name='showProducts'),
     path('add-product', views.addProductPage, name='addProductPage'),
     path('add-product-details', views.addProductDetails, name='addProductDetails'),
+    path('edit-product/<int:pk>',views.editProductPage, name='editProductPage'),
+    path('edit-product-details/<int:pk>',views.editProductDetails, name='editProductDetails'),
     path('remove-product/<int:pk>',views.removeProduct, name='removeProduct'),
+    path('show-categories',views.showCategories, name= 'showCategories'),
+    path('edit-category/<int:pk>',views.editCategoryPage, name='editCategoryPage'),
+    path('edit-category-details/<int:pk>',views.editCategoryDetails, name= 'editCategoryDetails'),
+    path('remove-category/<int:pk>',views.removeCategory, name='removeCategory'),
+    path('show-users',views.showUsers, name= 'showUsers'),
+    path('remove-user/<int:pk>',views.removeUser, name='removeUser'),
+    path('show-orders',views.showOrders, name= 'showOrders'),
+    path('dispatch-order/<int:pk>',views.dispatchOrder, name = 'dispatchOrder'),
+    path('remove-order/<int:pk>',views.removeOrder, name = 'removeOrder'),
+    path('dispatched-orders',views.dispatchedOrders, name = 'dispatchedOrders'),
+    path('deliver-order/<int:pk>',views.deliverOrder, name = 'deliverOrder'),
 
     # GUI Pages
     # CART
@@ -25,6 +39,7 @@ urlpatterns = [
     path('change-product-quantity',views.changeProductQuantity, name='changeProductQuantity'),
     # CATEGORIES
     path('category-items/<int:pk>',views.showCategoryItems, name='showCategoryItems'),
+    path('category-items-all',views.categoryItems, name='categoryItems'),
 
     # Checkout
     path('checkout/',views.checkoutPage, name='checkoutPage'),

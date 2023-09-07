@@ -63,6 +63,7 @@
     position: relative;
     padding-top: 0.3rem;
     width: 19vw;
+    height: 60vh;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
@@ -123,6 +124,7 @@
       margin: 0.4rem 0.4rem;
     }
     .card{
+      height: 50vh;
       width: 73vw;
     }
     .imgcard-body img {

@@ -97,10 +97,17 @@ hr {
   border-radius: 0.25rem;
   margin: 0.15rem;
 }
+.usersdd .dropdown-item.log-out{
+    border: none;
+  }
 .usersdd .dropdown-item:hover {
   background-color: #232832;
   color: #fff;
 }
+.usersdd .dropdown-item.log-out:hover {
+    background-color: #fff;
+    color: #fff;
+  }
 .dash-content {
   background-color: #232832;
   /* color: white; */
@@ -111,19 +118,19 @@ hr {
 .dash-right-content {
   background-color: #232832;
   /* color: white; */
-  width: 93%;
-  margin-top: 2rem;
+  width: 95%;
+  margin-top: 18%;
   height: 27vh;
   border-radius: 0.4rem;
 }
 .dash-right-content i {
   padding-top: 30%;
-  font-size: 5rem;
+  font-size: 3.5rem;
 }
 .dash-right-content .tile-text {
   color: white;
-  padding-top: 15%;
-  padding-left: 3rem;
+  padding-top: 10%;
+  padding-left: 4rem;
   font-weight: 700;
   font-size: 1.65rem;
 }

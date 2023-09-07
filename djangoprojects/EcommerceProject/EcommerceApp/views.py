@@ -23,13 +23,27 @@ def homePage(request):
     cartItemsCount = len(CartModel.objects.filter(user=request.user.id))
     context = {
         "categories": ctg,
-        "products": prd,
         "count": cartItemsCount,
+        "products": prd,
         "crsl1": crsl1,
         "crsl2": crsl2,
     }
 
     return render(request, "user/products-home.html", context)
+
+
+def showProduct(request, pk):
+    prd = ProductModel.objects.get(id=pk)
+    cartItemsCount = len(CartModel.objects.filter(user=request.user.id))
+    ctg = CategoryModel.objects.all()
+    items = ProductModel.objects.filter(category=prd.category.id)[0:4]
+    context = {
+        "categories": ctg,
+        "count": cartItemsCount,
+        "product": prd,
+        "items": items,
+    }
+    return render(request, "user/product.html", context)
 
 
 # GUI Pages
@@ -41,71 +55,56 @@ def userCartPage(request):
     for i in products:
         netAmount += i.total_price
     count = len(products)
-    return render(
-        request,
-        "user/cart.html",
-        {"products": products, "count": count, "sum": netAmount},
-    )
+    ctg = CategoryModel.objects.all()
+    context = {
+        "categories": ctg,
+        "products": products,
+        "count": count,
+        "sum": netAmount,
+    }
+    return render(request, "user/cart.html", context)
 
-
-# @login_required(login_url="userSigninPage")
-# def addToCart(request, pk):
-#     userId = request.user.id
-#     prodId = pk
-#     item = ProductModel.objects.get(id=prodId)
-#     user = User.objects.get(id=userId)
-#     if CartModel.objects.filter(user=userId).exists():
-#         if CartModel.objects.filter(user=userId).filter(product=prodId).exists():
-#             # if product is not None:
-#             product = CartModel.objects.get(user=userId, product=prodId)
-#             product.quantity += 1
-#             product.total_price = product.quantity * product.product.price
-#             product.save()
-
-#             return redirect("homePage")
-#         else:
-#             cartItem = CartModel(
-#                 user=user, product=item, quantity=1, total_price=item.price
-#             )
-#             cartItem.save()
-#             return redirect("homePage")
-#     else:
-#         cartItem = CartModel(
-#             user=user, product=item, quantity=1, total_price=item.price
-#         )
-#         cartItem.save()
-
-#         return redirect("homePage")
-    
 
 @login_required(login_url="userSigninPage")
 def addToCart(request):
-    if request.method == 'POST':
-        productId = request.POST.get('product')
+    if request.method == "POST":
+        productId = request.POST.get("product")
         item = ProductModel.objects.get(id=productId)
         user = User.objects.get(id=request.user.id)
         if CartModel.objects.filter(user=user.id).exists():
-            if CartModel.objects.filter(user=user.id).filter(product=productId).exists():
-            # if product is not None:
+            if (
+                CartModel.objects.filter(user=user.id)
+                .filter(product=productId)
+                .exists()
+            ):
+                # if product is not None:
                 product = CartModel.objects.get(user=user.id, product=productId)
                 product.quantity += 1
                 product.total_price = product.quantity * product.product.price
                 product.save()
 
                 cartItemsCount = len(CartModel.objects.filter(user=request.user.id))
-                return JsonResponse({"status":'Item Added','cartCount':cartItemsCount})
+                return JsonResponse(
+                    {"status": "Item Added", "cartCount": cartItemsCount}
+                )
             else:
-                cartItem = CartModel(user=user, product=item, quantity=1, total_price=item.price)
+                cartItem = CartModel(
+                    user=user, product=item, quantity=1, total_price=item.price
+                )
                 cartItem.save()
 
                 cartItemsCount = len(CartModel.objects.filter(user=request.user.id))
-                return JsonResponse({"status":'Item Added','cartCount':cartItemsCount})
+                return JsonResponse(
+                    {"status": "Item Added", "cartCount": cartItemsCount}
+                )
         else:
-            cartItem = CartModel(user=user, product=item, quantity=1, total_price=item.price)
+            cartItem = CartModel(
+                user=user, product=item, quantity=1, total_price=item.price
+            )
             cartItem.save()
 
             cartItemsCount = len(CartModel.objects.filter(user=request.user.id))
-            return JsonResponse({"status":'Item Added','cartCount':cartItemsCount})
+            return JsonResponse({"status": "Item Added", "cartCount": cartItemsCount})
     else:
         return redirect("homePage")
 
@@ -141,7 +140,22 @@ def changeProductQuantity(request):
 def showCategoryItems(request, pk):
     items = ProductModel.objects.filter(category_id=pk)
     category = CategoryModel.objects.get(id=pk)
-    context = {"items": items, "category": category}
+    ctg = CategoryModel.objects.all()
+    count = len(CartModel.objects.filter(user=request.user.id))
+    context = {"items": items, "category": category, "categories": ctg, "count": count}
+    return render(request, "user/categories/category.html", context)
+
+
+def categoryItems(request):
+    items = ProductModel.objects.all()
+    ctg = CategoryModel.objects.all()
+    count = len(CartModel.objects.filter(user=request.user.id))
+    context = {
+        "items": items,
+        "categoryname": "Products",
+        "categories": ctg,
+        "count": count,
+    }
     return render(request, "user/categories/category.html", context)
 
 
@@ -174,14 +188,15 @@ def placeOrder(request):
                 product=product,
                 price=price,
                 quantity=quantity,
-                payment="COD",
+                payment=request.POST["PaymentMethod"],
                 status="Placed",
             )
             order.save()
 
         cart = CartModel.objects.filter(user=request.user)
         cart.delete()
-        return render(request, "user/order-placed.html")
+        items = ProductModel.objects.all()[7:11]
+        return render(request, "user/order-placed.html", {"items": items})
     else:
         return redirect("checkoutPage")
 
@@ -198,11 +213,17 @@ def myOrders(request):
 
 
 def userSignupPage(request):
-    return render(request, "signup.html")
+    ctg = CategoryModel.objects.all()
+    count = len(CartModel.objects.filter(user=request.user.id))
+    context = {"categories": ctg, "count": count}
+    return render(request, "signup.html", context)
 
 
 def signinPage(request):
-    return render(request, "login.html")
+    ctg = CategoryModel.objects.all()
+    count = len(CartModel.objects.filter(user=request.user.id))
+    context = {"categories": ctg, "count": count}
+    return render(request, "login.html", context)
 
 
 def registerUser(request):
@@ -290,7 +311,26 @@ def userLogout(request):
 
 @login_required(login_url="userSigninPage")
 def adminHomePage(request):
-    return render(request, "admin/admin-home.html", {"user": request.user})
+    vendors = len(ProductModel.objects.all().values('vendor').distinct())
+    customers = len(CustomerModel.objects.all())
+    print(vendors)
+    orders = len(Orders.objects.filter(status="Placed"))
+    products = len(ProductModel.objects.all())
+    items = Orders.objects.filter(status="Delivered")
+    sales = len(Orders.objects.filter(status="Delivered"))
+    revenue = 0
+    for i in items:
+        revenue += i.price
+    context = {
+        "orders": orders,
+        "products": products,
+        "sales": sales,
+        "revenue": revenue,
+        "user": request.user,
+        'customers':customers,
+        "sellers":vendors
+    }
+    return render(request, "admin/admin-home.html", context)
 
 
 def addCategoryPage(request):
@@ -307,7 +347,7 @@ def addCategory(request):
         category.save()
 
         messages.success(request, f"{category.category_name} added successfully")
-        return redirect("addCategoryPage")
+        return redirect("showCategories")
 
 
 def addProductPage(request):
@@ -325,6 +365,7 @@ def showProducts(request):
 def removeProduct(request, pk):
     item = ProductModel.objects.get(id=pk)
     item.delete()
+    messages.success(request, "Product Removed Successfully")
     return redirect("showProducts")
 
 
@@ -334,6 +375,7 @@ def addProductDetails(request):
         pName = request.POST["prod-name"]
         pDesc = request.POST["prod-description"]
         pPrice = request.POST["prod-price"]
+        pListPrice = request.POST["original-price"]
         PCategory = CategoryModel.objects.get(id=request.POST["category"])
         pQuantity = request.POST["quantity"]
         pMFGDate = request.POST["mfg-date"]
@@ -346,6 +388,7 @@ def addProductDetails(request):
             category=PCategory,
             quantity=pQuantity,
             price=pPrice,
+            original_price=pListPrice,
             mfg_date=pMFGDate,
             vendor=vendor,
             image=pImage,
@@ -353,9 +396,135 @@ def addProductDetails(request):
         product.save()
         messages.info(request, "Product details added successfully.")
 
-        return redirect("addProductPage")
+        return redirect("showProducts")
+
+
+@login_required(login_url="userSigninPage")
+def editProductPage(request, pk):
+    category = CategoryModel.objects.all()
+    product = ProductModel.objects.get(id=pk)
+    return render(
+        request, "admin/edit-products.html", {"product": product, "category": category}
+    )
+
+
+@login_required(login_url="userSigninPage")
+def editProductDetails(request, pk):
+    product = ProductModel.objects.get(id=pk)
+    if request.method == "POST":
+        pName = request.POST["prod-name"]
+        pDesc = request.POST["prod-description"]
+        pPrice = request.POST["prod-price"]
+        pListPrice = request.POST["original-price"]
+        PCategory = CategoryModel.objects.get(id=request.POST["category"])
+        pQuantity = request.POST["quantity"]
+        pMFGDate = request.POST["mfg-date"]
+        vendor = request.POST["vendor"]
+        newImage = request.FILES.get("image")
+        currentImage = product.image
+        if newImage is not None:
+            product.image = newImage
+        else:
+            product.image = currentImage
+        product.product_name = pName
+        product.description = pDesc
+        product.price = pPrice
+        product.original_price = pListPrice
+        product.category = PCategory
+        product.quantity = pQuantity
+        product.mfg_date = pMFGDate
+        product.vendor = vendor
+        product.save()
+
+        messages.info(request, "Details Updated Successfully.")
+        return redirect("showProducts")
+    else:
+        return redirect("editProductPage", pk)
 
 
 def showUsers(request):
     users = CustomerModel.objects.all()
     return render(request, "admin/view-users.html", {"user": users})
+
+
+def showCategories(request):
+    categories = CategoryModel.objects.all()
+    return render(request, "admin/show-categories.html", {"categories": categories})
+
+
+def editCategoryPage(request, pk):
+    category = CategoryModel.objects.get(id=pk)
+    return render(request, "admin/edit-category.html", {"category": category})
+
+
+def editCategoryDetails(request, pk):
+    if request.method == "POST":
+        cName = request.POST["category-name"]
+        cDesc = request.POST["category-description"]
+
+        category = CategoryModel.objects.get(id=pk)
+        category.category_name = cName
+        category.category_description = cDesc
+        category.save()
+        messages.info(request, "Category Details updated successfully.")
+        return redirect("showCategories")
+    else:
+        return redirect("showCategories")
+
+
+def removeCategory(request, pk):
+    category = CategoryModel.objects.get(id=pk)
+    category.delete()
+
+    messages.info(request, "Category Removed")
+    return redirect("showCategories")
+
+
+def showUsers(request):
+    users = CustomerModel.objects.all()
+    return render(request, "admin/show-users.html", {"users": users})
+
+
+def removeUser(request, pk):
+    user = CustomerModel.objects.get(id=pk)
+    auth = User.objects.get(id=user.user.id)
+    auth.delete()
+    user.delete()
+    messages.info(request, "User Details Removed")
+
+    return redirect("showUsers")
+
+
+def showOrders(request):
+    orders = Orders.objects.all().order_by("-id")
+    return render(request, "admin/show-orders.html", {"orders": orders})
+
+
+def dispatchOrder(request, pk):
+    item = Orders.objects.get(id=pk)
+    item.status = "Dispatched"
+    item.save()
+
+    messages.info(request, f"Order {item.id} dispatched.")
+    return redirect("showOrders")
+
+
+def removeOrder(request, pk):
+    order = Orders.objects.get(id=pk)
+    order.delete()
+    messages.info(request, "Order Removed")
+    return redirect("showOrders")
+
+
+def dispatchedOrders(request):
+    orders = Orders.objects.filter(status="Dispatched")
+    return render(request, "admin/dispatched-orders.html", {"orders": orders})
+
+
+def deliverOrder(request, pk):
+    item = Orders.objects.get(id=pk)
+    item.status = "Delivered"
+    item.save()
+    messages.info(request, "Order Marked as Delivered!")
+
+    return redirect("dispatchedOrders")

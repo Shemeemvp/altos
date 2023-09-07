@@ -111,6 +111,9 @@ function addToCart(productId) {
       //   alert("Item Added");
       $("#cart-count").html(response.cartCount);
       $("#add-to-cart"+prodId).html(`<i class="fa fa-check mr-2"></i>Added to Cart`)
+      $("#addtocart"+prodId).html(`<i class="fa fa-check mr-2"></i>Added to Cart`)
+      $("#adbtn"+prodId).html(`<i class="fa fa-check mr-2"></i>Added to Cart`)
+      $("#addButton"+prodId).html(`<i class="fa fa-check mr-2"></i>Added to Cart`)
     },
   });
 }
