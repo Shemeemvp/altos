@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin | Add Category Details</title>
+    <title>Admin | Dashboard</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -56,7 +56,7 @@
               <li>
                 <div class="dropdown show container-fluid">
                   <a
-                    class="dropdown-toggle nav-link font-weight-bold"
+                    class="dropdown-toggle nav-link active font-weight-bold"
                     href="#"
                     role="button"
                     id="profileDropdownMenu"
@@ -100,7 +100,7 @@
               <li>
                 <div class="dropdown show container-fluid">
                   <a
-                    class="dropdown-toggle nav-link active font-weight-bold"
+                    class="dropdown-toggle nav-link font-weight-bold"
                     href="#"
                     role="button"
                     id="profileDropdownMenu"
@@ -187,67 +187,77 @@
       </nav>
     </header>
     <section>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col">
-              <div class="add-course-head pt-4">
-                <h3
-                  class="font-weight-bold text-secondary d-flex justify-content-center"
-                >
-                  Enter Category Details
-                </h3>
-              </div>
-            </div>
-          </div>
-          <div class="row pt-4">
-            <div class="col-md-12">
-              <form class="form course-form" action="{% url 'addCategory' %}" method="post">
-                {%csrf_token%}
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="category-name"
-                    placeholder="Category Name"
-                    id="categoryName"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="category-description"
-                    placeholder="Category Description (Optional)"
-                    id="courseDuration"
-                  />
-                </div>
-                <div class="w-100 d-flex justify-content-center">
-                    <input
-                      type="submit"
-                      name=""
-                      class="btn btn-outline-success actionbuttons mr-2"
-                      id=""
-                      value="ADD CATEGORY"
-                    />
-                    <input
-                      type="reset"
-                      name=""
-                      class="btn btn-outline-secondary actionbuttons"
-                      id=""
-                      value="CLEAR"
-                    />
-                </div>
-              </form>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <div class="add-course-head pt-4">
+              <h3
+                class="font-weight-bold text-secondary d-flex justify-content-center"
+              >
+                USERS REGISTERED
+              </h3>
             </div>
           </div>
         </div>
-        {%for message in messages%}
-        <script>
-            alert('{{message}}')
-        </script>
-        {%endfor%}
-      </section>
+      </div>
+    </section>
+    <section>
+      <div class="container-fluid">
+        <div class="table-seg">
+          <div class="table">
+            <table class="table table-striped bg-dark text-white">
+              <thead class="bg-secondary text-white">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">NAME</th>
+                  <th scope="col">USERNAME</th>
+                  <th scope="col">EMAIL</th>
+                  <th scope="col">ADDRESS</th>
+                  <th scope="col">CONTACT</th>
+                  <th scope="col">ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for i in users%}
+                <tr>
+                  <th scope="row">{{i.id}}</th>
+                  <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+                  <td>{{i.user.username}}</td>
+                  <td>{{i.user.email}}</td>
+                  <td>{{i.address}}</td>
+                  <td>{{i.phone}}</td>
+                  <td>
+                    <button
+                      type="button"
+                      onclick="deleteUser(`{{ i.id }}`)"
+                      class="btn btn-outline-danger"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    {%for message in messages%}
+    <script>
+      swal({
+        position: "top-end",
+        icon: "success",
+        title: "{{message}}"
+      });
+    </script>
+    {%endfor%}
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
@@ -257,5 +267,7 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="{% static 'js/script.js' %}"></script>
   </body>
 </html>

@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin | Add Category Details</title>
+    <title>Admin | Categories</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -187,67 +187,79 @@
       </nav>
     </header>
     <section>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col">
-              <div class="add-course-head pt-4">
-                <h3
-                  class="font-weight-bold text-secondary d-flex justify-content-center"
-                >
-                  Enter Category Details
-                </h3>
-              </div>
-            </div>
-          </div>
-          <div class="row pt-4">
-            <div class="col-md-12">
-              <form class="form course-form" action="{% url 'addCategory' %}" method="post">
-                {%csrf_token%}
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="category-name"
-                    placeholder="Category Name"
-                    id="categoryName"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="category-description"
-                    placeholder="Category Description (Optional)"
-                    id="courseDuration"
-                  />
-                </div>
-                <div class="w-100 d-flex justify-content-center">
-                    <input
-                      type="submit"
-                      name=""
-                      class="btn btn-outline-success actionbuttons mr-2"
-                      id=""
-                      value="ADD CATEGORY"
-                    />
-                    <input
-                      type="reset"
-                      name=""
-                      class="btn btn-outline-secondary actionbuttons"
-                      id=""
-                      value="CLEAR"
-                    />
-                </div>
-              </form>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <div class="add-course-head pt-4">
+              <h3
+                class="font-weight-bold text-secondary d-flex justify-content-center"
+              >
+                CATEGORIES ADDED
+              </h3>
             </div>
           </div>
         </div>
-        {%for message in messages%}
-        <script>
-            alert('{{message}}')
-        </script>
-        {%endfor%}
-      </section>
+      </div>
+    </section>
+    <section>
+      <div class="container-fluid">
+        <div class="table-seg">
+          <div class="table">
+            <table class="table table-striped bg-dark text-white">
+              <thead class="bg-secondary text-white">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">CATEGORY NAME</th>
+                  <th scope="col">DESCRIPTION</th>
+                  <th scope="col">ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for i in categories%}
+                <tr>
+                  <th scope="row">{{i.id}}</th>
+                  <td>{{i.category_name}}</td>
+                  <td>{{i.category_description}}</td>
+                  <td>
+                    <a href="{% url 'editCategoryPage' i.id %}">
+                      <button type="button" class="btn btn-outline-info">
+                        Edit
+                      </button>
+                    </a>
+                    <!-- <a href="#"> -->
+                    <!-- <button type="button" onclick="return confirm(`Are you sure you want to remove '{{i.product_name}}'?`)" class="btn btn-outline-danger" >Delete</button> -->
+                    <button
+                      type="button"
+                      onclick="deleteCategory(`{{ i.id }}`)"
+                      class="btn btn-outline-danger"
+                    >
+                      Delete
+                    </button>
+                    <!-- </a> -->
+                  </td>
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    {%for message in messages%}
+    <script>
+      swal({
+        position: "top-end",
+        icon: "success",
+        title: "{{message}}"
+      });
+    </script>
+    {%endfor%}
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
@@ -257,5 +269,7 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="{% static 'js/script.js' %}"></script>
   </body>
 </html>

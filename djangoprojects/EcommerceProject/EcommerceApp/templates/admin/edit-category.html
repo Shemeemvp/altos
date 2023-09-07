@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin | Add Category Details</title>
+    <title>Admin | Edit Category Details</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -194,14 +194,14 @@
                 <h3
                   class="font-weight-bold text-secondary d-flex justify-content-center"
                 >
-                  Enter Category Details
+                  Edit Category Details
                 </h3>
               </div>
             </div>
           </div>
           <div class="row pt-4">
             <div class="col-md-12">
-              <form class="form course-form" action="{% url 'addCategory' %}" method="post">
+              <form class="form course-form" action="{% url 'editCategoryDetails' category.id %}" method="post">
                 {%csrf_token%}
                 <div class="form-group">
                   <input
@@ -209,6 +209,7 @@
                     class="form-control"
                     name="category-name"
                     placeholder="Category Name"
+                    value="{{category.category_name}}"
                     id="categoryName"
                     required
                   />
@@ -219,6 +220,7 @@
                     class="form-control"
                     name="category-description"
                     placeholder="Category Description (Optional)"
+                    value="{{category.category_description}}"
                     id="courseDuration"
                   />
                 </div>
@@ -228,7 +230,7 @@
                       name=""
                       class="btn btn-outline-success actionbuttons mr-2"
                       id=""
-                      value="ADD CATEGORY"
+                      value="SAVE"
                     />
                     <input
                       type="reset"
@@ -236,6 +238,14 @@
                       class="btn btn-outline-secondary actionbuttons"
                       id=""
                       value="CLEAR"
+                    />
+                    <input
+                      type="button"
+                      name=""
+                      onclick="window.location.href='/show-categories'"
+                      class="btn btn-outline-secondary actionbuttons ml-2"
+                      id=""
+                      value="CANCEL"
                     />
                 </div>
               </form>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Add Products</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    /> -->
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+  </head>
+  <body>
+    <header>
+        <nav
+          class="container-fluid navbar navbar-custom navbar-expand-md justify-content-end navbar-dark fixed-top"
+        >
+          <div class="container-fluid mt-2 mb-2">
+            <a href="" class="navbar-brand">
+              <img
+                id="navbarLogo"
+                src="{% static 'images/logo/logo5.png' %}"
+                alt=""
+                class="d-inline-block align-middle"
+              />
+            </a>
+            <a class="navbar-brand font-weight-bold ml-3" href="#">Admin Panel</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarTabsContent"
+              aria-controls="navbarTabsContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+              class="collapse navbar-collapse justify-content-end"
+              id="navbarTabsContent"
+            >
+              <ul class="navbar-nav justify-content-end">
+                <li>
+                  <div class="dropdown show container-fluid">
+                    <a
+                      class="dropdown-toggle nav-link font-weight-bold"
+                      href="#"
+                      role="button"
+                      id="profileDropdownMenu"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      style="text-decoration: none"
+                    >
+                      <span><i class="fa fa-solid fa-user"></i>&nbsp;</span>Admin
+                    </a>
+  
+                    <div
+                      class="dropdown-menu usersdd px-2"
+                      aria-labelledby="profileDropdownMenu"
+                    >
+                    <a class="dropdown-item" href="{% url 'showUsers' %}"
+                        >Show Users</a
+                      >
+                    <div class="dropdown-divider"></div>
+                      <a class="dropdown-item log-out" href="{% url 'userLogout' %}"
+                        ><button class="btn btn-outline-danger w-100">
+                          <span
+                            ><i
+                              class="fa fa-solid fa-arrow-right-from-bracket"
+                            ></i
+                          ></span>
+                          Logout
+                        </button></a
+                      >
+                    </div>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'adminHomePage' %}" class="nav-link"
+                    ><span
+                      ><i class="fa fa-tachometer" aria-hidden="true"></i
+                    ></span>
+                    Dashboard</a
+                  >
+                </li>
+                <li>
+                  <div class="dropdown show container-fluid">
+                    <a
+                      class="dropdown-toggle nav-link font-weight-bold"
+                      href="#"
+                      role="button"
+                      id="profileDropdownMenu"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      style="text-decoration: none; color: rgb(255 255 255 / 84%)"
+                    >
+                      <span><i class="fa fa-plus" aria-hidden="true"></i> &nbsp;</span
+                      >Categories
+                    </a>
+  
+                    <div
+                      class="dropdown-menu usersdd p-2"
+                      aria-labelledby="profileDropdownMenu"
+                    >
+                    <a class="dropdown-item" href="{% url 'showCategories' %}"
+                        >Show Categories</a
+                      >
+                      <a class="dropdown-item" href="{% url 'addCategoryPage' %}"
+                        >Add Category</a
+                      >
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="dropdown show container-fluid">
+                    <a
+                      class="dropdown-toggle nav-link active font-weight-bold"
+                      href="#"
+                      role="button"
+                      id="profileDropdownMenu"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      style="text-decoration: none; color: rgb(255 255 255 / 84%)"
+                    >
+                      <span><i class="fa-brands fa-shopify"></i> &nbsp;</span
+                      >Products
+                    </a>
+  
+                    <div
+                      class="dropdown-menu usersdd p-2"
+                      aria-labelledby="profileDropdownMenu"
+                    >
+                      <a class="dropdown-item" href="{% url 'showProducts' %}"
+                        >Products</a
+                      >
+                      <a class="dropdown-item" href="{% url 'addProductPage' %}"
+                        >Add Product</a
+                      >
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="dropdown show container-fluid">
+                    <a
+                      class="dropdown-toggle nav-link font-weight-bold"
+                      href="#"
+                      role="button"
+                      id="profileDropdownMenu"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      style="text-decoration: none; color: rgb(255 255 255 / 84%)"
+                    >
+                      <span><i class="fa fa-cart-shopping"></i> &nbsp;</span
+                      >Orders
+                    </a>
+  
+                    <div
+                      class="dropdown-menu usersdd p-2"
+                      aria-labelledby="profileDropdownMenu"
+                    >
+                      <a class="dropdown-item" href="{% url 'showOrders' %}">Orders Placed</a>
+                      <a class="dropdown-item" href="{% url 'dispatchedOrders' %}">Shipment</a>
+                      <a class="dropdown-item" href="">Order Tracking</a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+    <section class="mb-5">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <div class="add-course-head pt-4">
+              <h3
+                class="font-weight-bold text-secondary d-flex justify-content-center"
+              >
+                EDIT PRODUCT DETAILS
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="row pt-4 w-100">
+            <div class="col-md-12 w-100 d-flex flex-column align-items-center justify-content-center">
+                {%if product.image %}
+            <img
+              id="productImage"
+              src="{{product.image.url}}"
+              alt="{{product.product_name}}"
+              class="img-thumbnail bg-light"
+              width="150"
+              height=""
+            />
+            {% else %}
+            <img
+              id="productImage"
+              src="{% static 'images/products/empty.png' %}"
+              alt="Admin"
+              class="img-thumbnail"
+              width="150"
+              height=""
+            />
+            {%endif%}
+            </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-md-12">
+            <form
+              class="form student-reg-form"
+              action="{% url 'editProductDetails' product.id %}"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              {%csrf_token%}
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Product Name"
+                  name="prod-name"
+                  value="{{product.product_name}}"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  class="form-control"
+                  name="prod-description"
+                  id="prod-descriptionInput"
+                  cols=""
+                  rows="3"
+                  placeholder="Product Description"
+                >
+{{product.description}}</textarea
+                >
+              </div>
+              <div class="form-group form-inline">
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Price (In INR)"
+                  name="prod-price"
+                  value="{{product.price}}"
+                  required
+                />
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="List Price (In INR)"
+                  name="original-price"
+                  value="{{product.original_price}}"
+                />
+              </div>
+              <div class="form-group">
+                <select
+                  name="category"
+                  id="categoryInput"
+                  class="form-control"
+                  required
+                >
+                  <option value="">--Category--</option>
+                  {%if category%}{% for i in category%}
+                  <option value="{{i.id}}">{{i.category_name}}</option>
+                  {% endfor %}{%endif%}
+                </select>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Vendor Details"
+                  value="{{product.vendor}}"
+                  name="vendor"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Units Available"
+                  value="{{product.quantity}}"
+                  name="quantity"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="date"
+                  class="form-control"
+                  value="{{product.mfg_date|date:'Y-m-d'}}"
+                  name="mfg-date"
+                  required
+                />
+              </div>
+              <div class="form-group form-inline">
+                <label
+                  for="inputImage"
+                  class="form-label text-secondary font-weight-bold w-25"
+                  >Product image</label
+                >
+                <input
+                  type="file"
+                  class="form-control"
+                  name="image"
+                  accept="image/*"
+                  style="width: 75%"
+                />
+              </div>
+              <div class="w-100 d-flex justify-content-center">
+                <input
+                  type="submit"
+                  name=""
+                  class="btn btn-outline-success actionbuttons mr-2"
+                  id=""
+                  value="SAVE"
+                />
+                <input
+                  type="reset"
+                  name=""
+                  class="btn btn-outline-secondary actionbuttons"
+                  id=""
+                  value="CLEAR"
+                />
+                <input
+                  type="button"
+                  name=""
+                  class="btn btn-outline-secondary actionbuttons ml-2"
+                  id=""
+                  value="CANCEL"
+                  onclick="window.location.href='/show-products/'"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      {%for message in messages%}
+      <script>
+        alert('{{message}}')
+      </script>
+      {%endfor%}
+      {%for message in messages%}
+      <script>
+        Swal.fire(
+            {
+                position: "top-end",
+                icon: "success",
+                title: "{{message}}",
+                showConfirmButton: false,
+                timer: 1500,
+            }
+        )
+      </script>
+      {%endfor%}
+    </section>
+
+    <script>
+      window.onload = function () {
+        const $categorySelect = document.querySelector("#categoryInput");
+        $categorySelect.value = `{{product.category.id}}`;
+      };
+      inputImage.onchange = (evt) => {
+        const [file] = inputImage.files;
+        if (file) {
+          productImage.src = URL.createObjectURL(file);
+        }
+      };
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+      integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -53,6 +53,44 @@
             id="navbarTabsContent"
           >
             <ul class="navbar-nav justify-content-end">
+              <li>
+                <div class="dropdown show container-fluid">
+                  <a
+                    class="dropdown-toggle nav-link font-weight-bold"
+                    href="#"
+                    role="button"
+                    id="profileDropdownMenu"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="text-decoration: none"
+                  >
+                    <span><i class="fa fa-solid fa-user"></i>&nbsp;</span>Admin
+                  </a>
+
+                  <div
+                    class="dropdown-menu usersdd px-2"
+                    aria-labelledby="profileDropdownMenu"
+                  >
+                    <a class="dropdown-item" href="{% url 'showUsers' %}"
+                      >Show Users</a
+                    >
+                    <div class="dropdown-divider"></div>
+                    <a
+                      class="dropdown-item log-out"
+                      href="{% url 'userLogout' %}"
+                      ><button class="btn btn-outline-danger w-100">
+                        <span
+                          ><i
+                            class="fa fa-solid fa-arrow-right-from-bracket"
+                          ></i
+                        ></span>
+                        Logout
+                      </button></a
+                    >
+                  </div>
+                </div>
+              </li>
               <li class="nav-item">
                 <a href="{% url 'adminHomePage' %}" class="nav-link active"
                   ><span
@@ -61,11 +99,36 @@
                   Dashboard</a
                 >
               </li>
-              <li class="nav-item">
-                <a href="{% url 'addCategoryPage' %}" class="nav-link"
-                  ><span><i class="fa fa-plus" aria-hidden="true"></i></span>
-                  Add Category</a
-                >
+              <li>
+                <div class="dropdown show container-fluid">
+                  <a
+                    class="dropdown-toggle nav-link font-weight-bold"
+                    href="#"
+                    role="button"
+                    id="profileDropdownMenu"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="text-decoration: none; color: rgb(255 255 255 / 84%)"
+                  >
+                    <span
+                      ><i class="fa fa-plus" aria-hidden="true"></i>
+                      &nbsp;</span
+                    >Categories
+                  </a>
+
+                  <div
+                    class="dropdown-menu usersdd p-2"
+                    aria-labelledby="profileDropdownMenu"
+                  >
+                    <a class="dropdown-item" href="{% url 'showCategories' %}"
+                      >Show Categories</a
+                    >
+                    <a class="dropdown-item" href="{% url 'addCategoryPage' %}"
+                      >Add Category</a
+                    >
+                  </div>
+                </div>
               </li>
               <li>
                 <div class="dropdown show container-fluid">
@@ -116,44 +179,13 @@
                     class="dropdown-menu usersdd p-2"
                     aria-labelledby="profileDropdownMenu"
                   >
-                    <a class="dropdown-item" href="">Orders Placed</a>
-                    <a class="dropdown-item" href="">Shipment</a>
-                    <a class="dropdown-item" href="">Order Tracking</a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="dropdown show container-fluid">
-                  <a
-                    class="dropdown-toggle nav-link font-weight-bold"
-                    href="#"
-                    role="button"
-                    id="profileDropdownMenu"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    style="text-decoration: none"
-                  >
-                    <span><i class="fa fa-solid fa-user"></i>&nbsp;</span>Admin
-                  </a>
-
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="profileDropdownMenu"
-                  >
-                    <!-- <a class="dropdown-item" href="">My Profile</a>
-                    <a class="dropdown-item" href="">Edit Profile</a>
-                    <div class="dropdown-divider"></div> -->
-                    <a class="dropdown-item" href="{% url 'userLogout' %}"
-                      ><button class="btn btn-outline-danger w-100">
-                        <span
-                          ><i
-                            class="fa fa-solid fa-arrow-right-from-bracket"
-                          ></i
-                        ></span>
-                        Logout
-                      </button></a
+                    <a class="dropdown-item" href="{% url 'showOrders' %}"
+                      >Orders Placed</a
                     >
+                    <a class="dropdown-item" href="{% url 'dispatchedOrders' %}"
+                      >Shipment</a
+                    >
+                    <a class="dropdown-item" href="">Order Tracking</a>
                   </div>
                 </div>
               </li>
@@ -165,8 +197,8 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-4">
-            <div class="dashboard-seg p-3">
+          <div class="col-md-3">
+            <div class="dashboard-seg px-1 py-3">
               <div class="dash-content">
                 <ul class="list-group">
                   <li class="list-group-item">
@@ -193,11 +225,17 @@
                     Analytics
                   </li>
                   <li class="list-group-item">
-                    <span
-                      ><i class="fa-solid fa-chart-simple text-success"></i>
-                      &nbsp;</span
+                    <a
+                      href="{% url 'showOrders' %}"
+                      class="text-white"
+                      style="text-decoration: none"
                     >
-                    Sales
+                      <span
+                        ><i class="fa-solid fa-chart-simple text-success"></i>
+                        &nbsp;</span
+                      >
+                      Sales
+                    </a>
                   </li>
                   <li class="list-group-item">
                     <span><i class="fa-solid fa-file-invoice"></i> &nbsp;</span>
@@ -226,45 +264,49 @@
               </div>
             </div>
           </div>
-          <div class="col-md-8">
-            <div class="dash-right-seg p-3">
+          <div class="col-md-9 mb-5">
+            <div class="dash-right-seg py-2">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="dash-right-content">
-                    <a href="" style="text-decoration: none">
+                    <a href="{% url 'showOrders' %}" style="text-decoration: none">
                       <div class="row">
-                        <div class="col-7 tile-text">STUDENTS</div>
+                        <div class="col-7 tile-text">
+                          <div class="row">ORDERS</div>
+                          <div class="row">{{orders}}</div>
+                        </div>
                         <div class="col-5">
                           <span
-                            ><i class="fa-solid fa-graduation-cap text-info"></i
+                            ><i class="fa-solid fa-cube text-info"></i
                           ></span>
                         </div>
                       </div>
                     </a>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="dash-right-content">
                     <a href="" style="text-decoration: none">
                       <div class="row">
-                        <div class="col-7 tile-text">FACULTY</div>
+                        <div class="col-7 tile-text">
+                          <div class="row">REVENUE</div>
+                          <div class="row"><span>₹&nbsp;</span>{{revenue}}</div>
+                        </div>
                         <div class="col-5">
                           <span
-                            ><i
-                              class="fa-solid fa-chalkboard-user text-secondary"
-                            ></i
-                          ></span>
+                            ><i class="fa-solid fa-comments-dollar text-secondary"></i></span>
                         </div>
                       </div>
                     </a>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="dash-right-content">
                     <div class="row">
-                      <div class="col-7 tile-text">PERFORMANCE</div>
+                      <div class="col-7 tile-text">
+                        <div class="row">SALES</div>
+                        <div class="row">{{sales}}</div>
+                      </div>
                       <div class="col-5">
                         <span
                           ><i class="fa-solid fa-chart-simple text-success"></i
@@ -273,16 +315,53 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="dash-right-content">
+                    <a href="{% url 'showProducts' %}" style="text-decoration: none">
+                      <div class="row">
+                        <div class="col-7 tile-text">
+                          <div class="row">PRODUCTS</div>
+                          <div class="row">{{products}}</div>
+                        </div>
+                        <div class="col-5">
+                          <span
+                            ><i class="fa-solid fa-bag-shopping text-success"></i></span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-4">
                   <div class="dash-right-content">
                     <div class="row">
-                      <div class="col-7 tile-text">PLACEMENTS</div>
+                      <div class="col-7 tile-text">
+                        <div class="row">USERS</div>
+                        <div class="row">{{customers}}</div>
+                      </div>
                       <div class="col-5">
                         <span
-                          ><i class="fa-solid fa-award text-success"></i
+                          ><i class="fa-solid fa-user text-info"></i
                         ></span>
                       </div>
                     </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="dash-right-content">
+                    <a href="" style="text-decoration: none">
+                      <div class="row">
+                        <div class="col-7 tile-text">
+                          <div class="row">SELLERS</div>
+                          <div class="row">{{sellers}}</div>
+                        </div>
+                        <div class="col-5">
+                          <span
+                            ><i class="fa-solid fa-store text-secondary"></i></span>
+                        </div>
+                      </div>
+                    </a>
                   </div>
                 </div>
               </div>

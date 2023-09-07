@@ -28,7 +28,15 @@
         class="container-fluid navbar navbar-custom navbar-expand-md justify-content-end navbar-dark fixed-top"
       >
         <div class="container-fluid mt-2 mb-2">
-            <a class="navbar-brand font-weight-bold" href="#">Admin Panel</a>
+          <a href="" class="navbar-brand">
+            <img
+              id="navbarLogo"
+              src="{% static 'images/logo/logo5.png' %}"
+              alt=""
+              class="d-inline-block align-middle"
+            />
+          </a>
+          <a class="navbar-brand font-weight-bold ml-3" href="#">Admin Panel</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -45,17 +53,6 @@
             id="navbarTabsContent"
           >
             <ul class="navbar-nav justify-content-end">
-              <li class="nav-item">
-                <a href="{% url 'adminHomePage' %}" class="nav-link"
-                  ><span><i class="fa fa-tachometer" aria-hidden="true"></i></span> Dashboard</a
-                >
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'addCategoryPage' %}" class="nav-link"><span><i class="fa fa-plus" aria-hidden="true"></i></span> Add Category</a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'addProductPage' %}" class="nav-link active"><span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Add Product</a>
-              </li>
               <li>
                 <div class="dropdown show container-fluid">
                   <a
@@ -66,46 +63,20 @@
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
-                    style="text-decoration: none;color: rgb(255 255 255 / 84%);"
-                  >
-                    <span><i class="fa fa-cart-shopping"></i> &nbsp;</span
-                    >Orders
-                  </a>
-
-                  <div
-                    class="dropdown-menu usersdd p-2"
-                    aria-labelledby="profileDropdownMenu"
-                  >
-                    <a class="dropdown-item" href="">Orders Placed</a>
-                    <a class="dropdown-item" href="">Shipment</a>
-                    <a class="dropdown-item" href="">Order Tracking</a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="dropdown show container-fluid">
-                  <a
-                    class="dropdown-toggle nav-link text-secondary font-weight-bold"
-                    href="#"
-                    role="button"
-                    id="profileDropdownMenu"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
                     style="text-decoration: none"
                   >
-                    <span><i class="fa fa-solid fa-user"></i>&nbsp;</span
-                    >Admin
+                    <span><i class="fa fa-solid fa-user"></i>&nbsp;</span>Admin
                   </a>
 
                   <div
-                    class="dropdown-menu"
+                    class="dropdown-menu usersdd px-2"
                     aria-labelledby="profileDropdownMenu"
                   >
-                    <!-- <a class="dropdown-item" href="">My Profile</a>
-                    <a class="dropdown-item" href="">Edit Profile</a>
-                    <div class="dropdown-divider"></div> -->
-                    <a class="dropdown-item" href="{% url 'userLogout' %}"
+                  <a class="dropdown-item" href="{% url 'showUsers' %}"
+                      >Show Users</a
+                    >
+                  <div class="dropdown-divider"></div>
+                    <a class="dropdown-item log-out" href="{% url 'userLogout' %}"
                       ><button class="btn btn-outline-danger w-100">
                         <span
                           ><i
@@ -118,12 +89,104 @@
                   </div>
                 </div>
               </li>
+              <li class="nav-item">
+                <a href="{% url 'adminHomePage' %}" class="nav-link"
+                  ><span
+                    ><i class="fa fa-tachometer" aria-hidden="true"></i
+                  ></span>
+                  Dashboard</a
+                >
+              </li>
+              <li>
+                <div class="dropdown show container-fluid">
+                  <a
+                    class="dropdown-toggle nav-link font-weight-bold"
+                    href="#"
+                    role="button"
+                    id="profileDropdownMenu"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="text-decoration: none; color: rgb(255 255 255 / 84%)"
+                  >
+                    <span><i class="fa fa-plus" aria-hidden="true"></i> &nbsp;</span
+                    >Categories
+                  </a>
+
+                  <div
+                    class="dropdown-menu usersdd p-2"
+                    aria-labelledby="profileDropdownMenu"
+                  >
+                  <a class="dropdown-item" href="{% url 'showCategories' %}"
+                      >Show Categories</a
+                    >
+                    <a class="dropdown-item" href="{% url 'addCategoryPage' %}"
+                      >Add Category</a
+                    >
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="dropdown show container-fluid">
+                  <a
+                    class="dropdown-toggle nav-link active font-weight-bold"
+                    href="#"
+                    role="button"
+                    id="profileDropdownMenu"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="text-decoration: none; color: rgb(255 255 255 / 84%)"
+                  >
+                    <span><i class="fa-brands fa-shopify"></i> &nbsp;</span
+                    >Products
+                  </a>
+
+                  <div
+                    class="dropdown-menu usersdd p-2"
+                    aria-labelledby="profileDropdownMenu"
+                  >
+                    <a class="dropdown-item" href="{% url 'showProducts' %}"
+                      >Products</a
+                    >
+                    <a class="dropdown-item" href="{% url 'addProductPage' %}"
+                      >Add Product</a
+                    >
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="dropdown show container-fluid">
+                  <a
+                    class="dropdown-toggle nav-link font-weight-bold"
+                    href="#"
+                    role="button"
+                    id="profileDropdownMenu"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="text-decoration: none; color: rgb(255 255 255 / 84%)"
+                  >
+                    <span><i class="fa fa-cart-shopping"></i> &nbsp;</span
+                    >Orders
+                  </a>
+
+                  <div
+                    class="dropdown-menu usersdd p-2"
+                    aria-labelledby="profileDropdownMenu"
+                  >
+                    <a class="dropdown-item" href="{% url 'showOrders' %}">Orders Placed</a>
+                    <a class="dropdown-item" href="{% url 'dispatchedOrders' %}">Shipment</a>
+                    <a class="dropdown-item" href="">Order Tracking</a>
+                  </div>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
-    <section>
+    <section class="mb-5">
         <div class="container-fluid">
           <div class="row">
             <div class="col">
@@ -156,16 +219,24 @@
                     <input
                       type="number"
                       class="form-control"
-                      placeholder="Price (In INR)"
+                      placeholder="Selling Price (In INR)"
                       name="prod-price"
                       required
                     />
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="List Price (In INR)"
+                      name="original-price"
+                    />
+                  </div>
+                  <div class="form-group">
                     <select name="category" id="categoryInput" class="form-control" required>
-                        <option value="">--Category--</option>
-                        {%if category%}{% for i in category%}
-                        <option value="{{i.id}}">{{i.category_name}}</option>
-                        {% endfor %}{%endif%}
-                    </select>
+                      <option value="">--Category--</option>
+                      {%if category%}{% for i in category%}
+                      <option value="{{i.id}}">{{i.category_name}}</option>
+                      {% endfor %}{%endif%}
+                  </select>
                   </div>
                   <div class="form-group">
                     <input

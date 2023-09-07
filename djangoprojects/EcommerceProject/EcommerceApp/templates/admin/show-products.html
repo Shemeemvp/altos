@@ -24,144 +24,168 @@
   </head>
   <body>
     <header>
-      <nav
-        class="container-fluid navbar navbar-custom navbar-expand-md justify-content-end navbar-dark fixed-top"
-      >
-        <div class="container-fluid mt-2 mb-2">
-          <a href="" class="navbar-brand">
-            <img
-              id="navbarLogo"
-              src="{% static 'images/logo/logo5.png' %}"
-              alt=""
-              class="d-inline-block align-middle"
-            />
-          </a>
-          <a class="navbar-brand font-weight-bold ml-3" href="#">Admin Panel</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarTabsContent"
-            aria-controls="navbarTabsContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div
-            class="collapse navbar-collapse justify-content-end"
-            id="navbarTabsContent"
-          >
-            <ul class="navbar-nav justify-content-end">
-              <li class="nav-item">
-                <a href="{% url 'adminHomePage' %}" class="nav-link active"
-                  ><span
-                    ><i class="fa fa-tachometer" aria-hidden="true"></i
-                  ></span>
-                  Dashboard</a
-                >
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'addCategoryPage' %}" class="nav-link"
-                  ><span><i class="fa fa-plus" aria-hidden="true"></i></span>
-                  Add Category</a
-                >
-              </li>
-              <li>
-                <div class="dropdown show container-fluid">
-                  <a
-                    class="dropdown-toggle nav-link font-weight-bold"
-                    href="#"
-                    role="button"
-                    id="profileDropdownMenu"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    style="text-decoration: none; color: rgb(255 255 255 / 84%)"
-                  >
-                    <span><i class="fa-brands fa-shopify"></i> &nbsp;</span
-                    >Products
-                  </a>
-
-                  <div
-                    class="dropdown-menu usersdd p-2"
-                    aria-labelledby="profileDropdownMenu"
-                  >
-                    <a class="dropdown-item" href="{% url 'showProducts' %}"
-                      >Products</a
+        <nav
+          class="container-fluid navbar navbar-custom navbar-expand-md justify-content-end navbar-dark fixed-top"
+        >
+          <div class="container-fluid mt-2 mb-2">
+            <a href="" class="navbar-brand">
+              <img
+                id="navbarLogo"
+                src="{% static 'images/logo/logo5.png' %}"
+                alt=""
+                class="d-inline-block align-middle"
+              />
+            </a>
+            <a class="navbar-brand font-weight-bold ml-3" href="#">Admin Panel</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarTabsContent"
+              aria-controls="navbarTabsContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+              class="collapse navbar-collapse justify-content-end"
+              id="navbarTabsContent"
+            >
+              <ul class="navbar-nav justify-content-end">
+                <li>
+                  <div class="dropdown show container-fluid">
+                    <a
+                      class="dropdown-toggle nav-link font-weight-bold"
+                      href="#"
+                      role="button"
+                      id="profileDropdownMenu"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      style="text-decoration: none"
                     >
-                    <a class="dropdown-item" href="{% url 'addProductPage' %}"
-                      >Add Product</a
+                      <span><i class="fa fa-solid fa-user"></i>&nbsp;</span>Admin
+                    </a>
+  
+                    <div
+                      class="dropdown-menu usersdd px-2"
+                      aria-labelledby="profileDropdownMenu"
                     >
+                    <a class="dropdown-item" href="{% url 'showUsers' %}"
+                        >Show Users</a
+                      >
+                    <div class="dropdown-divider"></div>
+                      <a class="dropdown-item log-out" href="{% url 'userLogout' %}"
+                        ><button class="btn btn-outline-danger w-100">
+                          <span
+                            ><i
+                              class="fa fa-solid fa-arrow-right-from-bracket"
+                            ></i
+                          ></span>
+                          Logout
+                        </button></a
+                      >
+                    </div>
                   </div>
-                </div>
-              </li>
-              <li>
-                <div class="dropdown show container-fluid">
-                  <a
-                    class="dropdown-toggle nav-link font-weight-bold"
-                    href="#"
-                    role="button"
-                    id="profileDropdownMenu"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    style="text-decoration: none; color: rgb(255 255 255 / 84%)"
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'adminHomePage' %}" class="nav-link"
+                    ><span
+                      ><i class="fa fa-tachometer" aria-hidden="true"></i
+                    ></span>
+                    Dashboard</a
                   >
-                    <span><i class="fa fa-cart-shopping"></i> &nbsp;</span
-                    >Orders
-                  </a>
-
-                  <div
-                    class="dropdown-menu usersdd p-2"
-                    aria-labelledby="profileDropdownMenu"
-                  >
-                    <a class="dropdown-item" href="">Orders Placed</a>
-                    <a class="dropdown-item" href="">Shipment</a>
-                    <a class="dropdown-item" href="">Order Tracking</a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="dropdown show container-fluid">
-                  <a
-                    class="dropdown-toggle nav-link font-weight-bold"
-                    href="#"
-                    role="button"
-                    id="profileDropdownMenu"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    style="text-decoration: none"
-                  >
-                    <span><i class="fa fa-solid fa-user"></i>&nbsp;</span>Admin
-                  </a>
-
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="profileDropdownMenu"
-                  >
-                    <!-- <a class="dropdown-item" href="">My Profile</a>
-                    <a class="dropdown-item" href="">Edit Profile</a>
-                    <div class="dropdown-divider"></div> -->
-                    <a class="dropdown-item" href="{% url 'userLogout' %}"
-                      ><button class="btn btn-outline-danger w-100">
-                        <span
-                          ><i
-                            class="fa fa-solid fa-arrow-right-from-bracket"
-                          ></i
-                        ></span>
-                        Logout
-                      </button></a
+                </li>
+                <li>
+                  <div class="dropdown show container-fluid">
+                    <a
+                      class="dropdown-toggle nav-link font-weight-bold"
+                      href="#"
+                      role="button"
+                      id="profileDropdownMenu"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      style="text-decoration: none; color: rgb(255 255 255 / 84%)"
                     >
+                      <span><i class="fa fa-plus" aria-hidden="true"></i> &nbsp;</span
+                      >Categories
+                    </a>
+  
+                    <div
+                      class="dropdown-menu usersdd p-2"
+                      aria-labelledby="profileDropdownMenu"
+                    >
+                    <a class="dropdown-item" href="{% url 'showCategories' %}"
+                        >Show Categories</a
+                      >
+                      <a class="dropdown-item" href="{% url 'addCategoryPage' %}"
+                        >Add Category</a
+                      >
+                    </div>
                   </div>
-                </div>
-              </li>
-            </ul>
+                </li>
+                <li>
+                  <div class="dropdown show container-fluid">
+                    <a
+                      class="dropdown-toggle nav-link active font-weight-bold"
+                      href="#"
+                      role="button"
+                      id="profileDropdownMenu"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      style="text-decoration: none; color: rgb(255 255 255 / 84%)"
+                    >
+                      <span><i class="fa-brands fa-shopify"></i> &nbsp;</span
+                      >Products
+                    </a>
+  
+                    <div
+                      class="dropdown-menu usersdd p-2"
+                      aria-labelledby="profileDropdownMenu"
+                    >
+                      <a class="dropdown-item" href="{% url 'showProducts' %}"
+                        >Products</a
+                      >
+                      <a class="dropdown-item" href="{% url 'addProductPage' %}"
+                        >Add Product</a
+                      >
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="dropdown show container-fluid">
+                    <a
+                      class="dropdown-toggle nav-link font-weight-bold"
+                      href="#"
+                      role="button"
+                      id="profileDropdownMenu"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      style="text-decoration: none; color: rgb(255 255 255 / 84%)"
+                    >
+                      <span><i class="fa fa-cart-shopping"></i> &nbsp;</span
+                      >Orders
+                    </a>
+  
+                    <div
+                      class="dropdown-menu usersdd p-2"
+                      aria-labelledby="profileDropdownMenu"
+                    >
+                      <a class="dropdown-item" href="{% url 'showOrders' %}">Orders Placed</a>
+                      <a class="dropdown-item" href="{% url 'dispatchedOrders' %}">Shipment</a>
+                      <a class="dropdown-item" href="">Order Tracking</a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </nav>
-    </header>
+        </nav>
+      </header>
     <section>
       <div class="container-fluid">
         <div class="row">
@@ -223,20 +247,20 @@
                     {%endif%}
                   </td>
                   <td>
-                    <a href="">
+                    <a href="{% url 'editProductPage' i.id %}">
                       <button type="button" class="btn btn-outline-info">
                         Edit
                       </button>
                     </a>
                     <!-- <a href="#"> -->
-                      <!-- <button type="button" onclick="return confirm(`Are you sure you want to remove '{{i.product_name}}'?`)" class="btn btn-outline-danger" >Delete</button> -->
-                      <button
-                        type="button"
-                        onclick="confirmDelete(`{{ i.id }}`)"
-                        class="btn btn-outline-danger"
-                      >
-                        Delete
-                      </button>
+                    <!-- <button type="button" onclick="return confirm(`Are you sure you want to remove '{{i.product_name}}'?`)" class="btn btn-outline-danger" >Delete</button> -->
+                    <button
+                      type="button"
+                      onclick="confirmDelete(`{{ i.id }}`)"
+                      class="btn btn-outline-danger"
+                    >
+                      Delete
+                    </button>
                     <!-- </a> -->
                   </td>
                 </tr>
@@ -247,6 +271,21 @@
         </div>
       </div>
     </section>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    {%for message in messages%}
+    <script>
+      swal({
+        position: "top-end",
+        icon: "success",
+        title: "{{message}}"
+      });
+    </script>
+    {%endfor%}
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
@@ -256,12 +295,7 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
-      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+
     <script src="{% static 'js/script.js' %}"></script>
   </body>
 </html>
